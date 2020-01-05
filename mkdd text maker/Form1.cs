@@ -34,7 +34,7 @@ namespace mkdd_text_maker
                 SavePNG.Enabled = true;
                 SaveBTI.Enabled = true;
                 SaveAsPNG.Enabled = true;
-                SaveAsBTI.Enabled = true;
+                //SaveAsBTI.Enabled = true;
 
                 Image thisImage = picText.BackgroundImage;
                 thisImage = myImage.writeLetters(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), chkboxSqueeze.Checked);
