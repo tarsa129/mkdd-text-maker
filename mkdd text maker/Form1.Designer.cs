@@ -33,6 +33,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SavePNG = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsPNG = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveBTI = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAsBTI = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -46,9 +48,8 @@
             this.saveFileDialogPNG = new System.Windows.Forms.SaveFileDialog();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.SaveBTI = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveAsBTI = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialogBTI = new System.Windows.Forms.SaveFileDialog();
+            this.chkboxSqueeze = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -57,13 +58,12 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1347, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1347, 60);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -75,7 +75,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 56);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // SavePNG
@@ -96,6 +96,22 @@
             this.SaveAsPNG.Size = new System.Drawing.Size(530, 54);
             this.SaveAsPNG.Text = "Save as .png";
             this.SaveAsPNG.Click += new System.EventHandler(this.SaveAspngToolStripMenuItem_Click);
+            // 
+            // SaveBTI
+            // 
+            this.SaveBTI.Enabled = false;
+            this.SaveBTI.Name = "SaveBTI";
+            this.SaveBTI.Size = new System.Drawing.Size(530, 54);
+            this.SaveBTI.Text = "Save .bti";
+            this.SaveBTI.Click += new System.EventHandler(this.saveAsbtiToolStripMenuItem_Click);
+            // 
+            // SaveAsBTI
+            // 
+            this.SaveAsBTI.Enabled = false;
+            this.SaveAsBTI.Name = "SaveAsBTI";
+            this.SaveAsBTI.Size = new System.Drawing.Size(530, 54);
+            this.SaveAsBTI.Text = "Save as. bti";
+            this.SaveAsBTI.Click += new System.EventHandler(this.SaveAsBTI_Click);
             // 
             // btnConvert
             // 
@@ -237,32 +253,27 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "Prefix:";
             // 
-            // SaveBTI
-            // 
-            this.SaveBTI.Enabled = false;
-            this.SaveBTI.Name = "SaveBTI";
-            this.SaveBTI.Size = new System.Drawing.Size(530, 54);
-            this.SaveBTI.Text = "Save .bti";
-            this.SaveBTI.Click += new System.EventHandler(this.saveAsbtiToolStripMenuItem_Click);
-            // 
-            // SaveAsBTI
-            // 
-            this.SaveAsBTI.Enabled = false;
-            this.SaveAsBTI.Name = "SaveAsBTI";
-            this.SaveAsBTI.Size = new System.Drawing.Size(530, 54);
-            this.SaveAsBTI.Text = "Save as. bti";
-            this.SaveAsBTI.Click += new System.EventHandler(this.SaveAsBTI_Click);
-            // 
             // saveFileDialogBTI
             // 
             this.saveFileDialogBTI.Filter = "\".bti file\"|*.bti";
             this.saveFileDialogBTI.Title = "Save image as";
             // 
+            // chkboxSqueeze
+            // 
+            this.chkboxSqueeze.AutoSize = true;
+            this.chkboxSqueeze.Location = new System.Drawing.Point(42, 503);
+            this.chkboxSqueeze.Name = "chkboxSqueeze";
+            this.chkboxSqueeze.Size = new System.Drawing.Size(417, 36);
+            this.chkboxSqueeze.TabIndex = 13;
+            this.chkboxSqueeze.Text = "Squeeze Letters Horizontally";
+            this.chkboxSqueeze.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1347, 513);
+            this.ClientSize = new System.Drawing.Size(1347, 567);
+            this.Controls.Add(this.chkboxSqueeze);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblWordValue);
@@ -312,6 +323,7 @@
         private System.Windows.Forms.ToolStripMenuItem SaveBTI;
         private System.Windows.Forms.ToolStripMenuItem SaveAsBTI;
         private System.Windows.Forms.SaveFileDialog saveFileDialogBTI;
+        private System.Windows.Forms.CheckBox chkboxSqueeze;
     }
 }
 
