@@ -50,6 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialogBTI = new System.Windows.Forms.SaveFileDialog();
             this.chkboxSqueeze = new System.Windows.Forms.CheckBox();
+            this.chkboxPrefix = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -63,7 +64,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1347, 60);
+            this.menuStrip1.Size = new System.Drawing.Size(1347, 49);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -75,7 +76,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 56);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // SavePNG
@@ -268,11 +269,22 @@
             this.chkboxSqueeze.Text = "Squeeze Letters Horizontally";
             this.chkboxSqueeze.UseVisualStyleBackColor = true;
             // 
+            // chkboxPrefix
+            // 
+            this.chkboxPrefix.AutoSize = true;
+            this.chkboxPrefix.Location = new System.Drawing.Point(484, 503);
+            this.chkboxPrefix.Name = "chkboxPrefix";
+            this.chkboxPrefix.Size = new System.Drawing.Size(230, 36);
+            this.chkboxPrefix.TabIndex = 14;
+            this.chkboxPrefix.Text = "Smaller Prefix";
+            this.chkboxPrefix.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1347, 567);
+            this.Controls.Add(this.chkboxPrefix);
             this.Controls.Add(this.chkboxSqueeze);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
@@ -324,6 +336,7 @@
         private System.Windows.Forms.ToolStripMenuItem SaveAsBTI;
         private System.Windows.Forms.SaveFileDialog saveFileDialogBTI;
         private System.Windows.Forms.CheckBox chkboxSqueeze;
+        private System.Windows.Forms.CheckBox chkboxPrefix;
     }
 }
 

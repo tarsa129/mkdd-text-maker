@@ -37,7 +37,7 @@ namespace mkdd_text_maker
                 //SaveAsBTI.Enabled = true;
 
                 Image thisImage = picText.BackgroundImage;
-                thisImage = myImage.writeLetters(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), chkboxSqueeze.Checked);
+                thisImage = myImage.writeLetters(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), chkboxSqueeze.Checked, chkboxPrefix.Checked);
                 picText.BackgroundImage = thisImage;
             } else
             {

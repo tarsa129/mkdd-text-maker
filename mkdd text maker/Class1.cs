@@ -7,7 +7,7 @@ namespace mkdd_text_maker
 {
     class myImage
     {
-        public static Image writeLetters(String text, Image thisImage, int btletters, int btwords, String prefix, bool squeeze)
+        public static Image writeLetters(String text, Image thisImage, int btletters, int btwords, String prefix, bool squeeze, bool smalpre)
         {
             //trim text and get the characters
             text.Trim();
@@ -46,7 +46,7 @@ namespace mkdd_text_maker
                 scaleFactor = .75;
             }
 
-            int[] xposes = spacing(chars, btletters, btwords, squeeze);
+            int[] xposes = spacing(chars, btletters, btwords, squeeze, smalpre);
 
             for(int i = xposes.Length - 1; i > -1; i --)
             {
@@ -64,8 +64,20 @@ namespace mkdd_text_maker
                     Bitmap picture = new Bitmap(thisImage);
                     Graphics mainImage = Graphics.FromImage(picture);
 
+                    if(chara.Length > 1)
+                    {
+                        double preScale = 1;
+                        if (smalpre)
+                        {
+                            preScale = .9;
+                        }
+                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale), (int)(bmp.Height * preScale)));
+                    } else
+                    {
+                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * scaleFactor), bmp.Height));
+                    }
 
-                    mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0,(int)( bmp.Width * scaleFactor), bmp.Height));
+                    
                     thisImage = picture;
                 }
               
@@ -76,7 +88,7 @@ namespace mkdd_text_maker
         }
 
         //process shit IN ORDER
-        public static int[] spacing(String[] text, int btletters, int btwords, bool squeezed)
+        public static int[] spacing(String[] text, int btletters, int btwords, bool squeezed, bool smalPre)
         {
             //make the positions array
             int[] positions = new int[text.Length];
@@ -106,8 +118,21 @@ namespace mkdd_text_maker
 
                         if (i + 1 < text.Length)
                         {
-                            positions[i + 1] = positions[i] + ((int)(magicNumbber * scaleFactor) - btletters);
-                            totalLength += ((int)(magicNumbber * scaleFactor) - btletters);
+                            if(letter.Length > 1)
+                            {
+                                double prefixScale = 1;
+                                if (smalPre)
+                                {
+                                    prefixScale = .8;
+                                }
+                                positions[i + 1] = positions[i] + ((int)(magicNumbber * prefixScale) - btletters);
+                                totalLength += ((int)(magicNumbber * prefixScale) - btletters);
+                            } else
+                            {
+                                positions[i + 1] = positions[i] + ((int)(magicNumbber * scaleFactor) - btletters);
+                                totalLength += ((int)(magicNumbber * scaleFactor) - btletters);
+                            }
+                            
                         } else
                         {
                             totalLength += (int)(magicNumbber * scaleFactor);
