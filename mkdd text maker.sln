@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mkdd text maker", "mkdd text maker\mkdd text maker.csproj", "{C5CA2AC1-40E7-463C-8E50-3C66728BB4ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5CA2AC1-40E7-463C-8E50-3C66728BB4ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CA2AC1-40E7-463C-8E50-3C66728BB4ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CA2AC1-40E7-463C-8E50-3C66728BB4ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CA2AC1-40E7-463C-8E50-3C66728BB4ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91608900-523E-48C2-B7B1-7F072F1D45D9}
+	EndGlobalSection
+EndGlobal
