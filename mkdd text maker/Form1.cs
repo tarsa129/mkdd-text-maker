@@ -37,7 +37,7 @@ namespace mkdd_text_maker
                 //SaveAsBTI.Enabled = true;
 
                 Image thisImage = picText.BackgroundImage;
-                thisImage = myImage.writeLetters(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), chkboxSqueeze.Checked, chkboxPrefix.Checked);
+                thisImage = myImage.writeLetters(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), (double) tckSqueeze.Value / 100, chkboxPrefix.Checked);
                 picText.BackgroundImage = thisImage;
             } else
             {
@@ -150,6 +150,9 @@ namespace mkdd_text_maker
             fs.Close();
         }
 
-       
+        private void tckSqueeze_Scroll(object sender, EventArgs e)
+        {
+            lblShowSqueeze.Text = tckSqueeze.Value.ToString();
+        }
     }
 }

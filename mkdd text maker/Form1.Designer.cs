@@ -49,16 +49,20 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialogBTI = new System.Windows.Forms.SaveFileDialog();
-            this.chkboxSqueeze = new System.Windows.Forms.CheckBox();
             this.chkboxPrefix = new System.Windows.Forms.CheckBox();
+            this.lblSqueeze = new System.Windows.Forms.Label();
+            this.tckSqueeze = new System.Windows.Forms.TrackBar();
+            this.lblShowSqueeze = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem});
@@ -116,7 +120,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(1011, 344);
+            this.btnConvert.Location = new System.Drawing.Point(1024, 422);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(311, 114);
             this.btnConvert.TabIndex = 1;
@@ -154,7 +158,7 @@
             // lblLetters
             // 
             this.lblLetters.AutoSize = true;
-            this.lblLetters.Location = new System.Drawing.Point(36, 341);
+            this.lblLetters.Location = new System.Drawing.Point(23, 341);
             this.lblLetters.Name = "lblLetters";
             this.lblLetters.Size = new System.Drawing.Size(323, 32);
             this.lblLetters.TabIndex = 5;
@@ -175,7 +179,7 @@
             // lblWords
             // 
             this.lblWords.AutoSize = true;
-            this.lblWords.Location = new System.Drawing.Point(36, 426);
+            this.lblWords.Location = new System.Drawing.Point(23, 426);
             this.lblWords.Name = "lblWords";
             this.lblWords.Size = new System.Drawing.Size(301, 32);
             this.lblWords.TabIndex = 8;
@@ -205,7 +209,7 @@
             // lblWordValue
             // 
             this.lblWordValue.AutoSize = true;
-            this.lblWordValue.Location = new System.Drawing.Point(932, 449);
+            this.lblWordValue.Location = new System.Drawing.Point(932, 426);
             this.lblWordValue.Name = "lblWordValue";
             this.lblWordValue.Size = new System.Drawing.Size(47, 32);
             this.lblWordValue.TabIndex = 10;
@@ -259,33 +263,56 @@
             this.saveFileDialogBTI.Filter = "\".bti file\"|*.bti";
             this.saveFileDialogBTI.Title = "Save image as";
             // 
-            // chkboxSqueeze
-            // 
-            this.chkboxSqueeze.AutoSize = true;
-            this.chkboxSqueeze.Location = new System.Drawing.Point(42, 503);
-            this.chkboxSqueeze.Name = "chkboxSqueeze";
-            this.chkboxSqueeze.Size = new System.Drawing.Size(417, 36);
-            this.chkboxSqueeze.TabIndex = 13;
-            this.chkboxSqueeze.Text = "Squeeze Letters Horizontally";
-            this.chkboxSqueeze.UseVisualStyleBackColor = true;
-            // 
             // chkboxPrefix
             // 
             this.chkboxPrefix.AutoSize = true;
-            this.chkboxPrefix.Location = new System.Drawing.Point(484, 503);
+            this.chkboxPrefix.Location = new System.Drawing.Point(1067, 341);
             this.chkboxPrefix.Name = "chkboxPrefix";
             this.chkboxPrefix.Size = new System.Drawing.Size(230, 36);
             this.chkboxPrefix.TabIndex = 14;
             this.chkboxPrefix.Text = "Smaller Prefix";
             this.chkboxPrefix.UseVisualStyleBackColor = true;
             // 
+            // lblSqueeze
+            // 
+            this.lblSqueeze.AutoSize = true;
+            this.lblSqueeze.Location = new System.Drawing.Point(23, 504);
+            this.lblSqueeze.Name = "lblSqueeze";
+            this.lblSqueeze.Size = new System.Drawing.Size(334, 32);
+            this.lblSqueeze.TabIndex = 15;
+            this.lblSqueeze.Text = "Letter Horizontal Scaling:";
+            // 
+            // tckSqueeze
+            // 
+            this.tckSqueeze.Location = new System.Drawing.Point(363, 488);
+            this.tckSqueeze.Maximum = 100;
+            this.tckSqueeze.Minimum = 75;
+            this.tckSqueeze.Name = "tckSqueeze";
+            this.tckSqueeze.Size = new System.Drawing.Size(531, 114);
+            this.tckSqueeze.SmallChange = 5;
+            this.tckSqueeze.TabIndex = 16;
+            this.tckSqueeze.TickFrequency = 5;
+            this.tckSqueeze.Value = 100;
+            this.tckSqueeze.Scroll += new System.EventHandler(this.tckSqueeze_Scroll);
+            // 
+            // lblShowSqueeze
+            // 
+            this.lblShowSqueeze.AutoSize = true;
+            this.lblShowSqueeze.Location = new System.Drawing.Point(932, 508);
+            this.lblShowSqueeze.Name = "lblShowSqueeze";
+            this.lblShowSqueeze.Size = new System.Drawing.Size(63, 32);
+            this.lblShowSqueeze.TabIndex = 17;
+            this.lblShowSqueeze.Text = "100";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1347, 567);
+            this.Controls.Add(this.lblShowSqueeze);
+            this.Controls.Add(this.tckSqueeze);
+            this.Controls.Add(this.lblSqueeze);
             this.Controls.Add(this.chkboxPrefix);
-            this.Controls.Add(this.chkboxSqueeze);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.lblWordValue);
@@ -308,6 +335,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,8 +363,10 @@
         private System.Windows.Forms.ToolStripMenuItem SaveBTI;
         private System.Windows.Forms.ToolStripMenuItem SaveAsBTI;
         private System.Windows.Forms.SaveFileDialog saveFileDialogBTI;
-        private System.Windows.Forms.CheckBox chkboxSqueeze;
         private System.Windows.Forms.CheckBox chkboxPrefix;
+        private System.Windows.Forms.Label lblSqueeze;
+        private System.Windows.Forms.TrackBar tckSqueeze;
+        private System.Windows.Forms.Label lblShowSqueeze;
     }
 }
 
