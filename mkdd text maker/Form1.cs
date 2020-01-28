@@ -8,10 +8,12 @@ namespace mkdd_text_maker
 {
     public partial class Form1 : Form
     {
-    
+        static int width;
+        static bool full = true;
         public Form1()
         {
             InitializeComponent();
+            width = picText.Width;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -23,9 +25,15 @@ namespace mkdd_text_maker
         private void Button1_Click(object sender, EventArgs e)
         {
             String name = "blank.png";
-            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
 
+            if (!full)
+            {
+                name = "blank152.png";
+            }
+
+            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
             picText.BackgroundImage = new Bitmap(fileToRead);
+
             String text = txtInput.Text;
             text.Trim();
 
@@ -154,5 +162,34 @@ namespace mkdd_text_maker
         {
             lblShowSqueeze.Text = tckSqueeze.Value.ToString();
         }
+
+        private void courseName256X32ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            String name = "blank.png";
+            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
+            picText.BackgroundImage = new Bitmap(fileToRead);
+
+            picText.Width = width;
+            full = true;
+        }
+
+        private void characterName152X32ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+  
+            String name = "blank152.png";
+            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
+            picText.BackgroundImage = new Bitmap(fileToRead);
+
+
+
+            picText.Width = (int)(width * 0.6);
+
+            
+            full = false;
+
+        }
+
     }
 }

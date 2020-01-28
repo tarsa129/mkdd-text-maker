@@ -35,6 +35,9 @@
             this.SaveAsPNG = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveBTI = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsBTI = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.courseName256X32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.characterName152X32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -65,10 +68,11 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.imageSizeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1347, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1347, 52);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -80,7 +84,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 48);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // SavePNG
@@ -117,6 +121,29 @@
             this.SaveAsBTI.Size = new System.Drawing.Size(530, 54);
             this.SaveAsBTI.Text = "Save as. bti";
             this.SaveAsBTI.Click += new System.EventHandler(this.SaveAsBTI_Click);
+            // 
+            // imageSizeToolStripMenuItem
+            // 
+            this.imageSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.courseName256X32ToolStripMenuItem,
+            this.characterName152X32ToolStripMenuItem});
+            this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
+            this.imageSizeToolStripMenuItem.Text = "Image Size";
+            // 
+            // courseName256X32ToolStripMenuItem
+            // 
+            this.courseName256X32ToolStripMenuItem.Name = "courseName256X32ToolStripMenuItem";
+            this.courseName256X32ToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.courseName256X32ToolStripMenuItem.Text = "Course Name (256 x 32)";
+            this.courseName256X32ToolStripMenuItem.Click += new System.EventHandler(this.courseName256X32ToolStripMenuItem_Click);
+            // 
+            // characterName152X32ToolStripMenuItem
+            // 
+            this.characterName152X32ToolStripMenuItem.Name = "characterName152X32ToolStripMenuItem";
+            this.characterName152X32ToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.characterName152X32ToolStripMenuItem.Text = "Character Name (152 x 32)";
+            this.characterName152X32ToolStripMenuItem.Click += new System.EventHandler(this.characterName152X32ToolStripMenuItem_Click);
             // 
             // btnConvert
             // 
@@ -367,6 +394,9 @@
         private System.Windows.Forms.Label lblSqueeze;
         private System.Windows.Forms.TrackBar tckSqueeze;
         private System.Windows.Forms.Label lblShowSqueeze;
+        private System.Windows.Forms.ToolStripMenuItem imageSizeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem courseName256X32ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem characterName152X32ToolStripMenuItem;
     }
 }
 

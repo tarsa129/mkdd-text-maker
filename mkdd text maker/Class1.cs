@@ -40,9 +40,9 @@ namespace mkdd_text_maker
                 chars[i + index] = characters[i].ToString();
             }
 
-           
+            bool full = (thisImage.Width == 256);
 
-            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre);
+            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre, full);
 
             for(int i = xposes.Length - 1; i > -1; i --)
             {
@@ -70,7 +70,7 @@ namespace mkdd_text_maker
                         mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale), (int)(bmp.Height * preScale)));
                     } else
                     {
-                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor), bmp.Height));
+                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor), 32));
                     }
 
                     
@@ -84,7 +84,7 @@ namespace mkdd_text_maker
         }
 
         //process shit IN ORDER
-        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre)
+        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre, bool full)
         {
             //make the positions array
             int[] positions = new int[text.Length];
@@ -146,19 +146,15 @@ namespace mkdd_text_maker
             Console.WriteLine("");
             Console.WriteLine(totalLength);
 
-            int shiftFactor = (256 - totalLength) / 2;
+            int width = 256;
+            if (!full)
+            {
+                width = 152;
+            }
+
+            int shiftFactor = (width - totalLength) / 2;
 
             Console.WriteLine(shiftFactor);
-
-            /*
-            int excess = 256 - totalLength;
-            if (excess < 0)
-            {
-                shiftFactor += (int)Math.Ceiling((double)excess / (double)positions.Length);
-                Console.WriteLine(excess + " over 256");
-            }
-            */
-
 
             for (int i = 0; i < positions.Length; i++)
             {
