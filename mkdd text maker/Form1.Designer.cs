@@ -56,6 +56,7 @@
             this.lblSqueeze = new System.Windows.Forms.Label();
             this.tckSqueeze = new System.Windows.Forms.TrackBar();
             this.lblShowSqueeze = new System.Windows.Forms.Label();
+            this.customSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -126,7 +127,8 @@
             // 
             this.imageSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.courseName256X32ToolStripMenuItem,
-            this.characterName152X32ToolStripMenuItem});
+            this.characterName152X32ToolStripMenuItem,
+            this.customSizeToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
             this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
@@ -331,6 +333,13 @@
             this.lblShowSqueeze.TabIndex = 17;
             this.lblShowSqueeze.Text = "100";
             // 
+            // customSizeToolStripMenuItem
+            // 
+            this.customSizeToolStripMenuItem.Name = "customSizeToolStripMenuItem";
+            this.customSizeToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.customSizeToolStripMenuItem.Text = "Custom Size";
+            this.customSizeToolStripMenuItem.Click += new System.EventHandler(this.customSizeToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -397,6 +406,7 @@
         private System.Windows.Forms.ToolStripMenuItem imageSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem courseName256X32ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem characterName152X32ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem customSizeToolStripMenuItem;
     }
 }
 

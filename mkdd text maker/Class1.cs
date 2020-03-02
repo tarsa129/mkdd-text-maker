@@ -18,7 +18,7 @@ namespace mkdd_text_maker
             //if there is a prefix, make the array of strings to write accomdate it
             
             bool withPre = prefix.Equals("none");
-            Console.WriteLine(withPre);
+            //Console.WriteLine(withPre);
             int index;
 
 
@@ -40,9 +40,9 @@ namespace mkdd_text_maker
                 chars[i + index] = characters[i].ToString();
             }
 
-            bool full = (thisImage.Width == 256);
+            
 
-            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre, full);
+            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre, thisImage.Width);
 
             for(int i = xposes.Length - 1; i > -1; i --)
             {
@@ -60,6 +60,8 @@ namespace mkdd_text_maker
                     Bitmap picture = new Bitmap(thisImage);
                     Graphics mainImage = Graphics.FromImage(picture);
 
+                    double heightAdjustment = thisImage.Height / 32;
+
                     if(chara.Length > 1)
                     {
                         double preScale = 1;
@@ -67,10 +69,10 @@ namespace mkdd_text_maker
                         {
                             preScale = .9;
                         }
-                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale), (int)(bmp.Height * preScale)));
+                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale * heightAdjustment), (int)(bmp.Height * preScale)));
                     } else
                     {
-                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor), 32));
+                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor * heightAdjustment), thisImage.Height));
                     }
 
                     
@@ -84,7 +86,7 @@ namespace mkdd_text_maker
         }
 
         //process shit IN ORDER
-        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre, bool full)
+        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre, int width)
         {
             //make the positions array
             int[] positions = new int[text.Length];
@@ -100,7 +102,7 @@ namespace mkdd_text_maker
 
                 if (!String.IsNullOrWhiteSpace(letter))
                 {
-                    Console.Write(letter);
+                    //Console.Write(letter);
                     String name = "mariofont_" + letter + ".png";
                     String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\btis\" + name;
                     try
@@ -143,18 +145,13 @@ namespace mkdd_text_maker
                     totalLength += (btwords);
                 }
             }
-            Console.WriteLine("");
-            Console.WriteLine(totalLength);
+            //Console.WriteLine("");
+            //Console.WriteLine(totalLength);
 
-            int width = 256;
-            if (!full)
-            {
-                width = 152;
-            }
-
+          
             int shiftFactor = (width - totalLength) / 2;
 
-            Console.WriteLine(shiftFactor);
+            //Console.WriteLine(shiftFactor);
 
             for (int i = 0; i < positions.Length; i++)
             {

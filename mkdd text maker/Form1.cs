@@ -9,11 +9,22 @@ namespace mkdd_text_maker
     public partial class Form1 : Form
     {
         static int width;
-        static bool full = true;
+        static int height;
+        static double scale;
+
         public Form1()
         {
             InitializeComponent();
-            width = picText.Width;
+            width = 256;
+            height = 32;
+
+            Console.WriteLine("Load Width:" + picText.Size.Width.ToString());
+
+            int DispWidth = picText.Size.Width;
+            scale = (double)DispWidth / (double)width;
+            
+            //Console.WriteLine("Load Height:" + picText.Size.Height.ToString());
+            Console.WriteLine(scale.ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -24,15 +35,8 @@ namespace mkdd_text_maker
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            String name = "blank.png";
-
-            if (!full)
-            {
-                name = "blank152.png";
-            }
-
-            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
-            picText.BackgroundImage = new Bitmap(fileToRead);
+       
+            picText.BackgroundImage = new Bitmap(width, height);
 
             String text = txtInput.Text;
             text.Trim();
@@ -140,12 +144,9 @@ namespace mkdd_text_maker
             saveFileDialogBTI.ShowDialog();
             FileStream fs = (FileStream)saveFileDialogBTI.OpenFile();
 
-            
-
             Image toSave = picText.BackgroundImage;
             toSave.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
             
-
             bool ToDelete = File.Exists(saveFileDialogBTI.FileName);
 
             Wimgt(saveFileDialogBTI.FileName);
@@ -163,33 +164,68 @@ namespace mkdd_text_maker
             lblShowSqueeze.Text = tckSqueeze.Value.ToString();
         }
 
+        private void updateImageBox()
+        {
+            picText.BackgroundImage = new Bitmap(width, height);
+            picText.Size = new Size((int)(width * scale), (int)(height * scale));
+            //Console.WriteLine("Height: " + height.ToString());
+           // Console.WriteLine("Width: " + width.ToString());
+        }
+
         private void courseName256X32ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            String name = "blank.png";
-            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
-            picText.BackgroundImage = new Bitmap(fileToRead);
-
-            picText.Width = width;
-            full = true;
+            width = 256;
+            height = 32;
+            updateImageBox();  
         }
 
         private void characterName152X32ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-  
-            String name = "blank152.png";
-            String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\" + name;
-            picText.BackgroundImage = new Bitmap(fileToRead);
 
+            width = 152;
+            height = 32;
 
-
-            picText.Width = (int)(width * 0.6);
-
-            
-            full = false;
-
+            updateImageBox();
+     
         }
 
+        private void customSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form size = new Form();
+
+            size.Text = "Change Image Size";
+
+            Label lblWidth = new Label();
+            lblWidth.Text = "New Width:";
+            lblWidth.Location = new Point(0, 0);
+
+            /*
+            Label lblHeight = new Label();
+            lblHeight.Text = "New Height:";
+            lblHeight.Location = new Point(0, 25);
+            */
+
+            TextBox txtWidth = new TextBox();
+            txtWidth.Location = new Point(100, 0);
+            //TextBox txtHeight = new TextBox();
+            //txtHeight.Location = new Point(100, 25);
+            
+            size.Controls.Add(lblWidth);
+            //size.Controls.Add(lblHeight);
+            size.Controls.Add(txtWidth);
+            //size.Controls.Add(txtHeight);
+
+            size.ShowDialog();
+
+            Int32.TryParse(txtWidth.Text, out width);
+            //Int32.TryParse(txtHeight.Text, out height);
+
+            updateImageBox(); 
+
+            //Console.WriteLine(width.ToString());
+            
+
+        }
+        
     }
 }
