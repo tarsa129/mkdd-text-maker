@@ -199,26 +199,28 @@ namespace mkdd_text_maker
             lblWidth.Text = "New Width:";
             lblWidth.Location = new Point(0, 0);
 
-            /*
+            
             Label lblHeight = new Label();
             lblHeight.Text = "New Height:";
             lblHeight.Location = new Point(0, 25);
-            */
+            
 
             TextBox txtWidth = new TextBox();
+            txtWidth.Text = width.ToString();
             txtWidth.Location = new Point(100, 0);
-            //TextBox txtHeight = new TextBox();
-            //txtHeight.Location = new Point(100, 25);
+            TextBox txtHeight = new TextBox();
+            txtHeight.Text = height.ToString();
+            txtHeight.Location = new Point(100, 25);
             
             size.Controls.Add(lblWidth);
-            //size.Controls.Add(lblHeight);
+            size.Controls.Add(lblHeight);
             size.Controls.Add(txtWidth);
-            //size.Controls.Add(txtHeight);
+            size.Controls.Add(txtHeight);
 
             size.ShowDialog();
 
             Int32.TryParse(txtWidth.Text, out width);
-            //Int32.TryParse(txtHeight.Text, out height);
+            Int32.TryParse(txtHeight.Text, out height);
 
             updateImageBox(); 
 

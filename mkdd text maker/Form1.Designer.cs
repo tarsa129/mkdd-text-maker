@@ -38,6 +38,7 @@
             this.imageSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.courseName256X32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.characterName152X32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.customSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.lblSqueeze = new System.Windows.Forms.Label();
             this.tckSqueeze = new System.Windows.Forms.TrackBar();
             this.lblShowSqueeze = new System.Windows.Forms.Label();
-            this.customSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -73,7 +73,7 @@
             this.imageSizeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1347, 52);
+            this.menuStrip1.Size = new System.Drawing.Size(1384, 49);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,7 +85,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 48);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // SavePNG
@@ -130,7 +130,7 @@
             this.characterName152X32ToolStripMenuItem,
             this.customSizeToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
@@ -146,6 +146,13 @@
             this.characterName152X32ToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
             this.characterName152X32ToolStripMenuItem.Text = "Character Name (152 x 32)";
             this.characterName152X32ToolStripMenuItem.Click += new System.EventHandler(this.characterName152X32ToolStripMenuItem_Click);
+            // 
+            // customSizeToolStripMenuItem
+            // 
+            this.customSizeToolStripMenuItem.Name = "customSizeToolStripMenuItem";
+            this.customSizeToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.customSizeToolStripMenuItem.Text = "Custom Size";
+            this.customSizeToolStripMenuItem.Click += new System.EventHandler(this.customSizeToolStripMenuItem_Click);
             // 
             // btnConvert
             // 
@@ -333,18 +340,11 @@
             this.lblShowSqueeze.TabIndex = 17;
             this.lblShowSqueeze.Text = "100";
             // 
-            // customSizeToolStripMenuItem
-            // 
-            this.customSizeToolStripMenuItem.Name = "customSizeToolStripMenuItem";
-            this.customSizeToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
-            this.customSizeToolStripMenuItem.Text = "Custom Size";
-            this.customSizeToolStripMenuItem.Click += new System.EventHandler(this.customSizeToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1347, 567);
+            this.ClientSize = new System.Drawing.Size(1384, 586);
             this.Controls.Add(this.lblShowSqueeze);
             this.Controls.Add(this.tckSqueeze);
             this.Controls.Add(this.lblSqueeze);

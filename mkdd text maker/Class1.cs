@@ -42,7 +42,7 @@ namespace mkdd_text_maker
 
             
 
-            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre, thisImage.Width);
+            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre, thisImage);
 
             for(int i = xposes.Length - 1; i > -1; i --)
             {
@@ -60,7 +60,7 @@ namespace mkdd_text_maker
                     Bitmap picture = new Bitmap(thisImage);
                     Graphics mainImage = Graphics.FromImage(picture);
 
-                    double heightAdjustment = thisImage.Height / 32;
+                    double heightAdjustment = (double)thisImage.Height / 32;
 
                     if(chara.Length > 1)
                     {
@@ -86,13 +86,14 @@ namespace mkdd_text_maker
         }
 
         //process shit IN ORDER
-        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre, int width)
+        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre, Image image)
         {
             //make the positions array
             int[] positions = new int[text.Length];
             positions[0] = 0;
             int totalLength = 0;
 
+            Console.WriteLine("Image height: " + image.Height);
             
 
             //iterate through the whole array to get the position of each character
@@ -108,7 +109,8 @@ namespace mkdd_text_maker
                     try
                     {
                         Bitmap imageLetter = new Bitmap(fileToRead);
-                        int magicNumbber = imageLetter.Width;
+                        int magicNumbber = (int)( imageLetter.Width * ((double)image.Height / 32));
+
 
                         if (i + 1 < text.Length)
                         {
@@ -149,7 +151,7 @@ namespace mkdd_text_maker
             //Console.WriteLine(totalLength);
 
           
-            int shiftFactor = (width - totalLength) / 2;
+            int shiftFactor = (image.Width - totalLength) / 2;
 
             //Console.WriteLine(shiftFactor);
 
