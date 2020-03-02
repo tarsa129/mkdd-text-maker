@@ -7,16 +7,22 @@ namespace mkdd_text_maker
 {
     class myImage
     {
-        public static Image writeLetters(String text, Image thisImage, int btletters, int btwords, String prefix, double ScaleFactor, bool smalpre)
+        static int totalLength;
+        public static Image writeLetters(WriteInfo Info)
         {
             //trim text and get the characters
+            String text = Info.getText();
             text.Trim();
             char[] characters = text.ToCharArray();
 
             String[] chars;
 
             //if there is a prefix, make the array of strings to write accomdate it
-            
+
+            String prefix = Info.getpre();
+            bool smalpre = Info.getsmall();
+            double ScaleFactor = Info.getsqueeze();
+
             bool withPre = prefix.Equals("none");
             //Console.WriteLine(withPre);
             int index;
@@ -40,11 +46,30 @@ namespace mkdd_text_maker
                 chars[i + index] = characters[i].ToString();
             }
 
+            Image thisImage = Info.getImage();
+
+            int[] xposes = spacing(chars, Info) ;
+
+            int shiftFactor;
+
+            if(Info.getalign() == 0)
+            {
+                shiftFactor = 0;
+            } else
+            {
+                shiftFactor = (thisImage.Width - totalLength) / Info.getalign();
+            }
             
 
-            int[] xposes = spacing(chars, btletters, btwords, ScaleFactor, smalpre, thisImage);
+            //Console.WriteLine(shiftFactor);
 
-            for(int i = xposes.Length - 1; i > -1; i --)
+            for (int i = 0; i < xposes.Length; i++)
+            {
+                xposes[i] = shiftFactor + xposes[i];
+            }
+
+
+            for (int i = xposes.Length - 1; i > -1; i --)
             {
                 String letter = chars[i];
                 String chara = letter.ToString().ToLower();
@@ -86,16 +111,22 @@ namespace mkdd_text_maker
         }
 
         //process shit IN ORDER
-        public static int[] spacing(String[] text, int btletters, int btwords, double ScaleFactor, bool smalPre, Image image)
+        public static int[] spacing(String[] text, WriteInfo Info)
         {
             //make the positions array
             int[] positions = new int[text.Length];
             positions[0] = 0;
-            int totalLength = 0;
+            int TotLength = 0;
+
+            //get the information
+            Image image = Info.getImage();
+            int btletters = Info.getletter();
+            int btwords = Info.getword();
+            bool smalPre = Info.getsmall();
+            double ScaleFactor = Info.getsqueeze();
 
             Console.WriteLine("Image height: " + image.Height);
             
-
             //iterate through the whole array to get the position of each character
             for (int i = 0; i < text.Length; i++)
             {
@@ -122,16 +153,16 @@ namespace mkdd_text_maker
                                     prefixScale = .8;
                                 }
                                 positions[i + 1] = positions[i] + ((int)(magicNumbber * prefixScale) - btletters);
-                                totalLength += ((int)(magicNumbber * prefixScale) - btletters);
+                                TotLength += ((int)(magicNumbber * prefixScale) - btletters);
                             } else
                             {
                                 positions[i + 1] = positions[i] + ((int)(magicNumbber * ScaleFactor) - btletters);
-                                totalLength += ((int)(magicNumbber * ScaleFactor) - btletters);
+                                TotLength += ((int)(magicNumbber * ScaleFactor) - btletters);
                             }
                             
                         } else
                         {
-                            totalLength += (int)(magicNumbber * ScaleFactor);
+                            TotLength += (int)(magicNumbber * ScaleFactor);
                         }
                         
                        
@@ -144,21 +175,14 @@ namespace mkdd_text_maker
                 else
                 {
                     positions[i+ 1] = positions[i] + (btwords);
-                    totalLength += (btwords);
+                    TotLength += (btwords);
                 }
             }
             //Console.WriteLine("");
             //Console.WriteLine(totalLength);
 
-          
-            int shiftFactor = (image.Width - totalLength) / 2;
-
-            //Console.WriteLine(shiftFactor);
-
-            for (int i = 0; i < positions.Length; i++)
-            {
-                positions[i] = shiftFactor + positions[i];
-            }
+            totalLength = TotLength;
+           
 
 
             return positions;

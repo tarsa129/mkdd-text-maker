@@ -12,11 +12,14 @@ namespace mkdd_text_maker
         static int height;
         static double scale;
 
+        static int alignment = 2;
         public Form1()
         {
             InitializeComponent();
             width = 256;
             height = 32;
+
+           
 
             Console.WriteLine("Load Width:" + picText.Size.Width.ToString());
 
@@ -49,7 +52,8 @@ namespace mkdd_text_maker
                 SaveAsBTI.Enabled = true;
 
                 Image thisImage = picText.BackgroundImage;
-                thisImage = myImage.writeLetters(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), (double) tckSqueeze.Value / 100, chkboxPrefix.Checked);
+                WriteInfo Info = new WriteInfo(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment);
+                thisImage = myImage.writeLetters(Info);
                 picText.BackgroundImage = thisImage;
             } else
             {
@@ -228,6 +232,28 @@ namespace mkdd_text_maker
             
 
         }
-        
+
+        private void leftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alignment = 0;
+        }
+
+        private void centerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alignment = 2;
+        }
+
+        private void rightToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alignment = 1;
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Button1_Click(btnConvert, EventArgs.Empty);
+            }
+        }
     }
 }
