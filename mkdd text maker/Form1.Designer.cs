@@ -70,7 +70,6 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
@@ -78,7 +77,7 @@
             this.alignmentToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1369, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1383, 49);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -90,7 +89,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 48);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // SavePNG
@@ -135,7 +134,7 @@
             this.characterName152X32ToolStripMenuItem,
             this.customSizeToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
@@ -166,35 +165,35 @@
             this.centerToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
-            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 48);
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 45);
             this.alignmentToolStripMenuItem.Text = "Alignment";
             // 
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(272, 54);
             this.leftToolStripMenuItem.Text = "Left";
             this.leftToolStripMenuItem.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
             // 
             // centerToolStripMenuItem
             // 
             this.centerToolStripMenuItem.Name = "centerToolStripMenuItem";
-            this.centerToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.centerToolStripMenuItem.Size = new System.Drawing.Size(272, 54);
             this.centerToolStripMenuItem.Text = "Center";
             this.centerToolStripMenuItem.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
             // 
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(272, 54);
             this.rightToolStripMenuItem.Text = "Right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(1024, 422);
+            this.btnConvert.Location = new System.Drawing.Point(1024, 222);
             this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(311, 114);
+            this.btnConvert.Size = new System.Drawing.Size(285, 114);
             this.btnConvert.TabIndex = 1;
             this.btnConvert.Text = "Make Text";
             this.btnConvert.UseVisualStyleBackColor = true;
@@ -219,7 +218,7 @@
             // tckLetter
             // 
             this.tckLetter.LargeChange = 3;
-            this.tckLetter.Location = new System.Drawing.Point(346, 341);
+            this.tckLetter.Location = new System.Drawing.Point(346, 141);
             this.tckLetter.Maximum = 15;
             this.tckLetter.Name = "tckLetter";
             this.tckLetter.Size = new System.Drawing.Size(548, 114);
@@ -230,28 +229,28 @@
             // lblLetters
             // 
             this.lblLetters.AutoSize = true;
-            this.lblLetters.Location = new System.Drawing.Point(23, 341);
+            this.lblLetters.Location = new System.Drawing.Point(23, 141);
             this.lblLetters.Name = "lblLetters";
             this.lblLetters.Size = new System.Drawing.Size(323, 32);
             this.lblLetters.TabIndex = 5;
             this.lblLetters.Text = "Overlap between letters:";
-            this.lblLetters.Click += new System.EventHandler(this.Label1_Click);
             // 
             // picText
             // 
             this.picText.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picText.BackgroundImage")));
             this.picText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picText.Location = new System.Drawing.Point(42, 147);
+            this.picText.Location = new System.Drawing.Point(29, 408);
             this.picText.Name = "picText";
             this.picText.Size = new System.Drawing.Size(1280, 160);
             this.picText.TabIndex = 6;
             this.picText.TabStop = false;
+            this.picText.DoubleClick += new System.EventHandler(this.picText_DoubleClick);
             // 
             // lblWords
             // 
             this.lblWords.AutoSize = true;
-            this.lblWords.Location = new System.Drawing.Point(23, 426);
+            this.lblWords.Location = new System.Drawing.Point(23, 226);
             this.lblWords.Name = "lblWords";
             this.lblWords.Size = new System.Drawing.Size(301, 32);
             this.lblWords.TabIndex = 8;
@@ -260,7 +259,7 @@
             // tckWords
             // 
             this.tckWords.LargeChange = 1;
-            this.tckWords.Location = new System.Drawing.Point(346, 426);
+            this.tckWords.Location = new System.Drawing.Point(346, 226);
             this.tckWords.Maximum = 20;
             this.tckWords.Minimum = 1;
             this.tckWords.Name = "tckWords";
@@ -272,7 +271,7 @@
             // lblLetterVal
             // 
             this.lblLetterVal.AutoSize = true;
-            this.lblLetterVal.Location = new System.Drawing.Point(932, 341);
+            this.lblLetterVal.Location = new System.Drawing.Point(932, 141);
             this.lblLetterVal.Name = "lblLetterVal";
             this.lblLetterVal.Size = new System.Drawing.Size(31, 32);
             this.lblLetterVal.TabIndex = 9;
@@ -281,7 +280,7 @@
             // lblWordValue
             // 
             this.lblWordValue.AutoSize = true;
-            this.lblWordValue.Location = new System.Drawing.Point(932, 426);
+            this.lblWordValue.Location = new System.Drawing.Point(932, 226);
             this.lblWordValue.Name = "lblWordValue";
             this.lblWordValue.Size = new System.Drawing.Size(47, 32);
             this.lblWordValue.TabIndex = 10;
@@ -319,7 +318,6 @@
             this.comboBox1.Size = new System.Drawing.Size(134, 39);
             this.comboBox1.TabIndex = 11;
             this.comboBox1.Text = "None";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -338,7 +336,7 @@
             // chkboxPrefix
             // 
             this.chkboxPrefix.AutoSize = true;
-            this.chkboxPrefix.Location = new System.Drawing.Point(1067, 341);
+            this.chkboxPrefix.Location = new System.Drawing.Point(1024, 152);
             this.chkboxPrefix.Name = "chkboxPrefix";
             this.chkboxPrefix.Size = new System.Drawing.Size(230, 36);
             this.chkboxPrefix.TabIndex = 14;
@@ -348,7 +346,7 @@
             // lblSqueeze
             // 
             this.lblSqueeze.AutoSize = true;
-            this.lblSqueeze.Location = new System.Drawing.Point(23, 504);
+            this.lblSqueeze.Location = new System.Drawing.Point(23, 304);
             this.lblSqueeze.Name = "lblSqueeze";
             this.lblSqueeze.Size = new System.Drawing.Size(334, 32);
             this.lblSqueeze.TabIndex = 15;
@@ -356,7 +354,7 @@
             // 
             // tckSqueeze
             // 
-            this.tckSqueeze.Location = new System.Drawing.Point(363, 488);
+            this.tckSqueeze.Location = new System.Drawing.Point(363, 288);
             this.tckSqueeze.Maximum = 100;
             this.tckSqueeze.Minimum = 75;
             this.tckSqueeze.Name = "tckSqueeze";
@@ -370,7 +368,7 @@
             // lblShowSqueeze
             // 
             this.lblShowSqueeze.AutoSize = true;
-            this.lblShowSqueeze.Location = new System.Drawing.Point(932, 508);
+            this.lblShowSqueeze.Location = new System.Drawing.Point(932, 308);
             this.lblShowSqueeze.Name = "lblShowSqueeze";
             this.lblShowSqueeze.Size = new System.Drawing.Size(63, 32);
             this.lblShowSqueeze.TabIndex = 17;
@@ -380,7 +378,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1369, 601);
+            this.ClientSize = new System.Drawing.Size(1383, 637);
             this.Controls.Add(this.lblShowSqueeze);
             this.Controls.Add(this.tckSqueeze);
             this.Controls.Add(this.lblSqueeze);

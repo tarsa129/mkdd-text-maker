@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace mkdd_text_maker
 {
@@ -19,15 +19,14 @@ namespace mkdd_text_maker
             width = 256;
             height = 32;
 
-           
-
             Console.WriteLine("Load Width:" + picText.Size.Width.ToString());
 
+            //get scale factor for display
             int DispWidth = picText.Size.Width;
             scale = (double)DispWidth / (double)width;
             
             //Console.WriteLine("Load Height:" + picText.Size.Height.ToString());
-            Console.WriteLine(scale.ToString());
+            //Console.WriteLine(scale.ToString());
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,32 +45,26 @@ namespace mkdd_text_maker
 
             if (!String.IsNullOrWhiteSpace(text) && !String.IsNullOrEmpty(text))
             {
+                //if there is valid text, allow saving
                 SavePNG.Enabled = true;
                 SaveBTI.Enabled = true;
                 SaveAsPNG.Enabled = true;
                 SaveAsBTI.Enabled = true;
 
+                //call the writing method
                 Image thisImage = picText.BackgroundImage;
                 WriteInfo Info = new WriteInfo(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment);
                 thisImage = myImage.writeLetters(Info);
                 picText.BackgroundImage = thisImage;
             } else
             {
+                //if the text is not valid, don't allow saving
                 SavePNG.Enabled = false;
                 SaveBTI.Enabled = false;
                 SaveAsPNG.Enabled = false;
                 SaveAsBTI.Enabled = false;
             }
             
-        }
-
-        private void Label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void TckLetter_Scroll(object sender, EventArgs e)
@@ -129,11 +122,13 @@ namespace mkdd_text_maker
         {
             Image toSave = picText.BackgroundImage;
 
+            //if there is a .png file already, don't delete it
             bool ToDelete = File.Exists(txtInput.Text + ".png");
 
-            toSave.Save(txtInput.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            //don't wanna overwrite an existing .png file
+            toSave.Save(txtInput.Text + "placeholder" + ".png", System.Drawing.Imaging.ImageFormat.Png);
 
-            Wimgt(txtInput.Text);
+            Wimgt(txtInput.Text + "placeholder");
 
             if (!ToDelete)
             {
@@ -195,7 +190,10 @@ namespace mkdd_text_maker
 
         private void customSizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //create form with text boxes.
             Form size = new Form();
+
+            size.Size = new Size(250, 100);
 
             size.Text = "Change Image Size";
 
@@ -248,12 +246,12 @@ namespace mkdd_text_maker
             alignment = 1;
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void picText_DoubleClick(object sender, EventArgs e)
         {
-            if(e.KeyCode == Keys.Enter)
-            {
-                Button1_Click(btnConvert, EventArgs.Empty);
-            }
+
+            Clipboard.SetImage(picText.BackgroundImage);
         }
+
+        
     }
 }
