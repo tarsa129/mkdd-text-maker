@@ -158,8 +158,10 @@ namespace mkdd_text_maker
             saveFileDialogBTI.FileName = saveFileDialogBTI.FileName.Substring(0, index + 1);
             saveFileDialogBTI.FileName += intendedName + ".png";
             */
+
+            String rando = "42t98ga";
             String intendedName = saveFileDialogBTI.FileName.Substring(0, saveFileDialogBTI.FileName.Length - 4);
-            saveFileDialogBTI.FileName = intendedName + ".png";
+            saveFileDialogBTI.FileName = intendedName + rando + ".png";
            
 
             Console.WriteLine(saveFileDialogBTI.FileName);
@@ -170,20 +172,22 @@ namespace mkdd_text_maker
             Image toSave = picText.BackgroundImage;
             toSave.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
 
+            fs.Close();
+
+            File.Delete(intendedName + rando + ".bti");
             File.Delete(intendedName + ".bti");
 
 
-            Console.WriteLine(intendedName);
 
-            fs.Close();
-
-            MessageBox.Show("before deletion");
-
-            Wimgt(intendedName);
+            Console.WriteLine(intendedName + rando);
 
 
+            Wimgt(intendedName + rando);
 
-            File.Delete(saveFileDialogBTI.FileName);
+            System.IO.File.Move(intendedName + rando + ".bti", intendedName + ".bti");
+
+
+            File.Delete(intendedName + rando + ".png");
             
 
             
