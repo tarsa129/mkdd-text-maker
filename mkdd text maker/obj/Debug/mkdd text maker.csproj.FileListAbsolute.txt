@@ -7,3 +7,4 @@ C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd_text_
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csproj.GenerateResource.cache
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.exe
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.pdb
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csproj.CoreCompileInputs.cache

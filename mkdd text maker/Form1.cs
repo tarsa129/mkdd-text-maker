@@ -97,12 +97,15 @@ namespace mkdd_text_maker
 
         private void Wimgt(String text)
         {
+            
+
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.CreateNoWindow = false;
             startInfo.UseShellExecute = false;
             startInfo.FileName = "wimgt.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = "convert " + text + ".png -d " + text + ".bti";
+            startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.CMPR --n-mm=0";
+           
             try
             {
                 // Start the process with the info we specified.
@@ -126,9 +129,9 @@ namespace mkdd_text_maker
             bool ToDelete = File.Exists(txtInput.Text + ".png");
 
             //don't wanna overwrite an existing .png file
-            toSave.Save(txtInput.Text + "placeholder" + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            toSave.Save(txtInput.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
 
-            Wimgt(txtInput.Text + "placeholder");
+            Wimgt(txtInput.Text);
 
             if (!ToDelete)
             {
@@ -141,21 +144,49 @@ namespace mkdd_text_maker
         {
             saveFileDialogBTI.FileName = txtInput.Text + ".bti";
             saveFileDialogBTI.ShowDialog();
+
+            /*
+            String intendedName = saveFileDialogBTI.FileName;
+            int index = intendedName.LastIndexOf("\\");
+            intendedName = intendedName.Substring(index +1);
+            intendedName = intendedName.Substring(0, intendedName.Length - 4);
+
+            //Console.WriteLine(intendedName);
+
+           
+            index = saveFileDialogBTI.FileName.LastIndexOf("\\");
+            saveFileDialogBTI.FileName = saveFileDialogBTI.FileName.Substring(0, index + 1);
+            saveFileDialogBTI.FileName += intendedName + ".png";
+            */
+            String intendedName = saveFileDialogBTI.FileName.Substring(0, saveFileDialogBTI.FileName.Length - 4);
+            saveFileDialogBTI.FileName = intendedName + ".png";
+           
+
+            Console.WriteLine(saveFileDialogBTI.FileName);
+
+
             FileStream fs = (FileStream)saveFileDialogBTI.OpenFile();
 
             Image toSave = picText.BackgroundImage;
             toSave.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
-            
-            bool ToDelete = File.Exists(saveFileDialogBTI.FileName);
 
-            Wimgt(saveFileDialogBTI.FileName);
+            File.Delete(intendedName + ".bti");
 
-            if (!ToDelete)
-            {
-                File.Delete(txtInput.Text + ".png");
-            }
+
+            Console.WriteLine(intendedName);
 
             fs.Close();
+
+            MessageBox.Show("before deletion");
+
+            Wimgt(intendedName);
+
+
+
+            File.Delete(saveFileDialogBTI.FileName);
+            
+
+            
         }
 
         private void tckSqueeze_Scroll(object sender, EventArgs e)
