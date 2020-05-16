@@ -1,10 +1,11 @@
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\bin\Debug\mkdd text maker.exe.config
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\bin\Debug\mkdd text maker.exe
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\bin\Debug\mkdd text maker.pdb
-C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csprojAssemblyReference.cache
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd_text_maker.Color_Editor.resources
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd_text_maker.Form1.resources
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd_text_maker.Properties.Resources.resources
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csproj.GenerateResource.cache
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csproj.CoreCompileInputs.cache
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.exe
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.pdb
-C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csproj.CoreCompileInputs.cache
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csprojAssemblyReference.cache

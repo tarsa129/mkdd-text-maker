@@ -1,23 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 
 namespace mkdd_text_maker
 {
     public partial class Form1 : Form
     {
-        static int width;
-        static int height;
-        static double scale;
-
+        static public int width;
+        static public int height;
+        static public double scale;
+        static bool autosize;
+        static Color color;
         static int alignment = 2;
+
+        static Color_Editor editor;
+        static List<Color[]> gradients;
         public Form1()
         {
             InitializeComponent();
             width = 256;
             height = 32;
+
+            autosize = false;
+            color = Color.White;
+
+            editor = new Color_Editor();
+
+            gradients = new List<Color[]>();
+            Color[] temp = { color, color };
+            gradients.Add(temp);
 
             Console.WriteLine("Load Width:" + picText.Size.Width.ToString());
 
@@ -53,9 +68,14 @@ namespace mkdd_text_maker
 
                 //call the writing method
                 Image thisImage = picText.BackgroundImage;
-                WriteInfo Info = new WriteInfo(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment);
+                WriteInfo Info = new WriteInfo(text, thisImage, tckLetter.Value, tckWords.Value, comboBox1.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment, autosize, gradients, chkColor.Checked);
                 thisImage = myImage.writeLetters(Info);
                 picText.BackgroundImage = thisImage;
+                if (autosize)
+                {
+                    width = thisImage.Width;
+                    picText.Size = new Size((int)(width * scale), (int)(height * scale));
+                }
             } else
             {
                 //if the text is not valid, don't allow saving
@@ -64,8 +84,12 @@ namespace mkdd_text_maker
                 SaveAsPNG.Enabled = false;
                 SaveAsBTI.Enabled = false;
             }
-            
+
+           
         }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //options stuff
 
         private void TckLetter_Scroll(object sender, EventArgs e)
         {
@@ -76,6 +100,14 @@ namespace mkdd_text_maker
         {
             lblWordValue.Text = tckWords.Value.ToString();
         }
+
+        private void tckSqueeze_Scroll(object sender, EventArgs e)
+        {
+            lblShowSqueeze.Text = tckSqueeze.Value.ToString();
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //saving stuff
 
         private void SavepngToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -145,20 +177,6 @@ namespace mkdd_text_maker
             saveFileDialogBTI.FileName = txtInput.Text + ".bti";
             saveFileDialogBTI.ShowDialog();
 
-            /*
-            String intendedName = saveFileDialogBTI.FileName;
-            int index = intendedName.LastIndexOf("\\");
-            intendedName = intendedName.Substring(index +1);
-            intendedName = intendedName.Substring(0, intendedName.Length - 4);
-
-            //Console.WriteLine(intendedName);
-
-           
-            index = saveFileDialogBTI.FileName.LastIndexOf("\\");
-            saveFileDialogBTI.FileName = saveFileDialogBTI.FileName.Substring(0, index + 1);
-            saveFileDialogBTI.FileName += intendedName + ".png";
-            */
-
             String rando = "42t98ga";
             String intendedName = saveFileDialogBTI.FileName.Substring(0, saveFileDialogBTI.FileName.Length - 4);
             saveFileDialogBTI.FileName = intendedName + rando + ".png";
@@ -177,8 +195,6 @@ namespace mkdd_text_maker
             File.Delete(intendedName + rando + ".bti");
             File.Delete(intendedName + ".bti");
 
-
-
             Console.WriteLine(intendedName + rando);
 
 
@@ -187,19 +203,17 @@ namespace mkdd_text_maker
             System.IO.File.Move(intendedName + rando + ".bti", intendedName + ".bti");
 
 
-            File.Delete(intendedName + rando + ".png");
-            
-
-            
+            File.Delete(intendedName + rando + ".png");     
         }
 
-        private void tckSqueeze_Scroll(object sender, EventArgs e)
-        {
-            lblShowSqueeze.Text = tckSqueeze.Value.ToString();
-        }
 
-        private void updateImageBox()
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //image size
+
+
+        public void updateImageBox()
         {
+            autosize = false;
             picText.BackgroundImage = new Bitmap(width, height);
             picText.Size = new Size((int)(width * scale), (int)(height * scale));
             //Console.WriteLine("Height: " + height.ToString());
@@ -266,6 +280,13 @@ namespace mkdd_text_maker
 
         }
 
+        private void autoSize(object sender, EventArgs e)
+        {
+            autosize = true;
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //alignment shit
         private void leftToolStripMenuItem_Click(object sender, EventArgs e)
         {
             alignment = 0;
@@ -281,12 +302,41 @@ namespace mkdd_text_maker
             alignment = 1;
         }
 
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //extra stuff
+
         private void picText_DoubleClick(object sender, EventArgs e)
         {
 
             Clipboard.SetImage(picText.BackgroundImage);
         }
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //color
 
-        
+        private void colordia(object sender, EventArgs e)
+        {
+            ColorDialog picker = new ColorDialog();
+            if (picker.ShowDialog() == DialogResult.OK)
+            {
+                color = picker.Color;
+                List<Color[]> sing = new List<Color[]>();
+                Color[] onecolor = { color, color };
+                sing.Add(onecolor);
+                gradients = sing;
+                //Console.WriteLine(color.R + " " + color.B);
+            }
+        }
+
+        private void graidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            editor.ShowDialog();
+            gradients = editor.GetColors();
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            chkColor.Checked = true;
+        }
     }
 }

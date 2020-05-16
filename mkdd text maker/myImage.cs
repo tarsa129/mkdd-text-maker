@@ -2,12 +2,14 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
+using System.Windows.Forms.VisualStyles;
 
 namespace mkdd_text_maker
 {
     class myImage
     {
         static int totalLength;
+        
         public static Image writeLetters(WriteInfo Info)
         {
             //trim text and get the characters
@@ -24,7 +26,7 @@ namespace mkdd_text_maker
             double ScaleFactor = Info.getsqueeze();
 
             bool withPre = prefix.Equals("none");
-            //Console.WriteLine(withPre);
+            
             int index;
 
 
@@ -48,27 +50,26 @@ namespace mkdd_text_maker
 
             Image thisImage = Info.getImage();
 
+           
+
             int[] xposes = spacing(chars, Info) ;
 
-            int shiftFactor;
-
-            if(Info.getalign() == 0)
+            if (Info.getauto())
             {
-                shiftFactor = 0;
-            } else
-            {
-                shiftFactor = (thisImage.Width - totalLength) / Info.getalign();
-            }
-            
-
-            //Console.WriteLine(shiftFactor);
-
-            for (int i = 0; i < xposes.Length; i++)
-            {
-                xposes[i] = shiftFactor + xposes[i];
+                thisImage = new Bitmap(totalLength, 32);
             }
 
-
+            //if left align or auto size, do not shift. if center or right, shift
+            if (!(Info.getalign() == 0) && !Info.getauto())
+            {
+                int shiftFactor = (thisImage.Width - totalLength) / Info.getalign();
+                for (int i = 0; i < xposes.Length; i++)
+                {
+                    xposes[i] = shiftFactor + xposes[i];
+                }
+            }
+            int cindex = xposes.Length;
+            //actually writing the letters
             for (int i = xposes.Length - 1; i > -1; i --)
             {
                 String letter = chars[i];
@@ -76,11 +77,27 @@ namespace mkdd_text_maker
 
                 if (!String.IsNullOrWhiteSpace(letter))
                 {
+                    //get the letter image files 
+
                     String name = "mariofont_" + chara + ".png";
                     String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\btis\" + name;
                     Bitmap asdf = new Bitmap(fileToRead);
 
+
+                    //if the color is on, edit the letter image
+                    if (Info.getcol())
+                    {
+                        
+                        int colorindex = cindex % Info.getcolor().Count;
+                       
+                        asdf = editColor(asdf, Info.getcolor()[colorindex]);
+                        cindex--;
+
+                    }
+
                     Bitmap bmp = new Bitmap(asdf.Width, asdf.Height, PixelFormat.Format32bppPArgb);
+
+                    
 
                     Bitmap picture = new Bitmap(thisImage);
                     Graphics mainImage = Graphics.FromImage(picture);
@@ -99,13 +116,13 @@ namespace mkdd_text_maker
                     {
                         mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor * heightAdjustment), thisImage.Height));
                     }
-
-                    
+ 
                     thisImage = picture;
                 }
               
             }
-            //writePrefix(prefix, thisImage);
+           
+            
             thisImage = makeOutline(thisImage);
             return thisImage;
         }
@@ -125,7 +142,7 @@ namespace mkdd_text_maker
             bool smalPre = Info.getsmall();
             double ScaleFactor = Info.getsqueeze();
 
-            Console.WriteLine("Image height: " + image.Height);
+            //Console.WriteLine("Image height: " + image.Height);
             
             //iterate through the whole array to get the position of each character
             for (int i = 0; i < text.Length; i++)
@@ -188,6 +205,9 @@ namespace mkdd_text_maker
             return positions;
         }
 
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //outline shit
+
         private static Image makeOutline(Image image)
         {
 
@@ -232,6 +252,40 @@ namespace mkdd_text_maker
                 }
             }
             return false;
+        }
+
+        private static Bitmap editColor(Image image, Color[] color)
+        {
+            //Console.WriteLine(color.R);
+            
+            
+
+            for (int i = 0; i < image.Width; i++)
+            {
+                for (int j = 0; j < image.Height; j++)
+                {
+                    Color pixel = ((Bitmap)image).GetPixel(i, j);
+                    if(pixel.A == 255)
+                    {
+                        double x = pixel.R / 255.00;
+                        double y = 1 - ((double) j / (double)image.Height);
+                        //System.Diagnostics.Debug.Write(" " + x);
+                        if (color[0].Equals(color[1]))
+                        {
+                            pixel = Color.FromArgb(255, (int)(x * color[0].R), (int)(x * color[0].G), (int)(x * color[0].B));
+                        } else
+                        {
+                            pixel = Color_Editor.gradCalc(color[0], color[1], x, y);
+                        }
+                   
+                        ((Bitmap)image).SetPixel(i, j, pixel);
+                    }
+                    
+                    
+                }
+            }
+
+            return (Bitmap)image;
         }
 
     }

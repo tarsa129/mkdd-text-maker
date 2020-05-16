@@ -17,8 +17,11 @@ namespace mkdd_text_maker
         double squeeze;
         bool small;
         int align;
+        bool auto;
+        List<Color[]> color;
+        bool col;
 
-        public WriteInfo(String t, Image i, int l, int w, String p, double d, bool s, int a)
+        public WriteInfo(String t, Image i, int l, int w, String p, double d, bool s, int a, bool au, List<Color[]> c, bool co)
         {
             text = t;
             image = i;
@@ -28,6 +31,9 @@ namespace mkdd_text_maker
             squeeze = d;
             small = s;
             align = a;
+            auto = au;
+            color = c;
+            col = co;
         }
 
         public WriteInfo()
@@ -43,5 +49,8 @@ namespace mkdd_text_maker
         public double getsqueeze() { return squeeze; }
         public bool getsmall() { return small; }
         public int getalign() { return align; }
+        public bool getauto() { return auto; }
+        public List<Color[]> getcolor() { return color; }
+        public bool getcol() { return col; }
     }
 }

@@ -39,10 +39,14 @@
             this.courseName256X32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.characterName152X32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoSizesomethingX32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alignmentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.leftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.centerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.singleColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.graidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -61,6 +65,7 @@
             this.lblSqueeze = new System.Windows.Forms.Label();
             this.tckSqueeze = new System.Windows.Forms.TrackBar();
             this.lblShowSqueeze = new System.Windows.Forms.Label();
+            this.chkColor = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -70,14 +75,16 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.imageSizeToolStripMenuItem,
-            this.alignmentToolStripMenuItem});
+            this.alignmentToolStripMenuItem,
+            this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1383, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1348, 52);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -89,7 +96,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 45);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 48);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // SavePNG
@@ -132,31 +139,39 @@
             this.imageSizeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.courseName256X32ToolStripMenuItem,
             this.characterName152X32ToolStripMenuItem,
-            this.customSizeToolStripMenuItem});
+            this.customSizeToolStripMenuItem,
+            this.autoSizesomethingX32ToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
             // 
             this.courseName256X32ToolStripMenuItem.Name = "courseName256X32ToolStripMenuItem";
-            this.courseName256X32ToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.courseName256X32ToolStripMenuItem.Size = new System.Drawing.Size(539, 54);
             this.courseName256X32ToolStripMenuItem.Text = "Course Name (256 x 32)";
             this.courseName256X32ToolStripMenuItem.Click += new System.EventHandler(this.courseName256X32ToolStripMenuItem_Click);
             // 
             // characterName152X32ToolStripMenuItem
             // 
             this.characterName152X32ToolStripMenuItem.Name = "characterName152X32ToolStripMenuItem";
-            this.characterName152X32ToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.characterName152X32ToolStripMenuItem.Size = new System.Drawing.Size(539, 54);
             this.characterName152X32ToolStripMenuItem.Text = "Character Name (152 x 32)";
             this.characterName152X32ToolStripMenuItem.Click += new System.EventHandler(this.characterName152X32ToolStripMenuItem_Click);
             // 
             // customSizeToolStripMenuItem
             // 
             this.customSizeToolStripMenuItem.Name = "customSizeToolStripMenuItem";
-            this.customSizeToolStripMenuItem.Size = new System.Drawing.Size(533, 54);
+            this.customSizeToolStripMenuItem.Size = new System.Drawing.Size(539, 54);
             this.customSizeToolStripMenuItem.Text = "Custom Size";
             this.customSizeToolStripMenuItem.Click += new System.EventHandler(this.customSizeToolStripMenuItem_Click);
+            // 
+            // autoSizesomethingX32ToolStripMenuItem
+            // 
+            this.autoSizesomethingX32ToolStripMenuItem.Name = "autoSizesomethingX32ToolStripMenuItem";
+            this.autoSizesomethingX32ToolStripMenuItem.Size = new System.Drawing.Size(539, 54);
+            this.autoSizesomethingX32ToolStripMenuItem.Text = "Auto Size (something x 32)";
+            this.autoSizesomethingX32ToolStripMenuItem.Click += new System.EventHandler(this.autoSize);
             // 
             // alignmentToolStripMenuItem
             // 
@@ -165,7 +180,7 @@
             this.centerToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
-            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 45);
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 48);
             this.alignmentToolStripMenuItem.Text = "Alignment";
             // 
             // leftToolStripMenuItem
@@ -189,6 +204,30 @@
             this.rightToolStripMenuItem.Text = "Right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
+            // colorToolStripMenuItem
+            // 
+            this.colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.singleColorToolStripMenuItem,
+            this.graidToolStripMenuItem});
+            this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
+            this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
+            // 
+            // singleColorToolStripMenuItem
+            // 
+            this.singleColorToolStripMenuItem.Name = "singleColorToolStripMenuItem";
+            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.singleColorToolStripMenuItem.Text = "Single Color";
+            this.singleColorToolStripMenuItem.Click += new System.EventHandler(this.colordia);
+            // 
+            // graidToolStripMenuItem
+            // 
+            this.graidToolStripMenuItem.Name = "graidToolStripMenuItem";
+            this.graidToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.graidToolStripMenuItem.Text = "Gradient Editor";
+            this.graidToolStripMenuItem.Click += new System.EventHandler(this.graidToolStripMenuItem_Click);
+            // 
             // btnConvert
             // 
             this.btnConvert.Location = new System.Drawing.Point(1024, 222);
@@ -203,7 +242,7 @@
             // 
             this.txtInput.Location = new System.Drawing.Point(524, 67);
             this.txtInput.Name = "txtInput";
-            this.txtInput.Size = new System.Drawing.Size(397, 38);
+            this.txtInput.Size = new System.Drawing.Size(455, 38);
             this.txtInput.TabIndex = 2;
             // 
             // lblInput
@@ -336,7 +375,7 @@
             // chkboxPrefix
             // 
             this.chkboxPrefix.AutoSize = true;
-            this.chkboxPrefix.Location = new System.Drawing.Point(1024, 152);
+            this.chkboxPrefix.Location = new System.Drawing.Point(1024, 160);
             this.chkboxPrefix.Name = "chkboxPrefix";
             this.chkboxPrefix.Size = new System.Drawing.Size(230, 36);
             this.chkboxPrefix.TabIndex = 14;
@@ -374,11 +413,22 @@
             this.lblShowSqueeze.TabIndex = 17;
             this.lblShowSqueeze.Text = "100";
             // 
+            // chkColor
+            // 
+            this.chkColor.AutoSize = true;
+            this.chkColor.Location = new System.Drawing.Point(1024, 118);
+            this.chkColor.Name = "chkColor";
+            this.chkColor.Size = new System.Drawing.Size(121, 36);
+            this.chkColor.TabIndex = 18;
+            this.chkColor.Text = "Color";
+            this.chkColor.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1383, 637);
+            this.ClientSize = new System.Drawing.Size(1348, 637);
+            this.Controls.Add(this.chkColor);
             this.Controls.Add(this.lblShowSqueeze);
             this.Controls.Add(this.tckSqueeze);
             this.Controls.Add(this.lblSqueeze);
@@ -445,6 +495,11 @@
         private System.Windows.Forms.ToolStripMenuItem leftToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem centerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem autoSizesomethingX32ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
+        private System.Windows.Forms.CheckBox chkColor;
+        private System.Windows.Forms.ToolStripMenuItem singleColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem graidToolStripMenuItem;
     }
 }
 
