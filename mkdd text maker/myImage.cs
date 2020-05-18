@@ -32,13 +32,13 @@ namespace mkdd_text_maker
 
             if (!withPre)
             {
-                chars = new string[characters.Length + 2];
+                chars = new String[characters.Length + 2];
                 chars[0] = prefix;
                 chars[1] = " ";
                 index = 2;
             } else
             {
-                chars = new string[characters.Length];
+                chars = new String[characters.Length];
                 index = 0;
             }
 
@@ -48,9 +48,10 @@ namespace mkdd_text_maker
                 chars[i + index] = characters[i].ToString();
             }
 
-            Image thisImage = Info.getImage();
+            //thing for special characters here
+            chars = Form1.specialCharacters(chars);
 
-           
+            Image thisImage = Info.getImage();
 
             int[] xposes = spacing(chars, Info) ;
 
@@ -104,7 +105,7 @@ namespace mkdd_text_maker
 
                     double heightAdjustment = (double)thisImage.Height / 32;
 
-                    if(chara.Length > 1)
+                    if(chara.Length > 1 && withPre)
                     {
                         double preScale = 1;
                         if (smalpre)

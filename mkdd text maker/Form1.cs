@@ -310,6 +310,39 @@ namespace mkdd_text_maker
 
             Clipboard.SetImage(picText.BackgroundImage);
         }
+
+        public static String[] specialCharacters(String[] letters)
+        {
+            for(int i = 0; i < letters.Length; i++)
+            {
+                switch (letters[i])
+                {
+                    case "+":
+                        letters[i] = "plus";
+                        break;
+                    case "-":
+                        letters[i] = "minus";
+                        break;
+                    case ":":
+                        letters[i] = "colon";
+                        break;
+                    case ".":
+                        letters[i] = "period";
+                        break;
+                    case "!":
+                        letters[i] = "exclam";
+                        break;
+                    case "?":
+                        letters[i] = "ques";
+                        break;
+                    case "/":
+                        letters[i] = "slash";
+                        break;
+                }
+                
+            }
+            return letters;
+        }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //color
 
@@ -324,6 +357,7 @@ namespace mkdd_text_maker
                 sing.Add(onecolor);
                 gradients = sing;
                 //Console.WriteLine(color.R + " " + color.B);
+                chkColor.Checked = true;
             }
         }
 
@@ -332,11 +366,8 @@ namespace mkdd_text_maker
             
             editor.ShowDialog();
             gradients = editor.GetColors();
-        }
-
-        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
             chkColor.Checked = true;
         }
+
     }
 }

@@ -26,6 +26,9 @@ namespace mkdd_text_maker
             picGrad.Image = new Bitmap(175, 275);
         }
 
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //button stuff
+
         private void btnCone_Click(object sender, EventArgs e)
         {
             ColorDialog picker = new ColorDialog();
@@ -57,15 +60,48 @@ namespace mkdd_text_maker
             }
         }
 
+        private void btnDone_Click(object sender, EventArgs e)
+        {
+
+            Close();
+        }
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Color[] temp = { Color.White, Color.White };
+            colors.Add(temp);
+            cmbGrads.Items.Add("Gradient " + (cmbGrads.Items.Count));
+            cmbGrads.SelectedIndex = cmbGrads.Items.Count - 1;
+
+            index = cmbGrads.Items.Count - 1;
+
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (cmbGrads.Items.Count > 0)
+            {
+                colors.RemoveAt(index);
+                cmbGrads.Items.RemoveAt(index);
+
+                if (index > 0)
+                {
+                    index = index - 1;
+                }
+
+                cmbGrads.SelectedIndex = index;
+
+                for (int i = index; i < cmbGrads.Items.Count; i++)
+                {
+                    cmbGrads.Items[i] = "Gradient " + i;
+                }
+            }
+
+        }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+        //public methods
         public List<Color[]> GetColors()
         {
             return colors;
-        }
-
-        private void btnDone_Click(object sender, EventArgs e)
-        {
-            
-            Close();
         }
 
         public static Color gradCalc(Color c1, Color c2, double x, double y)
@@ -82,6 +118,9 @@ namespace mkdd_text_maker
 
             return Color.FromArgb(255, r, g, b);
         }
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //text box stuff
 
         private void txt1r_TextChanged(object sender, EventArgs e)
         {
@@ -112,16 +151,8 @@ namespace mkdd_text_maker
             
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            Color[] temp = { Color.White, Color.White };
-            colors.Add(temp);
-            cmbGrads.Items.Add("Gradient " + (cmbGrads.Items.Count));
-            cmbGrads.SelectedIndex = cmbGrads.Items.Count - 1;
-            
-            index = cmbGrads.Items.Count - 1;
-
-        }
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+        //other stuff stuff
 
         private void cmbGrads_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -144,39 +175,20 @@ namespace mkdd_text_maker
         {
             Color[] gradient = colors[index];
             Image preview = new Bitmap(175, 275);
+            Console.WriteLine(preview.Height);
 
             for(int i = 0; i < 175; i++)
             {
                 for(int j = 0; j < 275; j++)
                 {
-                    Color pixel = Color_Editor.gradCalc(gradient[0], gradient[1], 1, 1- j/275.00);
+                    Color pixel = Color_Editor.gradCalc(gradient[0], gradient[1], 1, 1 - j/( 275.00));
                     ((Bitmap)preview).SetPixel(i, j, pixel);
                 }
             }
             picGrad.Image = preview;
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if(cmbGrads.Items.Count > 0)
-            {
-                colors.RemoveAt(index);
-                cmbGrads.Items.RemoveAt(index);
-
-                if(index > 0)
-                {
-                    index = index - 1;
-                }
-                
-                cmbGrads.SelectedIndex = index;
-
-                for(int i = index; i < cmbGrads.Items.Count; i++)
-                {
-                    cmbGrads.Items[i] = "Gradient " + i;
-                }
-            }
-            
-        }
+        
     }
 
    
