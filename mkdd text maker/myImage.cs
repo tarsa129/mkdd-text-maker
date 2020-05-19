@@ -69,7 +69,7 @@ namespace mkdd_text_maker
                     xposes[i] = shiftFactor + xposes[i];
                 }
             }
-            int cindex = xposes.Length;
+            int cindex = xposes.Length - 1;
             //actually writing the letters
             for (int i = xposes.Length - 1; i > -1; i --)
             {
