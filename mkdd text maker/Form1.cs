@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
@@ -111,14 +112,22 @@ namespace mkdd_text_maker
 
         private void SavepngToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            String[] name = txtInput.Text.ToCharArray().Select(c => c.ToString()).ToArray();
+            name = specialCharacters(name);
+            String savename = String.Join("", name);
+
+
             Image toSave = picText.BackgroundImage;
-            toSave.Save(txtInput.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            toSave.Save(savename + ".png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
         private void SaveAspngToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
-            saveFileDialogPNG.FileName = txtInput.Text + ".png";
+            String[] name = txtInput.Text.ToCharArray().Select(c => c.ToString()).ToArray();
+            name = specialCharacters(name);
+            String savename = String.Join("", name);
+
+            saveFileDialogPNG.FileName = savename + ".png";
             saveFileDialogPNG.ShowDialog();
             System.IO.FileStream fs = (System.IO.FileStream)saveFileDialogPNG.OpenFile();
             Image toSave = picText.BackgroundImage;
@@ -155,26 +164,36 @@ namespace mkdd_text_maker
 
         private void saveAsbtiToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            String[] name = txtInput.Text.ToCharArray().Select(c => c.ToString()).ToArray();
+            name = specialCharacters(name);
+            String savename = String.Join("", name);
+
             Image toSave = picText.BackgroundImage;
 
             //if there is a .png file already, don't delete it
-            bool ToDelete = File.Exists(txtInput.Text + ".png");
+            bool ToDelete = File.Exists(savename + ".png");
 
             //don't wanna overwrite an existing .png file
-            toSave.Save(txtInput.Text + ".png", System.Drawing.Imaging.ImageFormat.Png);
+            toSave.Save(savename+ ".png", System.Drawing.Imaging.ImageFormat.Png);
 
-            Wimgt(txtInput.Text);
+            Wimgt(savename);
 
             if (!ToDelete)
             {
-                File.Delete(txtInput.Text + ".png");
+                File.Delete(savename + ".png");
             }
 
         }
 
         private void SaveAsBTI_Click(object sender, EventArgs e)
         {
-            saveFileDialogBTI.FileName = txtInput.Text + ".bti";
+
+            String[] name = txtInput.Text.ToCharArray().Select(c => c.ToString()).ToArray();
+            name = specialCharacters(name);
+            String savename = String.Join("", name);
+
+            saveFileDialogBTI.FileName = savename + ".bti";
             saveFileDialogBTI.ShowDialog();
 
             String rando = "42t98ga";
@@ -316,21 +335,12 @@ namespace mkdd_text_maker
             for(int i = 0; i < letters.Length; i++)
             {
                 switch (letters[i])
-                {
-                    case "+":
-                        letters[i] = "plus";
-                        break;
-                    case "-":
-                        letters[i] = "minus";
-                        break;
+                {   
                     case ":":
                         letters[i] = "colon";
                         break;
                     case ".":
                         letters[i] = "period";
-                        break;
-                    case "!":
-                        letters[i] = "exclam";
                         break;
                     case "?":
                         letters[i] = "ques";
