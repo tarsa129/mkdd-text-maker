@@ -42,10 +42,16 @@ namespace mkdd_text_maker
                 index = 0;
             }
 
+            int cindex = -1;
+
             //write the char array to the string array
-            for(int i = 0; i < characters.Length; i++)
+            for (int i = 0; i < characters.Length; i++)
             {
                 chars[i + index] = characters[i].ToString();
+                if(!String.IsNullOrWhiteSpace(chars[i + index]))
+                {
+                    cindex++;
+                }
             }
 
             //thing for special characters here
@@ -69,7 +75,7 @@ namespace mkdd_text_maker
                     xposes[i] = shiftFactor + xposes[i];
                 }
             }
-            int cindex = xposes.Length - 1;
+            
             //actually writing the letters
             for (int i = xposes.Length - 1; i > -1; i --)
             {
