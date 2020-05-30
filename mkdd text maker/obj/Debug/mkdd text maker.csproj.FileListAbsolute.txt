@@ -9,3 +9,6 @@ C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text 
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.exe
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.pdb
 C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csprojAssemblyReference.cache
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\bin\Debug\Newtonsoft.Json.dll
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\bin\Debug\Newtonsoft.Json.xml
+C:\Users\sheeh\source\repos\mkdd text maker\mkdd text maker\obj\Debug\mkdd text maker.csproj.CopyComplete

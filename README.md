@@ -7,3 +7,5 @@ Found in root -> scenedata -> <language here> -> courseselect.arc -> timg -> con
 Found in root -> scenedata ->  <language here> -> mapselect.arc -> timg ->  mozi_map<number here>.bti
 Character names can be found:
 Found in root -> scenedata -> <language here> -> menu.arc -> timg -> chaname_<character>.bti 
+
+Double Cherry made the prefix images

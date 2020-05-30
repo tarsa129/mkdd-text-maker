@@ -4,151 +4,336 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+
 
 namespace mkdd_text_maker
 {
     public partial class Color_Editor : Form
     {
-        int index = 0;
-        List<Color[]> colors;
+        int gradindex = 0;
+        int colindex = 0;
+        public List<List<Color>> Colors { get; set; }
+        public List<List<int>> Positions { get; set; }
+        public List<int> Angles { get; set; }
+        public int Setting { get; set; } 
+        
         public Color_Editor()
         {
-            colors = new List<Color[]>();
-            Color[] temp = { Color.White, Color.White };
-            colors.Add(temp);
+           
+            Colors = new List<List<Color>>();
+            Positions = new List<List<int>>();
+            Angles = new List<int>();
+
+            List<Color> temp = new List<Color>();
+            temp.Add(Color.White); temp.Add(Color.White);
+            Colors.Add(temp);
+
+            List<int> tempin = new List<int>();
+            tempin.Add(0); tempin.Add(100);
+            Positions.Add(tempin);
+            Angles.Add(90);
+
+            Setting = 0;
 
             InitializeComponent();
+         
             cmbGrads.SelectedIndex = 0;
-            picGrad.Image = new Bitmap(175, 275);
+            cmbColors.SelectedIndex = 0;         
+
+            picGrad.BackgroundImage = new Bitmap(175, 275);
+
+            txtAngle.Text = tckAngle.Value.ToString();
+            txtPos.Text = tckPos.Value.ToString();
+        }
+
+        private void Color_Editor_Load(object sender, EventArgs e)
+        {
+            
+            cmbGrads.Items.Clear();
+            for(int j = 0; j < Colors.Count; j++)
+            {
+                cmbGrads.Items.Add("Gradient " + j);
+            }
+            gradindex = 0;
+            cmbGrads.SelectedIndex = 0;
+            
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //button stuff
 
-        private void btnCone_Click(object sender, EventArgs e)
+        private void btnColorDialog(object sender, EventArgs e)
         {
             ColorDialog picker = new ColorDialog();
             if (picker.ShowDialog() == DialogResult.OK)
             {
+                //get gradient stop collection
+                //GradientStopCollection current = Colors[gradindex].colors;
+
                 txt1r.Text = "" + picker.Color.R;
                 txt1g.Text = "" + picker.Color.G;
                 txt1b.Text = "" + picker.Color.B;
-                Color[] gradient = colors[index];
-                gradient[0] = picker.Color;
+
+                //get the current color
+                //System.Windows.Media.Color newCol = System.Windows.Media.Color.FromArgb(picker.Color.A, picker.Color.R, picker.Color.G, picker.Color.B);
+
+                Color newcol = Color.FromArgb(picker.Color.A, picker.Color.R, picker.Color.G, picker.Color.B);
+
+                Colors[gradindex][colindex] = newcol;
+
+                ///current[colindex].Color = newCol;
+           
                 //Console.WriteLine(color.R + " " + color.B);
-                updateBox(index);
+                updateBox(gradindex);
             }
 
         }
-
-        private void btnCtwo_Click(object sender, EventArgs e)
-        {
-            ColorDialog picker = new ColorDialog();
-            if (picker.ShowDialog() == DialogResult.OK)
-            {
-                txt2r.Text = "" + picker.Color.R;
-                txt2g.Text = "" + picker.Color.G;
-                txt2b.Text = "" + picker.Color.B;
-                Color[] gradient = colors[index];
-                gradient[1] = picker.Color;
-                //Console.WriteLine(color.R + " " + color.B);
-                updateBox(index);
-            }
-        }
-
         private void btnDone_Click(object sender, EventArgs e)
         {
-
             Close();
         }
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAddGrad_Click(object sender, EventArgs e)
         {
-            Color[] temp = { Color.White, Color.White };
-            colors.Add(temp);
+           
+            //make a new gradient and make it completely whit
+            List<Color> temp = new List<Color>();
+            temp.Add(Color.White); temp.Add(Color.White);
+
+            List<int> tempin = new List<int>();
+            tempin.Add(0); tempin.Add(100);
+            Positions.Add(tempin);
+
+            Colors.Add(temp);
+            Angles.Add(90);
             cmbGrads.Items.Add("Gradient " + (cmbGrads.Items.Count));
             cmbGrads.SelectedIndex = cmbGrads.Items.Count - 1;
+            gradindex = cmbGrads.Items.Count - 1;
 
-            index = cmbGrads.Items.Count - 1;
-
-        }
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (cmbGrads.Items.Count > 0)
+            if(colindex > 1)
             {
-                colors.RemoveAt(index);
-                cmbGrads.Items.RemoveAt(index);
+                colindex = 0;
+                cmbGrads.SelectedIndex = 0;
+            }
+  
+        }
+        private void btnAddColor_Click(object sender, EventArgs e)
+        {
 
-                if (index > 0)
+            //Colors[gradindex].colors.Add(new GradientStop(System.Windows.Media.Color.FromArgb(255, 255, 255, 255), 0));
+            Colors[gradindex].Add(Color.White);
+            Positions[gradindex].Add(100);
+            cmbColors.Items.Add("Color " + (cmbColors.Items.Count));
+            cmbColors.SelectedIndex = cmbColors.Items.Count - 1;
+
+            colindex = cmbColors.Items.Count - 1;
+        }
+        private void btnDeleteGrad_Click(object sender, EventArgs e)
+        {
+            if (cmbGrads.Items.Count > 1)
+            {
+                Colors.RemoveAt(gradindex);
+                Angles.RemoveAt(gradindex);
+                Positions.RemoveAt(gradindex);
+                cmbGrads.Items.RemoveAt(gradindex);
+
+                if (gradindex > 0)
                 {
-                    index = index - 1;
+                    gradindex = gradindex - 1;
                 }
 
-                cmbGrads.SelectedIndex = index;
+                cmbGrads.SelectedIndex = gradindex;
 
-                for (int i = index; i < cmbGrads.Items.Count; i++)
+                for (int i = gradindex; i < cmbGrads.Items.Count; i++)
                 {
                     cmbGrads.Items[i] = "Gradient " + i;
                 }
             }
 
         }
-
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
-        //public methods
-        public List<Color[]> GetColors()
+        private void btnDelColor_Click(object sender, EventArgs e)
         {
-            return colors;
+            if (cmbColors.Items.Count > 1)
+            {
+                Colors[gradindex].RemoveAt(colindex);
+                Positions[gradindex].RemoveAt(colindex);
+                cmbColors.Items.RemoveAt(colindex);
+
+                if (cmbColors.SelectedIndex > 0)
+                {
+                    cmbColors.SelectedIndex = cmbColors.SelectedIndex - 1;
+                }
+           
+
+                for (int i = colindex; i < cmbColors.Items.Count; i++)
+                {
+                    cmbColors.Items[i] = "Color " + i;
+                }
+            }
         }
-
-        public static Color gradCalc(Color c1, Color c2, double x, double y)
+        private void btnClearAll_Click(object sender, EventArgs e)
         {
-            int r = (int)(y * c1.R + (1 - y) * c2.R);
-            int g = (int)(y * c1.G + (1 - y) * c2.G);
-            int b = (int)(y * c1.B + (1 - y) * c2.B);
+           for(int j = 0; j < Colors.Count -1; j++)
+            {
+                /*
+                GradientStopCollection collection = Colors[j].colors;
+                System.Windows.Media.Color newCol = System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
+                for (int i = 0; i < collection.Count - 1; i++)
+                {
+                    collection[i].Color = newCol;
+                }
+                */
+                List<Color> gradient = Colors[j];
+                for (int i = 0; i < gradient.Count - 1; i++)
+                {
+                    gradient[i] = Color.White;
+                }
 
-            
-            r = (int)(r *x);
-            g = (int)(g * x);
-            b = (int)(b* x);
-            
 
-            return Color.FromArgb(255, r, g, b);
+            }
+            updateTextBoxes(sender, e);
+
+        }
+        private void btnClearGrad_Click(object sender, EventArgs e)
+        {
+            /*
+            GradientStopCollection collection = Colors[gradindex].colors;
+            System.Windows.Media.Color newCol = System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
+            for (int i = 0; i < collection.Count - 1; i++)
+            {
+                collection[i].Color = newCol;
+            }
+            */
+
+            for(int i = 0; i< Colors[gradindex].Count- 1; i ++)
+            {
+                Colors[gradindex][i] = Color.White;
+            }
+
+            updateTextBoxes(sender, e);
+
+        }
+        private void btnClearColor_Click(object sender, EventArgs e)
+        {
+            //System.Windows.Media.Color newCol = System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
+            //Colors[gradindex].colors[colindex].Color = newCol;
+            Colors[gradindex][colindex] = Color.White;
+            updateTextBoxes(sender, e);  
+        }
+        private void btnFill_Click(object sender, EventArgs e)
+        {
+            /*
+            GradientStopCollection collection = Colors[gradindex].colors;
+            System.Windows.Media.Color newCol = Colors[gradindex].colors[colindex].Color;
+            for (int i = 0; i < collection.Count - 1; i++)
+            {
+                collection[i].Color = newCol;
+            }
+            */
+            for(int i = 0; i< Colors[gradindex].Count - 1; i++)
+            {
+                Colors[gradindex][i] = Colors[gradindex][colindex];
+            }
+
+            updateTextBoxes(sender, e);
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //text box stuff
+        //text box / ticker stuff
 
         private void txt1r_TextChanged(object sender, EventArgs e)
         {
-            Color[] gradient = colors[index];
-            Console.Write(index);
-            int r = Int32.Parse(txt1r.Text);
-            int g = Int32.Parse(txt1g.Text);
-            int b = Int32.Parse(txt1b.Text);
-            
-            if (r >= 0 && r <= 255 && b >= 0 && b <= 255 && g >= 0 && g <= 255)
+            //GradientStop stop = Colors[gradindex].colors[colindex];
+            //Console.Write(index);
+            if ( int.TryParse(txt1r.Text, out _) && int.TryParse(txt1g.Text, out _) && int.TryParse(txt1b.Text, out _))
             {
-                gradient[0] = Color.FromArgb(255, r, g, b);
-                updateBox(index);
+                int r = Int32.Parse(txt1r.Text);
+                int g = Int32.Parse(txt1g.Text);
+                int b = Int32.Parse(txt1b.Text);
+
+                if (r >= 0 && r <= 255 && b >= 0 && b <= 255 && g >= 0 && g <= 255)
+                {
+                    Colors[gradindex][colindex] = Color.FromArgb(255, (byte)r, (byte)g, (byte)b);
+                    //stop.Color = System.Windows.Media.Color.FromArgb(255, (byte)r, (byte)g, (byte)b);
+                    updateBox(gradindex);
+                }
+            }
+           
+        }
+
+        private void updateTextBoxes(object sender, EventArgs e)
+        {
+            //System.Windows.Media.Color newColor = Colors[gradindex].colors[colindex].Color;
+            Color newColor = Colors[gradindex][colindex];
+            txt1r.Text = newColor.R.ToString();
+            txt1b.Text = newColor.B.ToString();
+            txt1g.Text = newColor.G.ToString();
+            updateBox(gradindex);
+        }
+
+        private void tckPos_ValueChanged(object sender, EventArgs e)
+        {
+            if(colindex == 0)
+            {
+                txtPos.Text = "0";
+            }
+            if(colindex == Colors[gradindex].Count - 1)
+            {
+                txtPos.Text = "100";
+            }
+  
+            Positions[gradindex][colindex] = tckPos.Value;
+            txtPos.Text = tckPos.Value.ToString();
+            updateBox(gradindex);
+        }
+
+        private void tckAngle_ValueChanged(object sender, EventArgs e)
+        {
+            Angles[gradindex] = tckAngle.Value;
+            txtAngle.Text = tckAngle.Value.ToString();
+            updateBox(gradindex);
+        }
+
+        private void txtPos_TextChanged(object sender, EventArgs e)
+        {
+            if(colindex == 0)
+            {
+                tckPos.Value = 0;
+            }
+            if (colindex == Colors[gradindex].Count - 1)
+            {
+                tckPos.Value = 100;
+            }
+            if (int.TryParse(txtPos.Text, out _))
+            {
+                int pos = Int32.Parse(txtPos.Text);
+                if (pos >= 0 && pos <= 100)
+                {
+                    Positions[gradindex][colindex] = pos;
+                    tckPos.Value = pos;
+                    updateBox(gradindex);
+                }   
             }
         }
 
-        private void txt2b_TextChanged(object sender, EventArgs e)
+        private void txtAngle_TextChanged(object sender, EventArgs e)
         {
-            Color[] gradient = colors[index];
-            int r = Int32.Parse(txt2r.Text);
-            int g = Int32.Parse(txt2g.Text);
-            int b = Int32.Parse(txt2b.Text);
-            if (r >= 0 && r <= 255 && b >= 0 && b <= 255 && g >= 0 && g <= 255)
+            if (int.TryParse(txtAngle.Text, out _))
             {
-                gradient[1] = Color.FromArgb(255, r, g, b);
-                updateBox(index);
+                int pos = Int32.Parse(txtAngle.Text);
+                if(pos >= tckAngle.Minimum && pos <= tckAngle.Maximum)
+                {
+                    Angles[gradindex] = tckAngle.Value;
+                    tckAngle.Value = pos;
+                    updateBox(gradindex);
+                }
             }
-            
+                 
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
@@ -156,40 +341,66 @@ namespace mkdd_text_maker
 
         private void cmbGrads_SelectedIndexChanged(object sender, EventArgs e)
         {
-            index = cmbGrads.SelectedIndex;
+          
+            gradindex = cmbGrads.SelectedIndex;
+            colindex = 0;
+            //Console.WriteLine("" + cmbColors.SelectedIndex + " " + colindex);
+           
 
-            Color[] gradient = colors[index];
-            txt1r.Text = "" + gradient[0].R;
-            txt1g.Text = "" + gradient[0].G;
-            txt1b.Text = "" + gradient[0].B;
+            cmbColors.Items.Clear();
+            for(int i = 0; i < Colors[gradindex].Count; i++)
+            {
+                cmbColors.Items.Add("Color " + i);
+            }
+            
+            
+            if(cmbColors.SelectedIndex > Colors[gradindex].Count - 1)
+            {
+                colindex = 0;
+                cmbColors.SelectedIndex = 0;
+                
+            }
 
-            txt2r.Text = "" + gradient[1].R;
-            txt2g.Text = "" + gradient[1].G;
-            txt2b.Text = "" + gradient[1].B;
+            updateTextBoxes(sender, e);
 
-            updateBox(index);
+             tckAngle.Value = Angles[gradindex];
+             tckPos.Value = Positions[gradindex][colindex];
+       
+        }
 
+        private void cmbColorChange(object sender, EventArgs e)
+        {
+            colindex = cmbColors.SelectedIndex;
+            updateTextBoxes(sender, e);
+
+            tckAngle.Value = Angles[gradindex];
+            tckPos.Value = Positions[gradindex][colindex];
         }
 
         private void updateBox(int index)
         {
-            Color[] gradient = colors[index];
-            Image preview = new Bitmap(175, 275);
-            Console.WriteLine(preview.Height);
-
-            for(int i = 0; i < 175; i++)
-            {
-                for(int j = 0; j < 275; j++)
-                {
-                    Color pixel = Color_Editor.gradCalc(gradient[0], gradient[1], 1, 1 - j/( 275.00));
-                    ((Bitmap)preview).SetPixel(i, j, pixel);
-                }
+            List<float> ConvertedPositions = new List<float>();
+            foreach(int position in Positions[gradindex]){
+                ConvertedPositions.Add((float)(position / 100.00));
             }
-            picGrad.Image = preview;
+            picGrad.Image = Gradient.getGradientBox(picGrad.Width, picGrad.Height, Colors[gradindex], ConvertedPositions, Angles[gradindex]);
+            
+        }
+
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //"by" stuff
+        private void radByLetter_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting = 0;
+        }
+
+        private void radByImage_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting = 2;
         }
 
         
     }
 
-   
 }

@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadAndConverttxtFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SavePNG = new System.Windows.Forms.ToolStripMenuItem();
             this.SaveAsPNG = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +51,8 @@
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.graidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -58,7 +64,7 @@
             this.lblLetterVal = new System.Windows.Forms.Label();
             this.lblWordValue = new System.Windows.Forms.Label();
             this.saveFileDialogPNG = new System.Windows.Forms.SaveFileDialog();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbPrefix = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.saveFileDialogBTI = new System.Windows.Forms.SaveFileDialog();
             this.chkboxPrefix = new System.Windows.Forms.CheckBox();
@@ -78,6 +84,7 @@
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem1,
             this.fileToolStripMenuItem,
             this.imageSizeToolStripMenuItem,
             this.alignmentToolStripMenuItem,
@@ -88,6 +95,37 @@
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // fileToolStripMenuItem1
+            // 
+            this.fileToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadAndConverttxtFileToolStripMenuItem,
+            this.loadSettingsToolStripMenuItem,
+            this.saveSettingsToolStripMenuItem});
+            this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 48);
+            this.fileToolStripMenuItem1.Text = "File";
+            // 
+            // loadAndConverttxtFileToolStripMenuItem
+            // 
+            this.loadAndConverttxtFileToolStripMenuItem.Name = "loadAndConverttxtFileToolStripMenuItem";
+            this.loadAndConverttxtFileToolStripMenuItem.Size = new System.Drawing.Size(515, 54);
+            this.loadAndConverttxtFileToolStripMenuItem.Text = "Load and Convert .txt file";
+            this.loadAndConverttxtFileToolStripMenuItem.Click += new System.EventHandler(this.loadText_Click);
+            // 
+            // loadSettingsToolStripMenuItem
+            // 
+            this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
+            this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(515, 54);
+            this.loadSettingsToolStripMenuItem.Text = "Load settings";
+            this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.LoadSettings);
+            // 
+            // saveSettingsToolStripMenuItem
+            // 
+            this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
+            this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(515, 54);
+            this.saveSettingsToolStripMenuItem.Text = "Save settings";
+            this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.SaveSettingsToolStripMenuItem_Click);
+            // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -96,8 +134,8 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(87, 48);
-            this.fileToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 48);
+            this.fileToolStripMenuItem.Text = "Save Image";
             // 
             // SavePNG
             // 
@@ -208,7 +246,9 @@
             // 
             this.colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.singleColorToolStripMenuItem,
-            this.graidToolStripMenuItem});
+            this.graidToolStripMenuItem,
+            this.loadGradientToolStripMenuItem,
+            this.saveGradientToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
             this.colorToolStripMenuItem.Text = "Color";
@@ -227,6 +267,20 @@
             this.graidToolStripMenuItem.Text = "Gradient Editor";
             this.graidToolStripMenuItem.Click += new System.EventHandler(this.graidToolStripMenuItem_Click);
             // 
+            // loadGradientToolStripMenuItem
+            // 
+            this.loadGradientToolStripMenuItem.Name = "loadGradientToolStripMenuItem";
+            this.loadGradientToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.loadGradientToolStripMenuItem.Text = "Load Gradient";
+            this.loadGradientToolStripMenuItem.Click += new System.EventHandler(this.loadGradientToolStripMenuItem_Click);
+            // 
+            // saveGradientToolStripMenuItem
+            // 
+            this.saveGradientToolStripMenuItem.Name = "saveGradientToolStripMenuItem";
+            this.saveGradientToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.saveGradientToolStripMenuItem.Text = "Save Gradient";
+            this.saveGradientToolStripMenuItem.Click += new System.EventHandler(this.saveGradientToolStripMenuItem_Click);
+            // 
             // btnConvert
             // 
             this.btnConvert.Location = new System.Drawing.Point(1024, 222);
@@ -235,7 +289,7 @@
             this.btnConvert.TabIndex = 1;
             this.btnConvert.Text = "Make Text";
             this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.Button1_Click);
+            this.btnConvert.Click += new System.EventHandler(this.UpdateText);
             // 
             // txtInput
             // 
@@ -329,10 +383,10 @@
             this.saveFileDialogPNG.Filter = "\".png file\"|*.png";
             this.saveFileDialogPNG.Title = "Save image as";
             // 
-            // comboBox1
+            // cmbPrefix
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cmbPrefix.FormattingEnabled = true;
+            this.cmbPrefix.Items.AddRange(new object[] {
             "None",
             "GBA",
             "3DS",
@@ -351,11 +405,12 @@
             "Wii",
             "WiiU",
             "XBX"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 66);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(134, 39);
-            this.comboBox1.TabIndex = 11;
-            this.comboBox1.Text = "None";
+            this.cmbPrefix.Location = new System.Drawing.Point(138, 66);
+            this.cmbPrefix.Name = "cmbPrefix";
+            this.cmbPrefix.Size = new System.Drawing.Size(134, 39);
+            this.cmbPrefix.TabIndex = 11;
+            this.cmbPrefix.Text = "None";
+            this.cmbPrefix.SelectedIndexChanged += new System.EventHandler(this.cmbPrefix_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -380,6 +435,7 @@
             this.chkboxPrefix.TabIndex = 14;
             this.chkboxPrefix.Text = "Smaller Prefix";
             this.chkboxPrefix.UseVisualStyleBackColor = true;
+            this.chkboxPrefix.CheckedChanged += new System.EventHandler(this.chkboxPrefix_CheckedChanged);
             // 
             // lblSqueeze
             // 
@@ -421,6 +477,7 @@
             this.chkColor.TabIndex = 18;
             this.chkColor.Text = "Color";
             this.chkColor.UseVisualStyleBackColor = true;
+            this.chkColor.CheckedChanged += new System.EventHandler(this.chkColor_CheckedChanged);
             // 
             // Form1
             // 
@@ -433,7 +490,7 @@
             this.Controls.Add(this.lblSqueeze);
             this.Controls.Add(this.chkboxPrefix);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbPrefix);
             this.Controls.Add(this.lblWordValue);
             this.Controls.Add(this.lblLetterVal);
             this.Controls.Add(this.lblWords);
@@ -446,6 +503,8 @@
             this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "MKDD Text Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -477,7 +536,7 @@
         private System.Windows.Forms.Label lblWordValue;
         private System.Windows.Forms.ToolStripMenuItem SaveAsPNG;
         private System.Windows.Forms.SaveFileDialog saveFileDialogPNG;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbPrefix;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem SaveBTI;
         private System.Windows.Forms.ToolStripMenuItem SaveAsBTI;
@@ -499,6 +558,12 @@
         private System.Windows.Forms.CheckBox chkColor;
         private System.Windows.Forms.ToolStripMenuItem singleColorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem graidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem loadAndConverttxtFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadGradientToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveGradientToolStripMenuItem;
     }
 }
 

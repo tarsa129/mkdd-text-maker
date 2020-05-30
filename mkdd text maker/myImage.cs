@@ -3,6 +3,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
 using System.Windows.Forms.VisualStyles;
+using System.IO;
+using System.Drawing.Drawing2D;
+using System.Collections.Generic;
+
 
 namespace mkdd_text_maker
 {
@@ -10,10 +14,10 @@ namespace mkdd_text_maker
     {
         static int totalLength;
         
-        public static Image writeLetters(WriteInfo Info)
+        public static Image writeLetters(WriteInfo Info, Gradient Gradients)
         {
             //trim text and get the characters
-            String text = Info.getText();
+            String text = Info.text;
             text.Trim();
             char[] characters = text.ToCharArray();
 
@@ -21,9 +25,9 @@ namespace mkdd_text_maker
 
             //if there is a prefix, make the array of strings to write accomdate it
 
-            String prefix = Info.getpre();
-            bool smalpre = Info.getsmall();
-            double ScaleFactor = Info.getsqueeze();
+            String prefix = Info.Prefix;
+            bool smalpre = Info.PrefixSmall;
+            double ScaleFactor = Info.SqueezeFactor;
 
             bool withPre = prefix.Equals("none");
             
@@ -57,19 +61,19 @@ namespace mkdd_text_maker
             //thing for special characters here
             chars = Form1.specialCharacters(chars);
 
-            Image thisImage = Info.getImage();
+            Image thisImage = Info.image;
 
             int[] xposes = spacing(chars, Info) ;
 
-            if (Info.getauto())
+            if (Info.auto)
             {
-                thisImage = new Bitmap(totalLength, 32);
+                thisImage = new Bitmap(totalLength + 2, 32);
             }
 
             //if left align or auto size, do not shift. if center or right, shift
-            if (!(Info.getalign() == 0) && !Info.getauto())
+            if (!(Info.align == 0) && !Info.auto)
             {
-                int shiftFactor = (thisImage.Width - totalLength) / Info.getalign();
+                int shiftFactor = (thisImage.Width - totalLength) / Info.align;
                 for (int i = 0; i < xposes.Length; i++)
                 {
                     xposes[i] = shiftFactor + xposes[i];
@@ -88,47 +92,58 @@ namespace mkdd_text_maker
 
                     String name = "mariofont_" + chara + ".png";
                     String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\btis\" + name;
-                    Bitmap asdf = new Bitmap(fileToRead);
-
-
-                    //if the color is on, edit the letter image
-                    if (Info.getcol())
-                    {
-                        
-                        int colorindex = cindex % Info.getcolor().Count;
-                       
-                        asdf = editColor(asdf, Info.getcolor()[colorindex]);
-                        cindex--;
-
-                    }
-
-                    Bitmap bmp = new Bitmap(asdf.Width, asdf.Height, PixelFormat.Format32bppPArgb);
-
                     
-
-                    Bitmap picture = new Bitmap(thisImage);
-                    Graphics mainImage = Graphics.FromImage(picture);
-
-                    double heightAdjustment = (double)thisImage.Height / 32;
-
-                    if(chara.Length > 1 && withPre)
+                    if (File.Exists(fileToRead))
                     {
-                        double preScale = 1;
-                        if (smalpre)
+                        Bitmap LetterImage = new Bitmap(fileToRead);
+
+                        //if the color is on, edit the letter image
+                        if (Info.HasColor && Gradients.BySetting == 0)
                         {
-                            preScale = .9;
+
+                            int colorindex = cindex % Gradients.Colors.Count;
+
+                            LetterImage = editColor(LetterImage, Gradients.Colors[colorindex], Gradients.Positions[colorindex],
+                                Gradients.Angles[colorindex]);
+                            cindex--;
+
                         }
-                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale * heightAdjustment), (int)(bmp.Height * preScale)));
-                    } else
-                    {
-                        mainImage.DrawImage(asdf, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor * heightAdjustment), thisImage.Height));
+
+                        Bitmap bmp = new Bitmap(LetterImage.Width, LetterImage.Height,System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+                        Bitmap picture = new Bitmap(thisImage);
+                        Graphics mainImage = Graphics.FromImage(picture);
+
+                        double heightAdjustment = (double)thisImage.Height / 32;
+
+                        if (chara.Length > 1 && withPre)
+                        {
+                            double preScale = 1;
+                            if (smalpre)
+                            {
+                                preScale = .9;
+                            }
+                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale * heightAdjustment), (int)(bmp.Height * preScale)));
+                        }
+                        else
+                        {
+                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor * heightAdjustment), thisImage.Height));
+                        }
+
+                        bmp.Dispose();
+                        LetterImage.Dispose();
+
+                        thisImage = picture;
                     }
- 
-                    thisImage = picture;
+       
                 }
               
             }
-           
+            if(Info.HasColor && Gradients.BySetting ==2)
+            {
+                thisImage = editColor(thisImage, Gradients.Colors[0], Gradients.Positions[0],
+                          Gradients.Angles[0]);
+            }
             
             thisImage = makeOutline(thisImage);
             return thisImage;
@@ -143,11 +158,11 @@ namespace mkdd_text_maker
             int TotLength = 0;
 
             //get the information
-            Image image = Info.getImage();
-            int btletters = Info.getletter();
-            int btwords = Info.getword();
-            bool smalPre = Info.getsmall();
-            double ScaleFactor = Info.getsqueeze();
+            Image image = Info.image;
+            int btletters = Info.LetterSpacing;
+            int btwords = Info.WordSpacing;
+            bool smalPre = Info.PrefixSmall;
+            double ScaleFactor = Info.SqueezeFactor;
 
             //Console.WriteLine("Image height: " + image.Height);
             
@@ -225,7 +240,7 @@ namespace mkdd_text_maker
             {
                 for(int j = 0; j < image.Height; j++)
                 {
-                    Color pixel = ((Bitmap)image).GetPixel(i, j);
+                    System.Drawing.Color pixel = ((Bitmap)image).GetPixel(i, j);
                     int alpha = pixel.A;
                     if(alpha == 255)
                     {
@@ -234,7 +249,7 @@ namespace mkdd_text_maker
                     {
                         if(CheckAdjacent(i, j, (Bitmap)image))
                         {
-                            newImage.SetPixel(i, j, Color.Black);
+                            newImage.SetPixel(i, j, System.Drawing.Color.Black);
                         }
                     }
                 }
@@ -261,38 +276,38 @@ namespace mkdd_text_maker
             return false;
         }
 
-        private static Bitmap editColor(Image image, Color[] color)
+        private static Bitmap editColor(Image image, List<Color> Colors, List<int> Positions, int angle)
         {
-            //Console.WriteLine(color.R);
-            
-            
-
-            for (int i = 0; i < image.Width; i++)
+            List<float> ConvertedPositions = new List<float>();
+            foreach (int position in Positions)
             {
-                for (int j = 0; j < image.Height; j++)
+                ConvertedPositions.Add((float)(position / 100.00));
+            }
+
+            Bitmap baseGrad = Gradient.getGradientBox(image.Width, image.Height, Colors, ConvertedPositions, angle);
+
+            for (int j = 0; j < image.Height; j++)
+            {
+                for (int i = 0; i < image.Width; i++)
                 {
+                   
                     Color pixel = ((Bitmap)image).GetPixel(i, j);
+
                     if(pixel.A == 255)
                     {
                         double x = pixel.R / 255.00;
-                        double y = 1 - ((double) j / (double)image.Height);
-                        //System.Diagnostics.Debug.Write(" " + x);
-                        if (color[0].Equals(color[1]))
-                        {
-                            pixel = Color.FromArgb(255, (int)(x * color[0].R), (int)(x * color[0].G), (int)(x * color[0].B));
-                        } else
-                        {
-                            pixel = Color_Editor.gradCalc(color[0], color[1], x, y);
-                        }
-                   
+
+                        Color baseColor = baseGrad.GetPixel(i, j);
+
+                        pixel = Color.FromArgb(255, (int)(x * baseColor.R), (int)(x * baseColor.G), (int)(x * baseColor.B));
                         ((Bitmap)image).SetPixel(i, j, pixel);
                     }
                     
-                    
+
                 }
             }
 
-            return (Bitmap)image;
+                return (Bitmap)image;
         }
 
     }

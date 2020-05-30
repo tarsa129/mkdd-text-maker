@@ -9,31 +9,29 @@ namespace mkdd_text_maker
 {
     public class WriteInfo
     {
-        String text;
-        Image image;
-        int letter;
-        int word; 
-        String pre;
-        double squeeze;
-        bool small;
-        int align;
-        bool auto;
-        List<Color[]> color;
-        bool col;
+        public String text{ get; set; }
+        public Image image { get; set; }
+        public int LetterSpacing { get; set; }
+        public int WordSpacing { get; set; }
+        public String Prefix { get; set; }
+        public double SqueezeFactor { get; set; }
+        public bool PrefixSmall { get; set; }
+        public int align { get; set; }
+        public bool auto { get; set; }
+        public bool HasColor { get; set; }
 
-        public WriteInfo(String t, Image i, int l, int w, String p, double d, bool s, int a, bool au, List<Color[]> c, bool co)
+        public WriteInfo(String t, Image i, int l, int w, String p, double d, bool s, int a, bool au, bool co)
         {
             text = t;
             image = i;
-            letter = l;
-            word = w;
-            pre = p;
-            squeeze = d;
-            small = s;
+            LetterSpacing = l;
+            WordSpacing = w;
+            Prefix = p;
+            SqueezeFactor = d;
+            PrefixSmall = s;
             align = a;
             auto = au;
-            color = c;
-            col = co;
+            HasColor = co;
         }
 
         public WriteInfo()
@@ -41,16 +39,5 @@ namespace mkdd_text_maker
 
         }
 
-       public  String getText() { return text; }
-        public Image getImage() { return image; }
-        public String getpre() { return pre; }
-        public int getletter() { return letter; }
-        public int getword() { return word; }
-        public double getsqueeze() { return squeeze; }
-        public bool getsmall() { return small; }
-        public int getalign() { return align; }
-        public bool getauto() { return auto; }
-        public List<Color[]> getcolor() { return color; }
-        public bool getcol() { return col; }
     }
 }
