@@ -67,7 +67,7 @@ namespace mkdd_text_maker
 
             if (Info.auto)
             {
-                thisImage = new Bitmap(totalLength + 2, 32);
+                thisImage = new Bitmap(totalLength + 3, 32);
             }
 
             //if left align or auto size, do not shift. if center or right, shift
@@ -77,6 +77,12 @@ namespace mkdd_text_maker
                 for (int i = 0; i < xposes.Length; i++)
                 {
                     xposes[i] = shiftFactor + xposes[i];
+                }
+            } else if (Info.auto)
+            {
+                for (int i = 0; i < xposes.Length; i++)
+                {
+                    xposes[i] = 1 + xposes[i];
                 }
             }
             
