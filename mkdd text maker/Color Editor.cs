@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -180,21 +181,11 @@ namespace mkdd_text_maker
         {
            for(int j = 0; j < Colors.Count -1; j++)
             {
-                /*
-                GradientStopCollection collection = Colors[j].colors;
-                System.Windows.Media.Color newCol = System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
-                for (int i = 0; i < collection.Count - 1; i++)
-                {
-                    collection[i].Color = newCol;
-                }
-                */
                 List<Color> gradient = Colors[j];
                 for (int i = 0; i < gradient.Count - 1; i++)
                 {
                     gradient[i] = Color.White;
                 }
-
-
             }
             updateTextBoxes(sender, e);
 
@@ -227,14 +218,7 @@ namespace mkdd_text_maker
         }
         private void btnFill_Click(object sender, EventArgs e)
         {
-            /*
-            GradientStopCollection collection = Colors[gradindex].colors;
-            System.Windows.Media.Color newCol = Colors[gradindex].colors[colindex].Color;
-            for (int i = 0; i < collection.Count - 1; i++)
-            {
-                collection[i].Color = newCol;
-            }
-            */
+            Debug.WriteLine(Colors[gradindex][colindex].ToString());
             for(int i = 0; i< Colors[gradindex].Count - 1; i++)
             {
                 Colors[gradindex][i] = Colors[gradindex][colindex];
@@ -259,7 +243,6 @@ namespace mkdd_text_maker
                 if (r >= 0 && r <= 255 && b >= 0 && b <= 255 && g >= 0 && g <= 255)
                 {
                     Colors[gradindex][colindex] = Color.FromArgb(255, (byte)r, (byte)g, (byte)b);
-                    //stop.Color = System.Windows.Media.Color.FromArgb(255, (byte)r, (byte)g, (byte)b);
                     updateBox(gradindex);
                 }
             }
@@ -268,7 +251,6 @@ namespace mkdd_text_maker
 
         private void updateTextBoxes(object sender, EventArgs e)
         {
-            //System.Windows.Media.Color newColor = Colors[gradindex].colors[colindex].Color;
             Color newColor = Colors[gradindex][colindex];
             txt1r.Text = newColor.R.ToString();
             txt1b.Text = newColor.B.ToString();

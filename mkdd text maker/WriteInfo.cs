@@ -19,8 +19,9 @@ namespace mkdd_text_maker
         public int align { get; set; }
         public bool auto { get; set; }
         public bool HasColor { get; set; }
+        public double VertiFactor { get; set; }
 
-        public WriteInfo(String t, Image i, int l, int w, String p, double d, bool s, int a, bool au, bool co)
+        public WriteInfo(String t, Image i, int l, int w, String p, double d, bool s, int a, bool au, bool co, double v)
         {
             text = t;
             image = i;
@@ -32,6 +33,7 @@ namespace mkdd_text_maker
             align = a;
             auto = au;
             HasColor = co;
+            VertiFactor = v;
         }
 
         public WriteInfo()

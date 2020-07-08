@@ -28,7 +28,7 @@ namespace mkdd_text_maker
             Gradients = new Gradient(true);
 
             InitializeComponent();
-            Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, chkColor.Checked);
+            Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, chkColor.Checked, (double)tckVertical.Value / 100);
 
             width = 256;
             height = 32;
@@ -103,6 +103,12 @@ namespace mkdd_text_maker
         {
             lblShowSqueeze.Text = tckSqueeze.Value.ToString();
             Information.SqueezeFactor = tckSqueeze.Value / 100.00;
+        }
+
+        private void tckVertical_Scroll(object sender, EventArgs e)
+        {
+            lblVertiVal.Text = tckVertical.Value.ToString();
+            Information.VertiFactor = tckVertical.Value / 100.00;
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -542,6 +548,6 @@ namespace mkdd_text_maker
             
         }
 
-       
+        
     }
 }

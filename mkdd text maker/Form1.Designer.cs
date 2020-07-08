@@ -72,16 +72,19 @@
             this.tckSqueeze = new System.Windows.Forms.TrackBar();
             this.lblShowSqueeze = new System.Windows.Forms.Label();
             this.chkColor = new System.Windows.Forms.CheckBox();
+            this.lblVertiVal = new System.Windows.Forms.Label();
+            this.tckVertical = new System.Windows.Forms.TrackBar();
+            this.lblVerticalScaling = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tckVertical)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
@@ -91,7 +94,7 @@
             this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1348, 52);
+            this.menuStrip1.Size = new System.Drawing.Size(1348, 49);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -102,7 +105,7 @@
             this.loadSettingsToolStripMenuItem,
             this.saveSettingsToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 48);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 45);
             this.fileToolStripMenuItem1.Text = "File";
             // 
             // loadAndConverttxtFileToolStripMenuItem
@@ -134,7 +137,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 48);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 45);
             this.fileToolStripMenuItem.Text = "Save Image";
             // 
             // SavePNG
@@ -180,7 +183,7 @@
             this.customSizeToolStripMenuItem,
             this.autoSizesomethingX32ToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
@@ -218,7 +221,7 @@
             this.centerToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
-            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 48);
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 45);
             this.alignmentToolStripMenuItem.Text = "Alignment";
             // 
             // leftToolStripMenuItem
@@ -250,34 +253,34 @@
             this.loadGradientToolStripMenuItem,
             this.saveGradientToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 45);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // singleColorToolStripMenuItem
             // 
             this.singleColorToolStripMenuItem.Name = "singleColorToolStripMenuItem";
-            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(384, 54);
             this.singleColorToolStripMenuItem.Text = "Single Color";
             this.singleColorToolStripMenuItem.Click += new System.EventHandler(this.colordia);
             // 
             // graidToolStripMenuItem
             // 
             this.graidToolStripMenuItem.Name = "graidToolStripMenuItem";
-            this.graidToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.graidToolStripMenuItem.Size = new System.Drawing.Size(384, 54);
             this.graidToolStripMenuItem.Text = "Gradient Editor";
             this.graidToolStripMenuItem.Click += new System.EventHandler(this.graidToolStripMenuItem_Click);
             // 
             // loadGradientToolStripMenuItem
             // 
             this.loadGradientToolStripMenuItem.Name = "loadGradientToolStripMenuItem";
-            this.loadGradientToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.loadGradientToolStripMenuItem.Size = new System.Drawing.Size(384, 54);
             this.loadGradientToolStripMenuItem.Text = "Load Gradient";
             this.loadGradientToolStripMenuItem.Click += new System.EventHandler(this.loadGradientToolStripMenuItem_Click);
             // 
             // saveGradientToolStripMenuItem
             // 
             this.saveGradientToolStripMenuItem.Name = "saveGradientToolStripMenuItem";
-            this.saveGradientToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.saveGradientToolStripMenuItem.Size = new System.Drawing.Size(384, 54);
             this.saveGradientToolStripMenuItem.Text = "Save Gradient";
             this.saveGradientToolStripMenuItem.Click += new System.EventHandler(this.saveGradientToolStripMenuItem_Click);
             // 
@@ -332,7 +335,7 @@
             this.picText.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picText.BackgroundImage")));
             this.picText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picText.Location = new System.Drawing.Point(29, 408);
+            this.picText.Location = new System.Drawing.Point(29, 489);
             this.picText.Name = "picText";
             this.picText.Size = new System.Drawing.Size(1280, 160);
             this.picText.TabIndex = 6;
@@ -442,17 +445,17 @@
             this.lblSqueeze.AutoSize = true;
             this.lblSqueeze.Location = new System.Drawing.Point(23, 304);
             this.lblSqueeze.Name = "lblSqueeze";
-            this.lblSqueeze.Size = new System.Drawing.Size(334, 32);
+            this.lblSqueeze.Size = new System.Drawing.Size(254, 32);
             this.lblSqueeze.TabIndex = 15;
-            this.lblSqueeze.Text = "Letter Horizontal Scaling:";
+            this.lblSqueeze.Text = "Horizontal Scaling:";
             // 
             // tckSqueeze
             // 
-            this.tckSqueeze.Location = new System.Drawing.Point(363, 288);
+            this.tckSqueeze.Location = new System.Drawing.Point(346, 288);
             this.tckSqueeze.Maximum = 100;
             this.tckSqueeze.Minimum = 75;
             this.tckSqueeze.Name = "tckSqueeze";
-            this.tckSqueeze.Size = new System.Drawing.Size(531, 114);
+            this.tckSqueeze.Size = new System.Drawing.Size(548, 114);
             this.tckSqueeze.SmallChange = 5;
             this.tckSqueeze.TabIndex = 16;
             this.tckSqueeze.TickFrequency = 5;
@@ -479,11 +482,45 @@
             this.chkColor.UseVisualStyleBackColor = true;
             this.chkColor.CheckedChanged += new System.EventHandler(this.chkColor_CheckedChanged);
             // 
+            // lblVertiVal
+            // 
+            this.lblVertiVal.AutoSize = true;
+            this.lblVertiVal.Location = new System.Drawing.Point(932, 370);
+            this.lblVertiVal.Name = "lblVertiVal";
+            this.lblVertiVal.Size = new System.Drawing.Size(63, 32);
+            this.lblVertiVal.TabIndex = 21;
+            this.lblVertiVal.Text = "100";
+            // 
+            // tckVertical
+            // 
+            this.tckVertical.Location = new System.Drawing.Point(346, 369);
+            this.tckVertical.Maximum = 100;
+            this.tckVertical.Minimum = 75;
+            this.tckVertical.Name = "tckVertical";
+            this.tckVertical.Size = new System.Drawing.Size(548, 114);
+            this.tckVertical.SmallChange = 5;
+            this.tckVertical.TabIndex = 20;
+            this.tckVertical.TickFrequency = 5;
+            this.tckVertical.Value = 100;
+            this.tckVertical.Scroll += new System.EventHandler(this.tckVertical_Scroll);
+            // 
+            // lblVerticalScaling
+            // 
+            this.lblVerticalScaling.AutoSize = true;
+            this.lblVerticalScaling.Location = new System.Drawing.Point(23, 370);
+            this.lblVerticalScaling.Name = "lblVerticalScaling";
+            this.lblVerticalScaling.Size = new System.Drawing.Size(221, 32);
+            this.lblVerticalScaling.TabIndex = 19;
+            this.lblVerticalScaling.Text = "Vertical Scaling:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 637);
+            this.ClientSize = new System.Drawing.Size(1348, 684);
+            this.Controls.Add(this.lblVertiVal);
+            this.Controls.Add(this.tckVertical);
+            this.Controls.Add(this.lblVerticalScaling);
             this.Controls.Add(this.chkColor);
             this.Controls.Add(this.lblShowSqueeze);
             this.Controls.Add(this.tckSqueeze);
@@ -514,6 +551,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picText)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tckVertical)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -564,6 +602,9 @@
         private System.Windows.Forms.ToolStripMenuItem saveSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadGradientToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveGradientToolStripMenuItem;
+        private System.Windows.Forms.Label lblVertiVal;
+        private System.Windows.Forms.TrackBar tckVertical;
+        private System.Windows.Forms.Label lblVerticalScaling;
     }
 }
 

@@ -45,12 +45,6 @@ namespace mkdd_text_maker
 
         public Gradient()
         {
-            /*
-            Colors = new List<List<Color>>();
-            Positions = new List<List<int>>();
-            Angles = new List<int>();
-            BySetting = 0;
-            */
         }
 
         public static Bitmap getGradientBox(int width, int height, List<Color> Colors, List<float> Positions, int angle)

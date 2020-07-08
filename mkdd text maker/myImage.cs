@@ -6,7 +6,7 @@ using System.Windows.Forms.VisualStyles;
 using System.IO;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace mkdd_text_maker
 {
@@ -26,9 +26,6 @@ namespace mkdd_text_maker
             //if there is a prefix, make the array of strings to write accomdate it
 
             String prefix = Info.Prefix;
-            bool smalpre = Info.PrefixSmall;
-            double ScaleFactor = Info.SqueezeFactor;
-
             bool withPre = prefix.Equals("none");
             
             int index;
@@ -63,29 +60,21 @@ namespace mkdd_text_maker
 
             Image thisImage = Info.image;
 
-            int[] xposes = spacing(chars, Info) ;
+            //call the spacing function
+            int[] xposes = spacing(chars, Info);
+
+            thisImage = new Bitmap(totalLength + 3, 32);
+
+            for (int i = 0; i < xposes.Length; i++)
+            {
+                xposes[i] = 1 + xposes[i];
+            }
 
             if (Info.auto)
             {
-                thisImage = new Bitmap(totalLength + 3, 32);
+               // thisImage = new Bitmap(totalLength + 3, 32);
             }
 
-            //if left align or auto size, do not shift. if center or right, shift
-            if (!(Info.align == 0) && !Info.auto)
-            {
-                int shiftFactor = (thisImage.Width - totalLength) / Info.align;
-                for (int i = 0; i < xposes.Length; i++)
-                {
-                    xposes[i] = shiftFactor + xposes[i];
-                }
-            } else if (Info.auto)
-            {
-                for (int i = 0; i < xposes.Length; i++)
-                {
-                    xposes[i] = 1 + xposes[i];
-                }
-            }
-            
             //actually writing the letters
             for (int i = xposes.Length - 1; i > -1; i --)
             {
@@ -120,20 +109,19 @@ namespace mkdd_text_maker
                         Bitmap picture = new Bitmap(thisImage);
                         Graphics mainImage = Graphics.FromImage(picture);
 
-                        double heightAdjustment = (double)thisImage.Height / 32;
-
+                        //drawing the actual image
                         if (chara.Length > 1 && withPre)
                         {
                             double preScale = 1;
-                            if (smalpre)
+                            if (Info.PrefixSmall)
                             {
                                 preScale = .9;
                             }
-                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale * heightAdjustment), (int)(bmp.Height * preScale)));
+                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale), (int)(bmp.Height * preScale)));
                         }
                         else
                         {
-                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(bmp.Width * ScaleFactor * heightAdjustment), thisImage.Height));
+                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, bmp.Width, 32));
                         }
 
                         bmp.Dispose();
@@ -145,14 +133,48 @@ namespace mkdd_text_maker
                 }
               
             }
+
+            //color the image if by image
             if(Info.HasColor && Gradients.BySetting ==2)
             {
                 thisImage = editColor(thisImage, Gradients.Colors[0], Gradients.Positions[0],
                           Gradients.Angles[0]);
             }
-            
+
+            //scale the image
             thisImage = makeOutline(thisImage);
-            return thisImage;
+
+            Image newImage = new Bitmap(Info.image.Width, Info.image.Height);
+            Graphics newgraph = Graphics.FromImage(newImage);
+
+            int NewWidth = (int)(thisImage.Width * Info.SqueezeFactor);
+            int NewHeight = (int)(thisImage.Height * Info.VertiFactor);
+
+            Rectangle DrawRectangle = new Rectangle(0, (Info.image.Height - NewHeight) /2, NewWidth, NewHeight);
+   
+            if (!Info.auto)
+            {
+                if (Info.align == 1)
+                {
+                    int HoriShift = Info.image.Width - (int)(thisImage.Width* Info.SqueezeFactor);
+                    DrawRectangle.Offset(HoriShift, 0);
+
+                } else if (Info.align == 2)
+                {
+                    int HoriShift = Info.image.Width - (int)(thisImage.Width * Info.SqueezeFactor);
+                    DrawRectangle.Offset(HoriShift / 2, 0);
+
+                }
+            } else
+            {
+                newImage = new Bitmap(NewWidth, NewHeight);
+                newgraph = Graphics.FromImage(newImage);
+                DrawRectangle = new Rectangle(0, 0, NewWidth, NewHeight);
+            }
+
+            newgraph.DrawImage(thisImage, DrawRectangle);
+
+            return newImage;
         }
 
         //process shit IN ORDER
@@ -167,8 +189,6 @@ namespace mkdd_text_maker
             Image image = Info.image;
             int btletters = Info.LetterSpacing;
             int btwords = Info.WordSpacing;
-            bool smalPre = Info.PrefixSmall;
-            double ScaleFactor = Info.SqueezeFactor;
 
             //Console.WriteLine("Image height: " + image.Height);
             
@@ -179,35 +199,32 @@ namespace mkdd_text_maker
 
                 if (!String.IsNullOrWhiteSpace(letter))
                 {
-                    //Console.Write(letter);
                     String name = "mariofont_" + letter + ".png";
                     String fileToRead = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\btis\" + name;
                     try
                     {
                         Bitmap imageLetter = new Bitmap(fileToRead);
-                        int magicNumbber = (int)( imageLetter.Width * ((double)image.Height / 32));
-
 
                         if (i + 1 < text.Length)
                         {
                             if(letter.Length > 1)
                             {
                                 double prefixScale = 1;
-                                if (smalPre)
+                                if (Info.PrefixSmall)
                                 {
                                     prefixScale = .8;
                                 }
-                                positions[i + 1] = positions[i] + ((int)(magicNumbber * prefixScale) - btletters);
-                                TotLength += ((int)(magicNumbber * prefixScale) - btletters);
+                                positions[i + 1] = positions[i] + ((int)(imageLetter.Width * prefixScale) - btletters);
+                                TotLength += ((int)(imageLetter.Width * prefixScale) - btletters);
                             } else
                             {
-                                positions[i + 1] = positions[i] + ((int)(magicNumbber * ScaleFactor) - btletters);
-                                TotLength += ((int)(magicNumbber * ScaleFactor) - btletters);
+                                positions[i + 1] = positions[i] + ((int)(imageLetter.Width) - btletters);
+                                TotLength += imageLetter.Width - btletters;
                             }
                             
                         } else
                         {
-                            TotLength += (int)(magicNumbber * ScaleFactor);
+                            TotLength += imageLetter.Width;
                         }
                         
                        
@@ -227,9 +244,7 @@ namespace mkdd_text_maker
             //Console.WriteLine(totalLength);
 
             totalLength = TotLength;
-           
-
-
+    
             return positions;
         }
 
