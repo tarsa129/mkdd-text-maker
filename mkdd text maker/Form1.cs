@@ -22,10 +22,12 @@ namespace mkdd_text_maker
 
         static Color_Editor editor;
         static Gradient Gradients;
+        static Gradient Outline;
         public Form1()
         {
             editor = new Color_Editor();
             Gradients = new Gradient(true);
+            Outline = new Gradient(false);
 
             InitializeComponent();
             Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, chkColor.Checked, (double)tckVertical.Value / 100);
@@ -66,7 +68,7 @@ namespace mkdd_text_maker
                 
                 Information.text = text;
                 Information.image = thisImage;
-                thisImage = myImage.writeLetters(Information, Gradients);
+                thisImage = myImage.writeLetters(Information, Gradients, Outline);
                 picText.BackgroundImage = thisImage;
                 if (Information.auto)
                 {
@@ -420,6 +422,32 @@ namespace mkdd_text_maker
             }
         }
 
+        private void singleColoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ColorDialog picker = new ColorDialog();
+            if (picker.ShowDialog() == DialogResult.OK)
+            {
+                Color PickedColor = picker.Color;
+
+                List<List<Color>> Colors = new List<List<Color>>();
+                List<List<int>> Positions = new List<List<int>>();
+                List<int> Angles = new List<int>();
+
+                List<Color> temp = new List<Color>();
+                temp.Add(PickedColor); temp.Add(PickedColor);
+                Colors.Add(temp);
+
+                List<int> tempin = new List<int>();
+                tempin.Add(0); tempin.Add(100);
+                Positions.Add(tempin);
+                Angles.Add(90);
+
+                Outline = new Gradient(Colors, Positions, Angles, 0);
+
+                chkColor.Checked = true;
+            }
+        }
+
         private void saveGradientToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog SaveSetting = new SaveFileDialog();
@@ -466,7 +494,7 @@ namespace mkdd_text_maker
                     Image thisImage = new Bitmap(256, 32);
                     //WriteInfo Info = new WriteInfo(line, thisImage, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment, autosize, chkColor.Checked);
                   
-                    Image currentImage = myImage.writeLetters(Information, Gradients);
+                    Image currentImage = myImage.writeLetters(Information, Gradients, Outline);
 
 
                     String[] name = line.ToCharArray().Select(c => c.ToString()).ToArray();

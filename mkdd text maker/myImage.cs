@@ -14,7 +14,7 @@ namespace mkdd_text_maker
     {
         static int totalLength;
         
-        public static Image writeLetters(WriteInfo Info, Gradient Gradients)
+        public static Image writeLetters(WriteInfo Info, Gradient Gradients, Gradient Outline)
         {
             //trim text and get the characters
             String text = Info.text;
@@ -58,21 +58,16 @@ namespace mkdd_text_maker
             //thing for special characters here
             chars = Form1.specialCharacters(chars);
 
-            Image thisImage = Info.image;
+            
 
             //call the spacing function
             int[] xposes = spacing(chars, Info);
 
-            thisImage = new Bitmap(totalLength + 3, 32);
+            Image thisImage = new Bitmap(totalLength + 3, 32);
 
             for (int i = 0; i < xposes.Length; i++)
             {
                 xposes[i] = 1 + xposes[i];
-            }
-
-            if (Info.auto)
-            {
-               // thisImage = new Bitmap(totalLength + 3, 32);
             }
 
             //actually writing the letters
@@ -98,16 +93,14 @@ namespace mkdd_text_maker
 
                             int colorindex = cindex % Gradients.Colors.Count;
 
-                            LetterImage = editColor(LetterImage, Gradients.Colors[colorindex], Gradients.Positions[colorindex],
-                                Gradients.Angles[colorindex]);
+                            LetterImage = editColor(LetterImage, Gradients, Outline, colorindex);
+                            LetterImage = (Bitmap)why(LetterImage);
+                            //LetterImage = (Bitmap)makeOutline(LetterImage, Outline.Colors[0][0]);
                             cindex--;
 
                         }
 
-                        Bitmap bmp = new Bitmap(LetterImage.Width, LetterImage.Height,System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
-
-                        Bitmap picture = new Bitmap(thisImage);
-                        Graphics mainImage = Graphics.FromImage(picture);
+                        Graphics mainImage = Graphics.FromImage(thisImage);
 
                         //drawing the actual image
                         if (chara.Length > 1 && withPre)
@@ -117,17 +110,14 @@ namespace mkdd_text_maker
                             {
                                 preScale = .9;
                             }
-                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(bmp.Width * preScale), (int)(bmp.Height * preScale)));
+                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(LetterImage.Width * preScale), (int)(LetterImage.Height * preScale)));
                         }
                         else
-                        {
-                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, bmp.Width, 32));
+                        {                       
+                            mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, LetterImage.Width, 32));
                         }
 
-                        bmp.Dispose();
                         LetterImage.Dispose();
-
-                        thisImage = picture;
                     }
        
                 }
@@ -135,14 +125,16 @@ namespace mkdd_text_maker
             }
 
             //color the image if by image
-            if(Info.HasColor && Gradients.BySetting ==2)
+            if(Info.HasColor && Gradients.BySetting == 2)
             {
-                thisImage = editColor(thisImage, Gradients.Colors[0], Gradients.Positions[0],
-                          Gradients.Angles[0]);
+                thisImage = editColor(thisImage, Gradients, Outline, index);
+                
             }
 
+            thisImage = makeOutline(thisImage, Outline.Colors[0][0]);
             //scale the image
-            thisImage = makeOutline(thisImage);
+
+
 
             Image newImage = new Bitmap(Info.image.Width, Info.image.Height);
             Graphics newgraph = Graphics.FromImage(newImage);
@@ -152,11 +144,13 @@ namespace mkdd_text_maker
 
             Rectangle DrawRectangle = new Rectangle(0, (Info.image.Height - NewHeight) /2, NewWidth, NewHeight);
    
+
+            //deal with alignment
             if (!Info.auto)
             {
                 if (Info.align == 1)
                 {
-                    int HoriShift = Info.image.Width - (int)(thisImage.Width* Info.SqueezeFactor);
+                    int HoriShift = Info.image.Width - (int)(thisImage.Width * Info.SqueezeFactor);
                     DrawRectangle.Offset(HoriShift, 0);
 
                 } else if (Info.align == 2)
@@ -251,7 +245,7 @@ namespace mkdd_text_maker
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //outline shit
 
-        private static Image makeOutline(Image image)
+        private static Image makeOutline(Image image, Color OutlineColor)
         {
 
             Bitmap newImage = new Bitmap(image.Width, image.Height);
@@ -261,16 +255,15 @@ namespace mkdd_text_maker
             {
                 for(int j = 0; j < image.Height; j++)
                 {
-                    System.Drawing.Color pixel = ((Bitmap)image).GetPixel(i, j);
-                    int alpha = pixel.A;
-                    if(alpha == 255)
+                    Color pixel = ((Bitmap)image).GetPixel(i, j);
+                    if(pixel.A == 255)
                     {
                         newImage.SetPixel(i,j, pixel);
                     } else
                     {
                         if(CheckAdjacent(i, j, (Bitmap)image))
                         {
-                            newImage.SetPixel(i, j, System.Drawing.Color.Black);
+                            newImage.SetPixel(i, j, OutlineColor);
                         }
                     }
                 }
@@ -297,15 +290,16 @@ namespace mkdd_text_maker
             return false;
         }
 
-        private static Bitmap editColor(Image image, List<Color> Colors, List<int> Positions, int angle)
+        private static Bitmap editColor(Image image, Gradient Text, Gradient Outline, int index)
         {
+            
             List<float> ConvertedPositions = new List<float>();
-            foreach (int position in Positions)
+            foreach (int position in Text.Positions[index])
             {
                 ConvertedPositions.Add((float)(position / 100.00));
             }
 
-            Bitmap baseGrad = Gradient.getGradientBox(image.Width, image.Height, Colors, ConvertedPositions, angle);
+            Bitmap baseGrad = Gradient.getGradientBox(image.Width, image.Height, Text.Colors[index], ConvertedPositions, Text.Angles[index]);
 
             for (int j = 0; j < image.Height; j++)
             {
@@ -319,8 +313,9 @@ namespace mkdd_text_maker
                         double x = pixel.R / 255.00;
 
                         Color baseColor = baseGrad.GetPixel(i, j);
+                        Color OutlineColor = Outline.Colors[0][0];
 
-                        pixel = Color.FromArgb(255, (int)(x * baseColor.R), (int)(x * baseColor.G), (int)(x * baseColor.B));
+                        pixel = Color.FromArgb(255, (int)(x * baseColor.R + (1-x)*OutlineColor.R), (int)(x * baseColor.G + (1 - x) * OutlineColor.G), (int)(x * baseColor.B + (1 - x) * OutlineColor.B));
                         ((Bitmap)image).SetPixel(i, j, pixel);
                     }
                     
@@ -328,8 +323,27 @@ namespace mkdd_text_maker
                 }
             }
 
-                return (Bitmap)image;
+            return (Bitmap)image;
         }
 
+        private static Image why(Image image)
+        {
+            Bitmap newImage = new Bitmap(image.Width, image.Height);
+
+            for (int j = 0; j < image.Height; j++)
+            {
+                for (int i = 0; i < image.Width; i++)
+                {
+                    Color pixel = ((Bitmap)image).GetPixel(i, j);
+
+                    if (pixel.A == 255)
+                    {      
+                        ((Bitmap)newImage).SetPixel(i, j, pixel);
+                    }
+
+                }
+            }
+            return newImage;
+        }
     }
 }

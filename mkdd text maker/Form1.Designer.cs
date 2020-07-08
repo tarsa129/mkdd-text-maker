@@ -75,6 +75,7 @@
             this.lblVertiVal = new System.Windows.Forms.Label();
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
+            this.singleColoroutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -85,6 +86,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
@@ -94,7 +96,7 @@
             this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1348, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1348, 52);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -251,23 +253,24 @@
             this.singleColorToolStripMenuItem,
             this.graidToolStripMenuItem,
             this.loadGradientToolStripMenuItem,
-            this.saveGradientToolStripMenuItem});
+            this.saveGradientToolStripMenuItem,
+            this.singleColoroutlineToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 45);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // singleColorToolStripMenuItem
             // 
             this.singleColorToolStripMenuItem.Name = "singleColorToolStripMenuItem";
-            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(384, 54);
-            this.singleColorToolStripMenuItem.Text = "Single Color";
+            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(460, 54);
+            this.singleColorToolStripMenuItem.Text = "Single Color (text)";
             this.singleColorToolStripMenuItem.Click += new System.EventHandler(this.colordia);
             // 
             // graidToolStripMenuItem
             // 
             this.graidToolStripMenuItem.Name = "graidToolStripMenuItem";
-            this.graidToolStripMenuItem.Size = new System.Drawing.Size(384, 54);
-            this.graidToolStripMenuItem.Text = "Gradient Editor";
+            this.graidToolStripMenuItem.Size = new System.Drawing.Size(460, 54);
+            this.graidToolStripMenuItem.Text = "Gradient Editor (text)";
             this.graidToolStripMenuItem.Click += new System.EventHandler(this.graidToolStripMenuItem_Click);
             // 
             // loadGradientToolStripMenuItem
@@ -513,6 +516,13 @@
             this.lblVerticalScaling.TabIndex = 19;
             this.lblVerticalScaling.Text = "Vertical Scaling:";
             // 
+            // singleColoroutlineToolStripMenuItem
+            // 
+            this.singleColoroutlineToolStripMenuItem.Name = "singleColoroutlineToolStripMenuItem";
+            this.singleColoroutlineToolStripMenuItem.Size = new System.Drawing.Size(463, 54);
+            this.singleColoroutlineToolStripMenuItem.Text = "Single Color (outline)";
+            this.singleColoroutlineToolStripMenuItem.Click += new System.EventHandler(this.singleColoroutlineToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -605,6 +615,7 @@
         private System.Windows.Forms.Label lblVertiVal;
         private System.Windows.Forms.TrackBar tckVertical;
         private System.Windows.Forms.Label lblVerticalScaling;
+        private System.Windows.Forms.ToolStripMenuItem singleColoroutlineToolStripMenuItem;
     }
 }
 

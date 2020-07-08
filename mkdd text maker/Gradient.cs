@@ -24,7 +24,7 @@ namespace mkdd_text_maker
             BySetting = setting;
         }
 
-        public Gradient(bool asdf)
+        public Gradient(bool text)
         {
             //create one gradient that is white
             Colors = new List<List<Color>>();
@@ -32,7 +32,14 @@ namespace mkdd_text_maker
             Angles = new List<int>();
 
             List<Color> temp = new List<Color>();
-            temp.Add(Color.White); temp.Add(Color.White);
+            if (text)
+            {
+                temp.Add(Color.White); temp.Add(Color.White);
+            } else
+            {
+                temp.Add(Color.Black); temp.Add(Color.Black);
+            }
+        
             Colors.Add(temp);
 
             List<int> tempin = new List<int>();
