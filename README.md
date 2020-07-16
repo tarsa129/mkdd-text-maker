@@ -5,4 +5,4 @@ The text will always be 32 pixels tall, unless the vertical scaling is changed.
 You have the option to save as a .png (for dolphin texture hacks) or a .bti (for editing the .iso itself)
 
 # Special Thanks
-Thanks to Cherry for makign the prefix images
+Thanks to Cherry for making the prefix images and the Japanese characters.
