@@ -125,8 +125,6 @@ namespace mkdd_text_maker
         }
         private void btnAddColor_Click(object sender, EventArgs e)
         {
-
-            //Colors[gradindex].colors.Add(new GradientStop(System.Windows.Media.Color.FromArgb(255, 255, 255, 255), 0));
             Colors[gradindex].Add(Color.White);
             Positions[gradindex].Add(100);
             cmbColors.Items.Add("Color " + (cmbColors.Items.Count));
@@ -218,10 +216,13 @@ namespace mkdd_text_maker
         }
         private void btnFill_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine(Colors[gradindex][colindex].ToString());
-            for(int i = 0; i< Colors[gradindex].Count - 1; i++)
+            //Debug.WriteLine(.ToString());
+            Color CurrentColor = Colors[gradindex][colindex];
+            //Debug.WriteLine(Colors[gradindex].Count);
+            for (int i = 0; i< cmbColors.Items.Count- 1; i++)
             {
-                Colors[gradindex][i] = Colors[gradindex][colindex];
+                Debug.WriteLine(gradindex.ToString() + " " + i.ToString());
+                Colors[gradindex][i] = CurrentColor;
             }
 
             updateTextBoxes(sender, e);

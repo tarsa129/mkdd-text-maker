@@ -299,7 +299,15 @@ namespace mkdd_text_maker
                 ConvertedPositions.Add((float)(position / 100.00));
             }
 
+            List<float> OLConvertedPositions = new List<float>();
+            foreach (int position in Outline.Positions[index])
+            {
+                OLConvertedPositions.Add((float)(position / 100.00));
+            }
+
             Bitmap baseGrad = Gradient.getGradientBox(image.Width, image.Height, Text.Colors[index], ConvertedPositions, Text.Angles[index]);
+            //Bitmap OutlineGrad = Gradient.getGradientBox(image.Width, image.Height, Outline.Colors[index], OLConvertedPositions, Outline.Angles[index]);
+
 
             for (int j = 0; j < image.Height; j++)
             {

@@ -53,7 +53,8 @@ namespace mkdd_text_maker
             picText.BackgroundImage = new Bitmap(width, height);
 
             String text = txtInput.Text;
-            text.Trim();
+            text = text.Trim();
+            txtInput.Text = text;
 
             if (!String.IsNullOrWhiteSpace(text) && !String.IsNullOrEmpty(text))
             {
