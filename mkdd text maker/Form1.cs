@@ -351,6 +351,10 @@ namespace mkdd_text_maker
                     case "/":
                         letters[i] = "slash";
                         break;
+                    case "\"":
+                        letters[i] = "''";
+                        break;
+
                 }
                 
             }
