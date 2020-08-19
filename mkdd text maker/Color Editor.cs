@@ -227,7 +227,7 @@ namespace mkdd_text_maker
             //Debug.WriteLine(.ToString());
             Color CurrentColor = Colors[gradindex][colindex];
             //Debug.WriteLine(Colors[gradindex].Count);
-            for (int i = 0; i< cmbColors.Items.Count- 1; i++)
+            for (int i = 0; i <= cmbColors.Items.Count- 1; i++)
             {
                 Debug.WriteLine(gradindex.ToString() + " " + i.ToString());
                 Colors[gradindex][i] = CurrentColor;
