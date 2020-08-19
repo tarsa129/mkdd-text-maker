@@ -91,7 +91,7 @@ namespace mkdd_text_maker
                 ///current[colindex].Color = newCol;
            
                 //Console.WriteLine(color.R + " " + color.B);
-                updateBox(gradindex);
+                updateBox();
             }
 
         }
@@ -159,6 +159,21 @@ namespace mkdd_text_maker
         {
             if (cmbColors.Items.Count > 1)
             {
+
+                Debug.WriteLine("delete button called");
+                Debug.WriteLine(colindex);
+                if (colindex == Colors[gradindex].Count - 1) {
+                    Debug.Write("last one");
+                    Positions[gradindex][colindex - 1] = 1;
+                    Debug.WriteLine(Positions[gradindex][colindex - 1]);
+                }
+
+                if (colindex == 0)
+                {
+                    Positions[gradindex][0] = 0;
+                }
+                    
+
                 Colors[gradindex].RemoveAt(colindex);
                 Positions[gradindex].RemoveAt(colindex);
                 cmbColors.Items.RemoveAt(colindex);
@@ -207,13 +222,6 @@ namespace mkdd_text_maker
             updateTextBoxes(sender, e);
 
         }
-        private void btnClearColor_Click(object sender, EventArgs e)
-        {
-            //System.Windows.Media.Color newCol = System.Windows.Media.Color.FromArgb(255, 255, 255, 255);
-            //Colors[gradindex].colors[colindex].Color = newCol;
-            Colors[gradindex][colindex] = Color.White;
-            updateTextBoxes(sender, e);  
-        }
         private void btnFill_Click(object sender, EventArgs e)
         {
             //Debug.WriteLine(.ToString());
@@ -244,7 +252,7 @@ namespace mkdd_text_maker
                 if (r >= 0 && r <= 255 && b >= 0 && b <= 255 && g >= 0 && g <= 255)
                 {
                     Colors[gradindex][colindex] = Color.FromArgb(255, (byte)r, (byte)g, (byte)b);
-                    updateBox(gradindex);
+                    updateBox();
                 }
             }
            
@@ -256,7 +264,7 @@ namespace mkdd_text_maker
             txt1r.Text = newColor.R.ToString();
             txt1b.Text = newColor.B.ToString();
             txt1g.Text = newColor.G.ToString();
-            updateBox(gradindex);
+            updateBox();
         }
 
         private void tckPos_ValueChanged(object sender, EventArgs e)
@@ -272,14 +280,14 @@ namespace mkdd_text_maker
   
             Positions[gradindex][colindex] = tckPos.Value;
             txtPos.Text = tckPos.Value.ToString();
-            updateBox(gradindex);
+            updateBox();
         }
 
         private void tckAngle_ValueChanged(object sender, EventArgs e)
         {
             Angles[gradindex] = tckAngle.Value;
             txtAngle.Text = tckAngle.Value.ToString();
-            updateBox(gradindex);
+            updateBox();
         }
 
         private void txtPos_TextChanged(object sender, EventArgs e)
@@ -299,7 +307,7 @@ namespace mkdd_text_maker
                 {
                     Positions[gradindex][colindex] = pos;
                     tckPos.Value = pos;
-                    updateBox(gradindex);
+                    updateBox();
                 }   
             }
         }
@@ -313,7 +321,7 @@ namespace mkdd_text_maker
                 {
                     Angles[gradindex] = tckAngle.Value;
                     tckAngle.Value = pos;
-                    updateBox(gradindex);
+                    updateBox();
                 }
             }
                  
@@ -344,23 +352,26 @@ namespace mkdd_text_maker
                 
             }
 
+            tckAngle.Value = Angles[gradindex];
+            tckPos.Value = Positions[gradindex][colindex];
+
             updateTextBoxes(sender, e);
 
-             tckAngle.Value = Angles[gradindex];
-             tckPos.Value = Positions[gradindex][colindex];
+            
        
         }
 
         private void cmbColorChange(object sender, EventArgs e)
         {
             colindex = cmbColors.SelectedIndex;
-            updateTextBoxes(sender, e);
-
             tckAngle.Value = Angles[gradindex];
             tckPos.Value = Positions[gradindex][colindex];
+            updateTextBoxes(sender, e);
+
+            
         }
 
-        private void updateBox(int index)
+        private void updateBox()
         {
             List<float> ConvertedPositions = new List<float>();
             foreach(int position in Positions[gradindex]){

@@ -50,11 +50,10 @@
             this.txtPos = new System.Windows.Forms.TextBox();
             this.txtAngle = new System.Windows.Forms.TextBox();
             this.btnAddColor = new System.Windows.Forms.Button();
-            this.btnClearColor = new System.Windows.Forms.Button();
             this.btnDelColor = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radByLetter = new System.Windows.Forms.RadioButton();
             this.radByImage = new System.Windows.Forms.RadioButton();
+            this.radByLetter = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.picGrad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckPos)).BeginInit();
@@ -111,7 +110,7 @@
             // 
             // btnAddGrad
             // 
-            this.btnAddGrad.Location = new System.Drawing.Point(589, 314);
+            this.btnAddGrad.Location = new System.Drawing.Point(707, 313);
             this.btnAddGrad.Name = "btnAddGrad";
             this.btnAddGrad.Size = new System.Drawing.Size(325, 74);
             this.btnAddGrad.TabIndex = 11;
@@ -130,9 +129,9 @@
             // 
             // btnDone
             // 
-            this.btnDone.Location = new System.Drawing.Point(1275, 503);
+            this.btnDone.Location = new System.Drawing.Point(1050, 509);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(119, 79);
+            this.btnDone.Size = new System.Drawing.Size(325, 74);
             this.btnDone.TabIndex = 13;
             this.btnDone.Text = "Done";
             this.btnDone.UseVisualStyleBackColor = true;
@@ -140,7 +139,7 @@
             // 
             // btnDelGrad
             // 
-            this.btnDelGrad.Location = new System.Drawing.Point(589, 510);
+            this.btnDelGrad.Location = new System.Drawing.Point(707, 509);
             this.btnDelGrad.Name = "btnDelGrad";
             this.btnDelGrad.Size = new System.Drawing.Size(325, 74);
             this.btnDelGrad.TabIndex = 14;
@@ -152,7 +151,7 @@
             // 
             this.picGrad.Location = new System.Drawing.Point(26, 313);
             this.picGrad.Name = "picGrad";
-            this.picGrad.Size = new System.Drawing.Size(175, 275);
+            this.picGrad.Size = new System.Drawing.Size(276, 275);
             this.picGrad.TabIndex = 15;
             this.picGrad.TabStop = false;
             // 
@@ -170,7 +169,7 @@
             // 
             // btnClearGrad
             // 
-            this.btnClearGrad.Location = new System.Drawing.Point(589, 411);
+            this.btnClearGrad.Location = new System.Drawing.Point(707, 410);
             this.btnClearGrad.Name = "btnClearGrad";
             this.btnClearGrad.Size = new System.Drawing.Size(325, 74);
             this.btnClearGrad.TabIndex = 18;
@@ -201,7 +200,7 @@
             // 
             // btnFill
             // 
-            this.btnFill.Location = new System.Drawing.Point(934, 508);
+            this.btnFill.Location = new System.Drawing.Point(1050, 410);
             this.btnFill.Name = "btnFill";
             this.btnFill.Size = new System.Drawing.Size(325, 74);
             this.btnFill.TabIndex = 21;
@@ -211,7 +210,7 @@
             // 
             // btnClearAll
             // 
-            this.btnClearAll.Location = new System.Drawing.Point(934, 411);
+            this.btnClearAll.Location = new System.Drawing.Point(1050, 313);
             this.btnClearAll.Name = "btnClearAll";
             this.btnClearAll.Size = new System.Drawing.Size(325, 74);
             this.btnClearAll.TabIndex = 22;
@@ -264,7 +263,7 @@
             // 
             // btnAddColor
             // 
-            this.btnAddColor.Location = new System.Drawing.Point(233, 314);
+            this.btnAddColor.Location = new System.Drawing.Point(351, 313);
             this.btnAddColor.Name = "btnAddColor";
             this.btnAddColor.Size = new System.Drawing.Size(325, 74);
             this.btnAddColor.TabIndex = 28;
@@ -272,19 +271,9 @@
             this.btnAddColor.UseVisualStyleBackColor = true;
             this.btnAddColor.Click += new System.EventHandler(this.btnAddColor_Click);
             // 
-            // btnClearColor
-            // 
-            this.btnClearColor.Location = new System.Drawing.Point(233, 411);
-            this.btnClearColor.Name = "btnClearColor";
-            this.btnClearColor.Size = new System.Drawing.Size(325, 74);
-            this.btnClearColor.TabIndex = 29;
-            this.btnClearColor.Text = "Clear Color";
-            this.btnClearColor.UseVisualStyleBackColor = true;
-            this.btnClearColor.Click += new System.EventHandler(this.btnClearColor_Click);
-            // 
             // btnDelColor
             // 
-            this.btnDelColor.Location = new System.Drawing.Point(233, 508);
+            this.btnDelColor.Location = new System.Drawing.Point(351, 410);
             this.btnDelColor.Name = "btnDelColor";
             this.btnDelColor.Size = new System.Drawing.Size(325, 74);
             this.btnDelColor.TabIndex = 31;
@@ -303,18 +292,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Apply By:";
             // 
-            // radByLetter
-            // 
-            this.radByLetter.AutoSize = true;
-            this.radByLetter.Location = new System.Drawing.Point(225, 4);
-            this.radByLetter.Name = "radByLetter";
-            this.radByLetter.Size = new System.Drawing.Size(116, 36);
-            this.radByLetter.TabIndex = 0;
-            this.radByLetter.TabStop = true;
-            this.radByLetter.Text = "letter";
-            this.radByLetter.UseVisualStyleBackColor = true;
-            this.radByLetter.CheckedChanged += new System.EventHandler(this.radByLetter_CheckedChanged);
-            // 
             // radByImage
             // 
             this.radByImage.AutoSize = true;
@@ -327,6 +304,18 @@
             this.radByImage.UseVisualStyleBackColor = true;
             this.radByImage.CheckedChanged += new System.EventHandler(this.radByImage_CheckedChanged);
             // 
+            // radByLetter
+            // 
+            this.radByLetter.AutoSize = true;
+            this.radByLetter.Location = new System.Drawing.Point(225, 4);
+            this.radByLetter.Name = "radByLetter";
+            this.radByLetter.Size = new System.Drawing.Size(116, 36);
+            this.radByLetter.TabIndex = 0;
+            this.radByLetter.TabStop = true;
+            this.radByLetter.Text = "letter";
+            this.radByLetter.UseVisualStyleBackColor = true;
+            this.radByLetter.CheckedChanged += new System.EventHandler(this.radByLetter_CheckedChanged);
+            // 
             // Color_Editor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -334,7 +323,6 @@
             this.ClientSize = new System.Drawing.Size(1425, 603);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDelColor);
-            this.Controls.Add(this.btnClearColor);
             this.Controls.Add(this.btnAddColor);
             this.Controls.Add(this.txtAngle);
             this.Controls.Add(this.txtPos);
@@ -393,7 +381,6 @@
         private System.Windows.Forms.TextBox txtPos;
         private System.Windows.Forms.TextBox txtAngle;
         private System.Windows.Forms.Button btnAddColor;
-        private System.Windows.Forms.Button btnClearColor;
         private System.Windows.Forms.Button btnDelColor;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radByImage;
