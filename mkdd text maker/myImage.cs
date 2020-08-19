@@ -92,7 +92,7 @@ namespace mkdd_text_maker
                         {
 
                             int colorindex = cindex % Gradients.Colors.Count;
-
+                            Debug.WriteLine(colorindex);
                             LetterImage = editColor(LetterImage, Gradients, Outline, colorindex);
                             LetterImage = (Bitmap)why(LetterImage);
                             //LetterImage = (Bitmap)makeOutline(LetterImage, Outline.Colors[0][0]);
@@ -300,7 +300,7 @@ namespace mkdd_text_maker
             }
 
             List<float> OLConvertedPositions = new List<float>();
-            foreach (int position in Outline.Positions[index])
+            foreach (int position in Outline.Positions[0])
             {
                 OLConvertedPositions.Add((float)(position / 100.00));
             }
