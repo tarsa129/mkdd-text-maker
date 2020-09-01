@@ -1,6 +1,6 @@
 ﻿namespace mkdd_text_maker
 {
-    partial class Form2
+    partial class Background_Image
     {
         /// <summary>
         /// Required designer variable.
@@ -35,6 +35,7 @@
             this.lblHeight = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.OpenImage = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(26, 146);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(373, 295);
+            this.pictureBox1.Size = new System.Drawing.Size(994, 132);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -79,9 +80,9 @@
             this.lblHeight.AutoSize = true;
             this.lblHeight.Location = new System.Drawing.Point(374, 72);
             this.lblHeight.Name = "lblHeight";
-            this.lblHeight.Size = new System.Drawing.Size(98, 32);
+            this.lblHeight.Size = new System.Drawing.Size(106, 32);
             this.lblHeight.TabIndex = 3;
-            this.lblHeight.Text = "Height";
+            this.lblHeight.Text = "Height:";
             // 
             // textBox1
             // 
@@ -96,6 +97,10 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(180, 38);
             this.textBox2.TabIndex = 5;
+            // 
+            // OpenImage
+            // 
+            this.OpenImage.FileName = "openFileDialog1";
             // 
             // Form2
             // 
@@ -128,5 +133,6 @@
         private System.Windows.Forms.Label lblHeight;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.OpenFileDialog OpenImage;
     }
 }

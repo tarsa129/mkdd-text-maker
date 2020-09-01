@@ -21,13 +21,13 @@ namespace mkdd_text_maker
         //static int alignment = 2;
 
         //static Color_Editor editor;
-        static Gradient Gradients;
-        static Gradient Outline;
+        static Color_Editor Gradients;
+        static Color_Editor Outline;
         public Form1()
         {
             //Color_Editor editor = new Color_Editor();
-            Gradients = new Gradient(true);
-            Outline = new Gradient(false);
+            Gradients = new Color_Editor(true);
+            Outline = new Color_Editor(false);
 
             InitializeComponent();
             Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, chkColor.Checked, (double)tckVertical.Value / 100);
@@ -383,7 +383,7 @@ namespace mkdd_text_maker
                 Positions.Add(tempin);
                 Angles.Add(90);
 
-                Gradients = new Gradient(Colors, Positions, Angles, 0);
+                Gradients = new Color_Editor(Colors, Positions, Angles, 0);
 
                 chkColor.Checked = true;
             }
@@ -391,9 +391,11 @@ namespace mkdd_text_maker
 
         private void graidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Color_Editor editor = new Color_Editor(Gradients);
-            editor.ShowDialog();
-            Gradients = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
+            //Color_Editor editor = new Color_Editor();
+            Gradients.ShowDialog();
+            //editor.ShowDialog();
+            //Gradients = editor;
+            //Gradients = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
             //MakeGradient();
             chkColor.Checked = true;
         }
@@ -405,8 +407,8 @@ namespace mkdd_text_maker
             opentxt.RestoreDirectory = true;
             if (opentxt.ShowDialog() == DialogResult.OK)
             {
-                Gradient newGradient = new Gradient();
-                newGradient = JsonConvert.DeserializeObject<Gradient>(File.ReadAllText(opentxt.FileName));
+                Color_Editor newGradient = new Color_Editor();
+                newGradient = JsonConvert.DeserializeObject<Color_Editor>(File.ReadAllText(opentxt.FileName));
                 //Console.WriteLine(newGradient.Colors.Count);
 
 
@@ -415,10 +417,10 @@ namespace mkdd_text_maker
                 editor.Colors = Gradients.Colors;
                 editor.Positions = Gradients.Positions;
                 editor.Angles = Gradients.Angles;
-                editor.Setting = Gradients.BySetting;
+                editor.Setting = Gradients.Setting;
 
                 //Console.WriteLine(Gradients.Colors.Count);
-                Gradients = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting); ;
+                Gradients = new Color_Editor(editor.Colors, editor.Positions, editor.Angles, editor.Setting); ;
  
             }
         }
@@ -444,7 +446,7 @@ namespace mkdd_text_maker
                 Positions.Add(tempin);
                 Angles.Add(90);
 
-                Outline = new Gradient(Colors, Positions, Angles, 0);
+                Outline = new Color_Editor(Colors, Positions, Angles, 0);
 
                 chkColor.Checked = true;
             }
@@ -453,9 +455,9 @@ namespace mkdd_text_maker
 
         private void gradientEditoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Color_Editor editor = new Color_Editor(Outline);
+            Color_Editor editor = new Color_Editor();
             editor.ShowDialog();
-            Outline = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
+            Outline = new Color_Editor(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
             //MakeGradient();
             chkColor.Checked = true;
         }
@@ -483,7 +485,8 @@ namespace mkdd_text_maker
 
         private void backgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Background_Image bgImage = new Background_Image();
+            bgImage.ShowDialog();
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

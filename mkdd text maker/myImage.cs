@@ -14,7 +14,7 @@ namespace mkdd_text_maker
     {
         static int totalLength;
         
-        public static Image writeLetters(WriteInfo Info, Gradient Gradients, Gradient Outline)
+        public static Image writeLetters(WriteInfo Info, Color_Editor Gradients, Color_Editor Outline)
         {
             //trim text and get the characters
             String text = Info.text;
@@ -88,7 +88,7 @@ namespace mkdd_text_maker
                         Bitmap LetterImage = new Bitmap(fileToRead);
 
                         //if the color is on, edit the letter image
-                        if (Info.HasColor && Gradients.BySetting == 0)
+                        if (Info.HasColor && Gradients.Setting == 0)
                         {
 
                             int colorindex = cindex % Gradients.Colors.Count;
@@ -125,7 +125,7 @@ namespace mkdd_text_maker
             }
 
             //color the image if by image
-            if(Info.HasColor && Gradients.BySetting == 2)
+            if(Info.HasColor && Gradients.Setting == 2)
             {
                 thisImage = editColor(thisImage, Gradients, Outline, index);
                 
@@ -246,7 +246,7 @@ namespace mkdd_text_maker
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //outline shit
 
-        private static Image makeOutline(Image image, Gradient Outline)
+        private static Image makeOutline(Image image, Color_Editor Outline)
         {
 
             Bitmap newImage = new Bitmap(image.Width, image.Height);
@@ -258,7 +258,7 @@ namespace mkdd_text_maker
             }
 
             
-            Bitmap OutlineGrad = Gradient.getGradientBox(image.Width, image.Height, Outline.Colors[0], OLConvertedPositions, Outline.Angles[0]);
+            Bitmap OutlineGrad = Color_Editor.getGradientBox(image.Width, image.Height, Outline.Colors[0], OLConvertedPositions, Outline.Angles[0]);
 
             for (int i = 0; i <image.Width; i++)
             {
@@ -299,7 +299,7 @@ namespace mkdd_text_maker
             return false;
         }
 
-        private static Bitmap editColor(Image image, Gradient Text, Gradient Outline, int index)
+        private static Bitmap editColor(Image image, Color_Editor Text, Color_Editor Outline, int index)
         {
             
             List<float> ConvertedPositions = new List<float>();
@@ -314,8 +314,8 @@ namespace mkdd_text_maker
                 OLConvertedPositions.Add((float)(position / 100.00));
             }
 
-            Bitmap baseGrad = Gradient.getGradientBox(image.Width, image.Height, Text.Colors[index], ConvertedPositions, Text.Angles[index]);
-            Bitmap OutlineGrad = Gradient.getGradientBox(image.Width, image.Height, Outline.Colors[0], OLConvertedPositions, Outline.Angles[0]);
+            Bitmap baseGrad = Color_Editor.getGradientBox(image.Width, image.Height, Text.Colors[index], ConvertedPositions, Text.Angles[index]);
+            Bitmap OutlineGrad = Color_Editor.getGradientBox(image.Width, image.Height, Outline.Colors[0], OLConvertedPositions, Outline.Angles[0]);
 
 
             for (int j = 0; j < image.Height; j++)

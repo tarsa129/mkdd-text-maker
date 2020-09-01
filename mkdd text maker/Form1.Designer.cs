@@ -88,6 +88,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
@@ -299,7 +300,6 @@
             // 
             // backgroundImageToolStripMenuItem
             // 
-            this.backgroundImageToolStripMenuItem.Enabled = false;
             this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
             this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(510, 54);
             this.backgroundImageToolStripMenuItem.Text = "Background Image (text)";

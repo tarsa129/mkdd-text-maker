@@ -57,7 +57,6 @@
     <Compile Include="Background Image.Designer.cs">
       <DependentUpon>Background Image.cs</DependentUpon>
     </Compile>
-    <Compile Include="Gradient.cs" />
     <Compile Include="Color Editor.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -42,17 +42,9 @@ namespace mkdd_text_maker
 
             Setting = 0;
 
-            InitializeComponent();
-         
-            cmbGrads.SelectedIndex = 0;
-            cmbColors.SelectedIndex = 0;         
-
-            picGrad.BackgroundImage = new Bitmap(175, 275);
-
-            txtAngle.Text = tckAngle.Value.ToString();
-            txtPos.Text = tckPos.Value.ToString();
+            this.common_initialize();
         }
-
+        /*
         public Color_Editor(Gradient Premade)
         {
             Colors = Premade.Colors;
@@ -62,6 +54,52 @@ namespace mkdd_text_maker
 
             Setting = 0;
 
+            common_initialize();
+        }
+        */
+
+        public Color_Editor(bool text)
+        {
+            //create one gradient that is white
+            Colors = new List<List<Color>>();
+            Positions = new List<List<int>>();
+            Angles = new List<int>();
+
+            List<Color> temp = new List<Color>();
+            if (text)
+            {
+                temp.Add(Color.White); temp.Add(Color.White);
+            }
+            else
+            {
+                temp.Add(Color.Black); temp.Add(Color.Black);
+            }
+
+            Colors.Add(temp);
+
+            List<int> tempin = new List<int>();
+            tempin.Add(0); tempin.Add(100);
+            Positions.Add(tempin);
+            Angles.Add(90);
+
+            Setting = 0;
+
+            this.common_initialize();
+        }
+
+
+        public Color_Editor(List<List<Color>> colors, List<List<int>> positions, List<int> angles, int setting)
+        {
+            Colors = colors;
+            Positions = positions;
+            Angles = angles;
+            Setting = setting;
+
+            this.common_initialize();
+        }
+
+        public void common_initialize()
+        {
             InitializeComponent();
 
             cmbGrads.SelectedIndex = 0;
@@ -397,9 +435,12 @@ namespace mkdd_text_maker
             foreach(int position in Positions[gradindex]){
                 ConvertedPositions.Add((float)(position / 100.00));
             }
-            picGrad.Image = Gradient.getGradientBox(picGrad.Width, picGrad.Height, Colors[gradindex], ConvertedPositions, Angles[gradindex]);
+            picGrad.Image = getGradientBox(picGrad.Width, picGrad.Height, Colors[gradindex], ConvertedPositions, Angles[gradindex]);
             
         }
+
+
+
 
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -414,7 +455,27 @@ namespace mkdd_text_maker
             Setting = 2;
         }
 
-        
+        //helper function
+        public static Bitmap getGradientBox(int width, int height, List<Color> Colors, List<float> Positions, int angle)
+        {
+            //make the stops
+            ColorBlend cb = new ColorBlend(Colors.Count);
+            cb.Colors = Colors.ToArray();
+            cb.Positions = Positions.ToArray();
+            cb.Positions = Positions.ToArray();
+
+            Bitmap baseGrad = new Bitmap(width, height);
+            LinearGradientBrush linGrBrush = new LinearGradientBrush(new Rectangle(0, 0, width, height), Color.Black, Color.Black, angle);
+            linGrBrush.InterpolationColors = cb;
+
+            Graphics graphics = Graphics.FromImage(baseGrad);
+
+            graphics.FillRectangle(linGrBrush, new Rectangle(0, 0, width, height));
+
+
+            return baseGrad;
+        }
+
     }
 
 }
