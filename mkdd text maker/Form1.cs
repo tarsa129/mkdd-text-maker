@@ -20,12 +20,12 @@ namespace mkdd_text_maker
         //static bool autosize;
         //static int alignment = 2;
 
-        static Color_Editor editor;
+        //static Color_Editor editor;
         static Gradient Gradients;
         static Gradient Outline;
         public Form1()
         {
-            editor = new Color_Editor();
+            //Color_Editor editor = new Color_Editor();
             Gradients = new Gradient(true);
             Outline = new Gradient(false);
 
@@ -391,15 +391,11 @@ namespace mkdd_text_maker
 
         private void graidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Color_Editor editor = new Color_Editor(Gradients);
             editor.ShowDialog();
-            MakeGradient();
-            chkColor.Checked = true;
-        }
-
-        private void MakeGradient()
-        {
             Gradients = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
+            //MakeGradient();
+            chkColor.Checked = true;
         }
 
         private void loadGradientToolStripMenuItem_Click(object sender, EventArgs e)
@@ -415,20 +411,21 @@ namespace mkdd_text_maker
 
 
                 Gradients = newGradient;
-
+                Color_Editor editor = new Color_Editor();
                 editor.Colors = Gradients.Colors;
                 editor.Positions = Gradients.Positions;
                 editor.Angles = Gradients.Angles;
                 editor.Setting = Gradients.BySetting;
 
                 //Console.WriteLine(Gradients.Colors.Count);
-                MakeGradient();
+                Gradients = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting); ;
  
             }
         }
 
         private void singleColoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             ColorDialog picker = new ColorDialog();
             if (picker.ShowDialog() == DialogResult.OK)
             {
@@ -451,6 +448,16 @@ namespace mkdd_text_maker
 
                 chkColor.Checked = true;
             }
+            
+        }
+
+        private void gradientEditoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Color_Editor editor = new Color_Editor(Outline);
+            editor.ShowDialog();
+            Outline = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
+            //MakeGradient();
+            chkColor.Checked = true;
         }
 
         private void saveGradientToolStripMenuItem_Click(object sender, EventArgs e)
@@ -472,6 +479,11 @@ namespace mkdd_text_maker
                 }
 
             }
+        }
+
+        private void backgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -581,6 +593,6 @@ namespace mkdd_text_maker
             
         }
 
-        
+       
     }
 }

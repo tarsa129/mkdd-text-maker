@@ -54,6 +54,7 @@
             this.loadGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.singleColoroutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -76,6 +77,7 @@
             this.lblVertiVal = new System.Windows.Forms.Label();
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
+            this.gradientEditoroutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -86,7 +88,6 @@
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
@@ -96,7 +97,7 @@
             this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1348, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1348, 52);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -107,7 +108,7 @@
             this.loadSettingsToolStripMenuItem,
             this.saveSettingsToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 45);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 48);
             this.fileToolStripMenuItem1.Text = "File";
             // 
             // loadAndConverttxtFileToolStripMenuItem
@@ -139,7 +140,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 45);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 48);
             this.fileToolStripMenuItem.Text = "Save Image";
             // 
             // SavePNG
@@ -185,7 +186,7 @@
             this.customSizeToolStripMenuItem,
             this.autoSizesomethingX32ToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
@@ -223,7 +224,7 @@
             this.centerToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
-            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 45);
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 48);
             this.alignmentToolStripMenuItem.Text = "Alignment";
             // 
             // leftToolStripMenuItem
@@ -254,45 +255,55 @@
             this.graidToolStripMenuItem,
             this.loadGradientToolStripMenuItem,
             this.saveGradientToolStripMenuItem,
-            this.singleColoroutlineToolStripMenuItem});
+            this.backgroundImageToolStripMenuItem,
+            this.singleColoroutlineToolStripMenuItem,
+            this.gradientEditoroutlineToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 45);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // singleColorToolStripMenuItem
             // 
             this.singleColorToolStripMenuItem.Name = "singleColorToolStripMenuItem";
-            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(463, 54);
+            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
             this.singleColorToolStripMenuItem.Text = "Single Color (text)";
             this.singleColorToolStripMenuItem.Click += new System.EventHandler(this.colordia);
             // 
             // graidToolStripMenuItem
             // 
             this.graidToolStripMenuItem.Name = "graidToolStripMenuItem";
-            this.graidToolStripMenuItem.Size = new System.Drawing.Size(463, 54);
+            this.graidToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
             this.graidToolStripMenuItem.Text = "Gradient Editor (text)";
             this.graidToolStripMenuItem.Click += new System.EventHandler(this.graidToolStripMenuItem_Click);
             // 
             // loadGradientToolStripMenuItem
             // 
             this.loadGradientToolStripMenuItem.Name = "loadGradientToolStripMenuItem";
-            this.loadGradientToolStripMenuItem.Size = new System.Drawing.Size(463, 54);
-            this.loadGradientToolStripMenuItem.Text = "Load Gradient";
+            this.loadGradientToolStripMenuItem.Size = new System.Drawing.Size(510, 54);
+            this.loadGradientToolStripMenuItem.Text = "Load Gradient (text)";
             this.loadGradientToolStripMenuItem.Click += new System.EventHandler(this.loadGradientToolStripMenuItem_Click);
             // 
             // saveGradientToolStripMenuItem
             // 
             this.saveGradientToolStripMenuItem.Name = "saveGradientToolStripMenuItem";
-            this.saveGradientToolStripMenuItem.Size = new System.Drawing.Size(463, 54);
-            this.saveGradientToolStripMenuItem.Text = "Save Gradient";
+            this.saveGradientToolStripMenuItem.Size = new System.Drawing.Size(510, 54);
+            this.saveGradientToolStripMenuItem.Text = "Save Gradient (text)";
             this.saveGradientToolStripMenuItem.Click += new System.EventHandler(this.saveGradientToolStripMenuItem_Click);
             // 
             // singleColoroutlineToolStripMenuItem
             // 
             this.singleColoroutlineToolStripMenuItem.Name = "singleColoroutlineToolStripMenuItem";
-            this.singleColoroutlineToolStripMenuItem.Size = new System.Drawing.Size(463, 54);
+            this.singleColoroutlineToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
             this.singleColoroutlineToolStripMenuItem.Text = "Single Color (outline)";
             this.singleColoroutlineToolStripMenuItem.Click += new System.EventHandler(this.singleColoroutlineToolStripMenuItem_Click);
+            // 
+            // backgroundImageToolStripMenuItem
+            // 
+            this.backgroundImageToolStripMenuItem.Enabled = false;
+            this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
+            this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(510, 54);
+            this.backgroundImageToolStripMenuItem.Text = "Background Image (text)";
+            this.backgroundImageToolStripMenuItem.Click += new System.EventHandler(this.backgroundImageToolStripMenuItem_Click);
             // 
             // btnConvert
             // 
@@ -523,6 +534,13 @@
             this.lblVerticalScaling.TabIndex = 19;
             this.lblVerticalScaling.Text = "Vertical Scaling:";
             // 
+            // gradientEditoroutlineToolStripMenuItem
+            // 
+            this.gradientEditoroutlineToolStripMenuItem.Name = "gradientEditoroutlineToolStripMenuItem";
+            this.gradientEditoroutlineToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
+            this.gradientEditoroutlineToolStripMenuItem.Text = "Gradient Editor (outline)";
+            this.gradientEditoroutlineToolStripMenuItem.Click += new System.EventHandler(this.gradientEditoroutlineToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -616,6 +634,8 @@
         private System.Windows.Forms.TrackBar tckVertical;
         private System.Windows.Forms.Label lblVerticalScaling;
         private System.Windows.Forms.ToolStripMenuItem singleColoroutlineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backgroundImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gradientEditoroutlineToolStripMenuItem;
     }
 }
 

@@ -53,6 +53,26 @@ namespace mkdd_text_maker
             txtPos.Text = tckPos.Value.ToString();
         }
 
+        public Color_Editor(Gradient Premade)
+        {
+            Colors = Premade.Colors;
+            Positions = Premade.Positions;
+            Angles = Premade.Angles;
+
+
+            Setting = 0;
+
+            InitializeComponent();
+
+            cmbGrads.SelectedIndex = 0;
+            cmbColors.SelectedIndex = 0;
+
+            picGrad.BackgroundImage = new Bitmap(175, 275);
+
+            txtAngle.Text = tckAngle.Value.ToString();
+            txtPos.Text = tckPos.Value.ToString();
+        }
+
         private void Color_Editor_Load(object sender, EventArgs e)
         {
             

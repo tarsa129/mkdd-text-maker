@@ -51,6 +51,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Background Image.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Background Image.Designer.cs">
+      <DependentUpon>Background Image.cs</DependentUpon>
+    </Compile>
     <Compile Include="Gradient.cs" />
     <Compile Include="Color Editor.cs">
       <SubType>Form</SubType>
@@ -68,6 +74,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Background Image.resx">
+      <DependentUpon>Background Image.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Color Editor.resx">
       <DependentUpon>Color Editor.cs</DependentUpon>
     </EmbeddedResource>

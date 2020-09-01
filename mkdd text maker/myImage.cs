@@ -131,7 +131,8 @@ namespace mkdd_text_maker
                 
             }
 
-            thisImage = makeOutline(thisImage, Outline.Colors[0][0]);
+            //thisImage = makeOutline(thisImage, Outline.Colors[0][0]);
+            thisImage = makeOutline(thisImage, Outline);
             //scale the image
 
 
@@ -245,13 +246,21 @@ namespace mkdd_text_maker
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //outline shit
 
-        private static Image makeOutline(Image image, Color OutlineColor)
+        private static Image makeOutline(Image image, Gradient Outline)
         {
 
             Bitmap newImage = new Bitmap(image.Width, image.Height);
 
+            List<float> OLConvertedPositions = new List<float>();
+            foreach (int position in Outline.Positions[0])
+            {
+                OLConvertedPositions.Add((float)(position / 100.00));
+            }
 
-            for(int i = 0; i <image.Width; i++)
+            
+            Bitmap OutlineGrad = Gradient.getGradientBox(image.Width, image.Height, Outline.Colors[0], OLConvertedPositions, Outline.Angles[0]);
+
+            for (int i = 0; i <image.Width; i++)
             {
                 for(int j = 0; j < image.Height; j++)
                 {
@@ -263,7 +272,7 @@ namespace mkdd_text_maker
                     {
                         if(CheckAdjacent(i, j, (Bitmap)image))
                         {
-                            newImage.SetPixel(i, j, OutlineColor);
+                            newImage.SetPixel(i, j, OutlineGrad.GetPixel(i,j));
                         }
                     }
                 }
@@ -306,7 +315,7 @@ namespace mkdd_text_maker
             }
 
             Bitmap baseGrad = Gradient.getGradientBox(image.Width, image.Height, Text.Colors[index], ConvertedPositions, Text.Angles[index]);
-            //Bitmap OutlineGrad = Gradient.getGradientBox(image.Width, image.Height, Outline.Colors[index], OLConvertedPositions, Outline.Angles[index]);
+            Bitmap OutlineGrad = Gradient.getGradientBox(image.Width, image.Height, Outline.Colors[0], OLConvertedPositions, Outline.Angles[0]);
 
 
             for (int j = 0; j < image.Height; j++)
@@ -321,7 +330,7 @@ namespace mkdd_text_maker
                         double x = pixel.R / 255.00;
 
                         Color baseColor = baseGrad.GetPixel(i, j);
-                        Color OutlineColor = Outline.Colors[0][0];
+                        Color OutlineColor = OutlineGrad.GetPixel(i, j);
 
                         pixel = Color.FromArgb(255, (int)(x * baseColor.R + (1-x)*OutlineColor.R), (int)(x * baseColor.G + (1 - x) * OutlineColor.G), (int)(x * baseColor.B + (1 - x) * OutlineColor.B));
                         ((Bitmap)image).SetPixel(i, j, pixel);
