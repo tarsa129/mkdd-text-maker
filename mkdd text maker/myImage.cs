@@ -56,7 +56,7 @@ namespace mkdd_text_maker
             }
 
             //thing for special characters here
-            chars = Form1.specialCharacters(chars);
+            chars = Main_Form.specialCharacters(chars);
 
             
 

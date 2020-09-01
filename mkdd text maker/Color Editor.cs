@@ -26,37 +26,9 @@ namespace mkdd_text_maker
         
         public Color_Editor()
         {
-           
-            Colors = new List<List<Color>>();
-            Positions = new List<List<int>>();
-            Angles = new List<int>();
 
-            List<Color> temp = new List<Color>();
-            temp.Add(Color.White); temp.Add(Color.White);
-            Colors.Add(temp);
-
-            List<int> tempin = new List<int>();
-            tempin.Add(0); tempin.Add(100);
-            Positions.Add(tempin);
-            Angles.Add(90);
-
-            Setting = 0;
-
-            this.common_initialize();
+            InitializeComponent();
         }
-        /*
-        public Color_Editor(Gradient Premade)
-        {
-            Colors = Premade.Colors;
-            Positions = Premade.Positions;
-            Angles = Premade.Angles;
-
-
-            Setting = 0;
-
-            common_initialize();
-        }
-        */
 
         public Color_Editor(bool text)
         {
@@ -86,7 +58,6 @@ namespace mkdd_text_maker
 
             this.common_initialize();
         }
-
 
         public Color_Editor(List<List<Color>> colors, List<List<int>> positions, List<int> angles, int setting)
         {
@@ -397,18 +368,24 @@ namespace mkdd_text_maker
            
 
             cmbColors.Items.Clear();
-            for(int i = 0; i < Colors[gradindex].Count; i++)
+
+            if (Colors.Count > 0)
             {
-                cmbColors.Items.Add("Color " + i);
+                for (int i = 0; i < Colors[gradindex].Count; i++)
+                {
+                    cmbColors.Items.Add("Color " + i);
+                }
+
+
+                if (cmbColors.SelectedIndex > Colors[gradindex].Count - 1)
+                {
+                    colindex = 0;
+                    cmbColors.SelectedIndex = 0;
+
+                }
             }
+
             
-            
-            if(cmbColors.SelectedIndex > Colors[gradindex].Count - 1)
-            {
-                colindex = 0;
-                cmbColors.SelectedIndex = 0;
-                
-            }
 
             tckAngle.Value = Angles[gradindex];
             tckPos.Value = Positions[gradindex][colindex];
@@ -439,23 +416,6 @@ namespace mkdd_text_maker
             
         }
 
-
-
-
-
-        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //"by" stuff
-        private void radByLetter_CheckedChanged(object sender, EventArgs e)
-        {
-            Setting = 0;
-        }
-
-        private void radByImage_CheckedChanged(object sender, EventArgs e)
-        {
-            Setting = 2;
-        }
-
-        //helper function
         public static Bitmap getGradientBox(int width, int height, List<Color> Colors, List<float> Positions, int angle)
         {
             //make the stops
@@ -474,6 +434,19 @@ namespace mkdd_text_maker
 
 
             return baseGrad;
+        }
+
+
+        //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //"by" stuff
+        private void radByLetter_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting = 0;
+        }
+
+        private void radByImage_CheckedChanged(object sender, EventArgs e)
+        {
+            Setting = 2;
         }
 
     }

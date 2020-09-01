@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace mkdd_text_maker
 {
-    public partial class Form1 : Form
+    public partial class Main_Form : Form
     {
         static public int width;
         static public int height;
@@ -23,7 +23,7 @@ namespace mkdd_text_maker
         //static Color_Editor editor;
         static Color_Editor Gradients;
         static Color_Editor Outline;
-        public Form1()
+        public Main_Form()
         {
             //Color_Editor editor = new Color_Editor();
             Gradients = new Color_Editor(true);
@@ -391,12 +391,8 @@ namespace mkdd_text_maker
 
         private void graidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Color_Editor editor = new Color_Editor();
+
             Gradients.ShowDialog();
-            //editor.ShowDialog();
-            //Gradients = editor;
-            //Gradients = new Gradient(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
-            //MakeGradient();
             chkColor.Checked = true;
         }
 
@@ -408,20 +404,33 @@ namespace mkdd_text_maker
             if (opentxt.ShowDialog() == DialogResult.OK)
             {
                 Color_Editor newGradient = new Color_Editor();
+           
                 newGradient = JsonConvert.DeserializeObject<Color_Editor>(File.ReadAllText(opentxt.FileName));
-                //Console.WriteLine(newGradient.Colors.Count);
-
+                Console.WriteLine("at lest you got here");
 
                 Gradients = newGradient;
-                Color_Editor editor = new Color_Editor();
-                editor.Colors = Gradients.Colors;
-                editor.Positions = Gradients.Positions;
-                editor.Angles = Gradients.Angles;
-                editor.Setting = Gradients.Setting;
 
-                //Console.WriteLine(Gradients.Colors.Count);
-                Gradients = new Color_Editor(editor.Colors, editor.Positions, editor.Angles, editor.Setting); ;
- 
+                chkColor.Checked = true;
+            }
+        }
+        private void saveGradientToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog SaveSetting = new SaveFileDialog();
+            SaveSetting.Filter = "json files(*.json)| *.json";
+            SaveSetting.RestoreDirectory = true;
+            SaveSetting.FileName = @"\settings\gradient.json";
+            if (SaveSetting.ShowDialog() == DialogResult.OK)
+            {
+
+                String json = JsonConvert.SerializeObject(Gradients, Formatting.Indented);
+                //Console.WriteLine(json);
+
+                using (StreamWriter file = File.CreateText(SaveSetting.FileName))
+                {
+                    file.Write(json);
+                    file.Close();
+                }
+
             }
         }
 
@@ -455,32 +464,8 @@ namespace mkdd_text_maker
 
         private void gradientEditoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Color_Editor editor = new Color_Editor();
-            editor.ShowDialog();
-            Outline = new Color_Editor(editor.Colors, editor.Positions, editor.Angles, editor.Setting);
-            //MakeGradient();
+            Outline.ShowDialog();
             chkColor.Checked = true;
-        }
-
-        private void saveGradientToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog SaveSetting = new SaveFileDialog();
-            SaveSetting.Filter = "json files(*.json)| *.json";
-            SaveSetting.RestoreDirectory = true;
-            SaveSetting.FileName = @"\settings\gradient.json";
-            if (SaveSetting.ShowDialog() == DialogResult.OK)
-            {
-  
-                String json = JsonConvert.SerializeObject(Gradients, Formatting.Indented);
-                //Console.WriteLine(json);
-
-                using (StreamWriter file = File.CreateText(SaveSetting.FileName))
-                {
-                    file.Write(json);
-                    file.Close();
-                }
-
-            }
         }
 
         private void backgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
