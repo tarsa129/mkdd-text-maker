@@ -49,11 +49,14 @@
             this.centerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rightToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.singleColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.graidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniTextColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniiTextSingle = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniiTextGrad = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniOutlineColor = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniiOutLSingle = new System.Windows.Forms.ToolStripMenuItem();
+            this.mniiOutLGrad = new System.Windows.Forms.ToolStripMenuItem();
             this.loadGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.singleColoroutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
@@ -77,7 +80,7 @@
             this.lblVertiVal = new System.Windows.Forms.Label();
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
-            this.gradientEditoroutlineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -252,30 +255,60 @@
             // colorToolStripMenuItem
             // 
             this.colorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.singleColorToolStripMenuItem,
-            this.graidToolStripMenuItem,
+            this.mniTextColor,
+            this.mniOutlineColor,
             this.loadGradientToolStripMenuItem,
             this.saveGradientToolStripMenuItem,
-            this.backgroundImageToolStripMenuItem,
-            this.singleColoroutlineToolStripMenuItem,
-            this.gradientEditoroutlineToolStripMenuItem});
+            this.backgroundImageToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
             this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
             this.colorToolStripMenuItem.Text = "Color";
             // 
-            // singleColorToolStripMenuItem
+            // mniTextColor
             // 
-            this.singleColorToolStripMenuItem.Name = "singleColorToolStripMenuItem";
-            this.singleColorToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
-            this.singleColorToolStripMenuItem.Text = "Single Color (text)";
-            this.singleColorToolStripMenuItem.Click += new System.EventHandler(this.colordia);
+            this.mniTextColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniiTextSingle,
+            this.mniiTextGrad});
+            this.mniTextColor.Name = "mniTextColor";
+            this.mniTextColor.Size = new System.Drawing.Size(510, 54);
+            this.mniTextColor.Text = "Text Color";
             // 
-            // graidToolStripMenuItem
+            // mniiTextSingle
             // 
-            this.graidToolStripMenuItem.Name = "graidToolStripMenuItem";
-            this.graidToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
-            this.graidToolStripMenuItem.Text = "Gradient Editor (text)";
-            this.graidToolStripMenuItem.Click += new System.EventHandler(this.graidToolStripMenuItem_Click);
+            this.mniiTextSingle.Name = "mniiTextSingle";
+            this.mniiTextSingle.Size = new System.Drawing.Size(448, 54);
+            this.mniiTextSingle.Text = "Single Color";
+            this.mniiTextSingle.Click += new System.EventHandler(this.mniiTextSingle_Click);
+            // 
+            // mniiTextGrad
+            // 
+            this.mniiTextGrad.Name = "mniiTextGrad";
+            this.mniiTextGrad.Size = new System.Drawing.Size(448, 54);
+            this.mniiTextGrad.Text = "Gradient Editor";
+            this.mniiTextGrad.Click += new System.EventHandler(this.GradientText_Click);
+            // 
+            // mniOutlineColor
+            // 
+            this.mniOutlineColor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mniiOutLSingle,
+            this.mniiOutLGrad});
+            this.mniOutlineColor.Name = "mniOutlineColor";
+            this.mniOutlineColor.Size = new System.Drawing.Size(510, 54);
+            this.mniOutlineColor.Text = "Outline Color";
+            // 
+            // mniiOutLSingle
+            // 
+            this.mniiOutLSingle.Name = "mniiOutLSingle";
+            this.mniiOutLSingle.Size = new System.Drawing.Size(448, 54);
+            this.mniiOutLSingle.Text = "Single Color";
+            this.mniiOutLSingle.Click += new System.EventHandler(this.OutlineSingle_Clicked);
+            // 
+            // mniiOutLGrad
+            // 
+            this.mniiOutLGrad.Name = "mniiOutLGrad";
+            this.mniiOutLGrad.Size = new System.Drawing.Size(448, 54);
+            this.mniiOutLGrad.Text = "Gradient Editor";
+            this.mniiOutLGrad.Click += new System.EventHandler(this.OutlineGradient_Clicked);
             // 
             // loadGradientToolStripMenuItem
             // 
@@ -291,15 +324,10 @@
             this.saveGradientToolStripMenuItem.Text = "Save Gradient (text)";
             this.saveGradientToolStripMenuItem.Click += new System.EventHandler(this.saveGradientToolStripMenuItem_Click);
             // 
-            // singleColoroutlineToolStripMenuItem
-            // 
-            this.singleColoroutlineToolStripMenuItem.Name = "singleColoroutlineToolStripMenuItem";
-            this.singleColoroutlineToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
-            this.singleColoroutlineToolStripMenuItem.Text = "Single Color (outline)";
-            this.singleColoroutlineToolStripMenuItem.Click += new System.EventHandler(this.singleColoroutlineToolStripMenuItem_Click);
-            // 
             // backgroundImageToolStripMenuItem
             // 
+            this.backgroundImageToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.clearImageToolStripMenuItem});
             this.backgroundImageToolStripMenuItem.Name = "backgroundImageToolStripMenuItem";
             this.backgroundImageToolStripMenuItem.Size = new System.Drawing.Size(510, 54);
             this.backgroundImageToolStripMenuItem.Text = "Background Image (text)";
@@ -506,7 +534,7 @@
             // lblVertiVal
             // 
             this.lblVertiVal.AutoSize = true;
-            this.lblVertiVal.Location = new System.Drawing.Point(932, 370);
+            this.lblVertiVal.Location = new System.Drawing.Point(932, 384);
             this.lblVertiVal.Name = "lblVertiVal";
             this.lblVertiVal.Size = new System.Drawing.Size(63, 32);
             this.lblVertiVal.TabIndex = 21;
@@ -514,7 +542,7 @@
             // 
             // tckVertical
             // 
-            this.tckVertical.Location = new System.Drawing.Point(346, 369);
+            this.tckVertical.Location = new System.Drawing.Point(346, 370);
             this.tckVertical.Maximum = 100;
             this.tckVertical.Minimum = 75;
             this.tckVertical.Name = "tckVertical";
@@ -528,20 +556,20 @@
             // lblVerticalScaling
             // 
             this.lblVerticalScaling.AutoSize = true;
-            this.lblVerticalScaling.Location = new System.Drawing.Point(23, 370);
+            this.lblVerticalScaling.Location = new System.Drawing.Point(23, 384);
             this.lblVerticalScaling.Name = "lblVerticalScaling";
             this.lblVerticalScaling.Size = new System.Drawing.Size(221, 32);
             this.lblVerticalScaling.TabIndex = 19;
             this.lblVerticalScaling.Text = "Vertical Scaling:";
             // 
-            // gradientEditoroutlineToolStripMenuItem
+            // clearImageToolStripMenuItem
             // 
-            this.gradientEditoroutlineToolStripMenuItem.Name = "gradientEditoroutlineToolStripMenuItem";
-            this.gradientEditoroutlineToolStripMenuItem.Size = new System.Drawing.Size(502, 54);
-            this.gradientEditoroutlineToolStripMenuItem.Text = "Gradient Editor (outline)";
-            this.gradientEditoroutlineToolStripMenuItem.Click += new System.EventHandler(this.gradientEditoroutlineToolStripMenuItem_Click);
+            this.clearImageToolStripMenuItem.Name = "clearImageToolStripMenuItem";
+            this.clearImageToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.clearImageToolStripMenuItem.Text = "Clear Image";
+            this.clearImageToolStripMenuItem.Click += new System.EventHandler(this.clearImageToolStripMenuItem_Click);
             // 
-            // Form1
+            // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -570,7 +598,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Main_Form";
             this.Text = "MKDD Text Editor";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -622,8 +650,7 @@
         private System.Windows.Forms.ToolStripMenuItem autoSizesomethingX32ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
         private System.Windows.Forms.CheckBox chkColor;
-        private System.Windows.Forms.ToolStripMenuItem singleColorToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem graidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mniTextColor;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loadAndConverttxtFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadSettingsToolStripMenuItem;
@@ -633,9 +660,13 @@
         private System.Windows.Forms.Label lblVertiVal;
         private System.Windows.Forms.TrackBar tckVertical;
         private System.Windows.Forms.Label lblVerticalScaling;
-        private System.Windows.Forms.ToolStripMenuItem singleColoroutlineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mniOutlineColor;
         private System.Windows.Forms.ToolStripMenuItem backgroundImageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem gradientEditoroutlineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mniiOutLSingle;
+        private System.Windows.Forms.ToolStripMenuItem mniiOutLGrad;
+        private System.Windows.Forms.ToolStripMenuItem mniiTextSingle;
+        private System.Windows.Forms.ToolStripMenuItem mniiTextGrad;
+        private System.Windows.Forms.ToolStripMenuItem clearImageToolStripMenuItem;
     }
 }
 

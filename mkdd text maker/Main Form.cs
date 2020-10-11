@@ -17,28 +17,38 @@ namespace mkdd_text_maker
         static public int height;
         static public double scale;
         static public WriteInfo Information;
-        //static bool autosize;
-        //static int alignment = 2;
-
-        //static Color_Editor editor;
+ 
         static Color_Editor Gradients;
         static Color_Editor Outline;
+        static Image BaseImage;
         public Main_Form()
         {
-            //Color_Editor editor = new Color_Editor();
+
             Gradients = new Color_Editor(true);
             Outline = new Color_Editor(false);
+ 
+            width = 256;
+            height = 32;
 
             InitializeComponent();
             Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, chkColor.Checked, (double)tckVertical.Value / 100);
 
-            width = 256;
-            height = 32;
 
             //get scale factor for display
             int DispWidth = picText.Size.Width;
             scale = (double)DispWidth / (double)width;
+
+            BaseImage = new Bitmap(width, height);
+            for ( int i = 0; i < width; i ++)
+            {
+                for( int j = 0; j < height; j ++)
+                {
+                    ((Bitmap)BaseImage).SetPixel(i, j, Color.FromArgb(0, 255, 255, 255) );
+                }
+            }
+
             
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -69,7 +79,7 @@ namespace mkdd_text_maker
                 
                 Information.text = text;
                 Information.image = thisImage;
-                thisImage = myImage.writeLetters(Information, Gradients, Outline);
+                thisImage = myImage.writeLetters(Information, Gradients, Outline, BaseImage);
                 picText.BackgroundImage = thisImage;
                 if (Information.auto)
                 {
@@ -362,8 +372,7 @@ namespace mkdd_text_maker
         }
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //color
-
-        private void colordia(object sender, EventArgs e)
+        private void mniiTextSingle_Click(object sender, EventArgs e)
         {
             ColorDialog picker = new ColorDialog();
             if (picker.ShowDialog() == DialogResult.OK)
@@ -372,7 +381,7 @@ namespace mkdd_text_maker
 
                 List<List<Color>> Colors = new List<List<Color>>();
                 List<List<int>> Positions = new List<List<int>>();
-                List<int> Angles= new List<int>();
+                List<int> Angles = new List<int>();
 
                 List<Color> temp = new List<Color>();
                 temp.Add(PickedColor); temp.Add(PickedColor);
@@ -388,14 +397,41 @@ namespace mkdd_text_maker
                 chkColor.Checked = true;
             }
         }
-
-        private void graidToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GradientText_Click(object sender, EventArgs e)
         {
-
             Gradients.ShowDialog();
             chkColor.Checked = true;
         }
+        private void OutlineSingle_Clicked(object sender, EventArgs e)
+        {
+            ColorDialog picker = new ColorDialog();
+            if (picker.ShowDialog() == DialogResult.OK)
+            {
+                Color PickedColor = picker.Color;
 
+                List<List<Color>> Colors = new List<List<Color>>();
+                List<List<int>> Positions = new List<List<int>>();
+                List<int> Angles = new List<int>();
+
+                List<Color> temp = new List<Color>();
+                temp.Add(PickedColor); temp.Add(PickedColor);
+                Colors.Add(temp);
+
+                List<int> tempin = new List<int>();
+                tempin.Add(0); tempin.Add(100);
+                Positions.Add(tempin);
+                Angles.Add(90);
+
+                Outline = new Color_Editor(Colors, Positions, Angles, 0);
+
+                chkColor.Checked = true;
+            }
+        }
+        private void OutlineGradient_Clicked(object sender, EventArgs e)
+        {
+            Outline.ShowDialog();
+            chkColor.Checked = true;
+        }
         private void loadGradientToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog opentxt = new OpenFileDialog();
@@ -433,46 +469,23 @@ namespace mkdd_text_maker
 
             }
         }
-
-        private void singleColoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-            ColorDialog picker = new ColorDialog();
-            if (picker.ShowDialog() == DialogResult.OK)
-            {
-                Color PickedColor = picker.Color;
-
-                List<List<Color>> Colors = new List<List<Color>>();
-                List<List<int>> Positions = new List<List<int>>();
-                List<int> Angles = new List<int>();
-
-                List<Color> temp = new List<Color>();
-                temp.Add(PickedColor); temp.Add(PickedColor);
-                Colors.Add(temp);
-
-                List<int> tempin = new List<int>();
-                tempin.Add(0); tempin.Add(100);
-                Positions.Add(tempin);
-                Angles.Add(90);
-
-                Outline = new Color_Editor(Colors, Positions, Angles, 0);
-
-                chkColor.Checked = true;
-            }
-            
-        }
-
-        private void gradientEditoroutlineToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Outline.ShowDialog();
-            chkColor.Checked = true;
-        }
-
         private void backgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Background_Image bgImage = new Background_Image();
+            Background_Image bgImage = new Background_Image( width, height, scale );
             bgImage.ShowDialog();
+            BaseImage = bgImage.FinalImage;
         }
+        private void clearImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    ((Bitmap)BaseImage).SetPixel(i, j, Color.FromArgb(0, 255, 255, 255));
+                }
+            }
+        }
+
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //loading stuff
@@ -499,7 +512,7 @@ namespace mkdd_text_maker
                     Image thisImage = new Bitmap(256, 32);
                     //WriteInfo Info = new WriteInfo(line, thisImage, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment, autosize, chkColor.Checked);
                   
-                    Image currentImage = myImage.writeLetters(Information, Gradients, Outline);
+                    Image currentImage = myImage.writeLetters(Information, Gradients, Outline, BaseImage);
 
 
                     String[] name = line.ToCharArray().Select(c => c.ToString()).ToArray();
@@ -581,6 +594,5 @@ namespace mkdd_text_maker
             
         }
 
-       
     }
 }

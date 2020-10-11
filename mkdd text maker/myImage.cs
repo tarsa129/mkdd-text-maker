@@ -7,6 +7,7 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Windows.Media.TextFormatting;
 
 namespace mkdd_text_maker
 {
@@ -14,7 +15,7 @@ namespace mkdd_text_maker
     {
         static int totalLength;
         
-        public static Image writeLetters(WriteInfo Info, Color_Editor Gradients, Color_Editor Outline)
+        public static Image writeLetters(WriteInfo Info, Color_Editor Gradients, Color_Editor Outline, Image BaseImage)    
         {
             //trim text and get the characters
             String text = Info.text;
@@ -58,8 +59,6 @@ namespace mkdd_text_maker
             //thing for special characters here
             chars = Main_Form.specialCharacters(chars);
 
-            
-
             //call the spacing function
             int[] xposes = spacing(chars, Info);
 
@@ -93,7 +92,7 @@ namespace mkdd_text_maker
 
                             int colorindex = cindex % Gradients.Colors.Count;
                             Debug.WriteLine(colorindex);
-                            LetterImage = editColor(LetterImage, Gradients, Outline, colorindex);
+                            LetterImage = editColor(LetterImage, Gradients, Outline, colorindex, BaseImage);
                             LetterImage = (Bitmap)why(LetterImage);
                             //LetterImage = (Bitmap)makeOutline(LetterImage, Outline.Colors[0][0]);
                             cindex--;
@@ -127,7 +126,7 @@ namespace mkdd_text_maker
             //color the image if by image
             if(Info.HasColor && Gradients.Setting == 2)
             {
-                thisImage = editColor(thisImage, Gradients, Outline, index);
+                thisImage = editColor(thisImage, Gradients, Outline, index, BaseImage);
                 
             }
 
@@ -299,7 +298,7 @@ namespace mkdd_text_maker
             return false;
         }
 
-        private static Bitmap editColor(Image image, Color_Editor Text, Color_Editor Outline, int index)
+        private static Bitmap editColor(Image image, Color_Editor Text, Color_Editor Outline, int index, Image BaseImage)
         {
             
             List<float> ConvertedPositions = new List<float>();
@@ -329,10 +328,11 @@ namespace mkdd_text_maker
                     {
                         double x = pixel.R / 255.00;
 
+                        Color ImageColor = ((Bitmap)BaseImage).GetPixel(i, j);
                         Color baseColor = baseGrad.GetPixel(i, j);
                         Color OutlineColor = OutlineGrad.GetPixel(i, j);
 
-                        pixel = Color.FromArgb(255, (int)(x * baseColor.R + (1-x)*OutlineColor.R), (int)(x * baseColor.G + (1 - x) * OutlineColor.G), (int)(x * baseColor.B + (1 - x) * OutlineColor.B));
+                        pixel = BlendColors(x, ImageColor, baseColor, OutlineColor);
                         ((Bitmap)image).SetPixel(i, j, pixel);
                     }
                     
@@ -361,6 +361,27 @@ namespace mkdd_text_maker
                 }
             }
             return newImage;
+        }
+
+        private static Color BlendColors(double alpha, Color ImageColor, Color BaseColor, Color OutlineColor)
+        {
+            
+            int Red =   (int)(alpha * BaseColor.R + (1 - alpha) * OutlineColor.R);
+            int Green = (int)(alpha * BaseColor.G + (1 - alpha) * OutlineColor.G);
+            int Blue =  (int)(alpha * BaseColor.B + (1 - alpha) * OutlineColor.B);
+
+            if (ImageColor.A == 0)
+            {
+                return Color.FromArgb(255, Red, Green, Blue);
+            }
+            
+
+            Red = (int)((alpha) * Red) + (int)( (1-alpha) * ImageColor.R);
+            Green = (int)((alpha) * Green) + (int)((1-alpha) * ImageColor.G);
+            Blue = (int)((alpha) * Blue) + (int)((1-alpha) * ImageColor.B);
+            //Blue = (int)(alpha * BaseColor.B + (1 - alpha) * OutlineColor.B);
+
+            return Color.FromArgb(255, Math.Min(Red, 255), Math.Min(Green, 255), Math.Min(Blue,255));
         }
     }
 }
