@@ -376,10 +376,10 @@ namespace mkdd_text_maker
             }
             
 
-            Red = (int)((alpha) * Red) + (int)( (1-alpha) * ImageColor.R);
-            Green = (int)((alpha) * Green) + (int)((1-alpha) * ImageColor.G);
-            Blue = (int)((alpha) * Blue) + (int)((1-alpha) * ImageColor.B);
-            //Blue = (int)(alpha * BaseColor.B + (1 - alpha) * OutlineColor.B);
+            Red =   (int)((1 - alpha) * Red) + (int)( (ImageColor.A / 255.0) * ImageColor.R);
+            Green = (int)((1 - alpha) * Green) + (int)((ImageColor.A / 255.0) * ImageColor.G);
+            Blue =  (int)((1 - alpha) * Blue) + (int)((ImageColor.A / 255.0) * ImageColor.B);
+            
 
             return Color.FromArgb(255, Math.Min(Red, 255), Math.Min(Green, 255), Math.Min(Blue,255));
         }
