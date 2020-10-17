@@ -5,10 +5,11 @@ The text will always be 32 pixels tall, unless the vertical scaling is changed.
 You have the option to save as a .png or a .bti
 
 # Supported Characters
-All English characters + foward / back accents on all vowels + umlauts on all values. <br>
-Digits 0-9 <br>
-The symbols: ! ( ) ' , " - _ ¡ ¿ / .<br>
-All Katakana characters <br>
+All standard English characters <br/>
+Forward / back accents on all vowels + umlauts on all voelws. <br/>
+Digits 0-9 <br/>
+The symbols: ! ( ) ' , " - _ ¡ ¿ / .<br/>
+All Katakana characters <br/>
 A variety of prefixes, including: SNES, N64, DS, Wii, WiiU, Tour
 
 # Special Thanks
