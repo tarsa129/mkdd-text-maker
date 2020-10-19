@@ -511,7 +511,8 @@ namespace mkdd_text_maker
                     //making the image
                     Image thisImage = new Bitmap(256, 32);
                     //WriteInfo Info = new WriteInfo(line, thisImage, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, alignment, autosize, chkColor.Checked);
-                  
+                    Information.text = line;
+                    Information.image = thisImage;
                     Image currentImage = myImage.writeLetters(Information, Gradients, Outline, BaseImage);
 
 
