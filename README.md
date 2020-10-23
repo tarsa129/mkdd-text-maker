@@ -13,4 +13,6 @@ All Katakana characters <br/>
 A variety of prefixes, including: SNES, N64, DS, Wii, WiiU, Tour
 
 # Special Thanks
-Thanks to Cherry for making the prefix images and the Japanese characters.
+Thanks to Cherry for making the prefix images and the Japanese characters. <br/>
+The program uses wimgt.exe, made by Wiimms. Wiimms szs tools must be installed for saving as .bti to work.
+
