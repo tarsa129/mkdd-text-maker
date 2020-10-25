@@ -171,6 +171,13 @@ namespace mkdd_text_maker
                 using (Process exeProcess = Process.Start(startInfo))
                 {
                     exeProcess.WaitForExit();
+
+                }
+                using (Stream stream = File.Open(text + ".bti", FileMode.Open))
+                {
+                    stream.Position = 6;
+                    byte[] data = { 0, 0, 0, 0 };
+                    stream.Write(data, 0, data.Length);
                 }
             }
             catch
