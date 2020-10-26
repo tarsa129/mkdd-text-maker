@@ -4,6 +4,9 @@ Type in the text, and adjust the spacings, and hit the button.
 The text will always be 32 pixels tall, unless the vertical scaling is changed. 
 You have the option to save as a .png or a .bti
 
+# Running the program
+mkdd text maker -> bin -> Debug -> mkdd text maker.exe. The next release will have an .exe without the source code.
+
 # Supported Characters
 All standard English characters <br/>
 Forward / back accents on all vowels + umlauts on all voelws. <br/>
