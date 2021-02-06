@@ -446,12 +446,16 @@ namespace mkdd_text_maker
             opentxt.RestoreDirectory = true;
             if (opentxt.ShowDialog() == DialogResult.OK)
             {
-                Color_Editor newGradient = new Color_Editor();
-           
-                newGradient = JsonConvert.DeserializeObject<Color_Editor>(File.ReadAllText(opentxt.FileName));
+                JsonInfo jsoninfo = new JsonInfo();
+
+
+                jsoninfo = JsonConvert.DeserializeObject<JsonInfo>(File.ReadAllText(opentxt.FileName));
                 Console.WriteLine("at lest you got here");
 
-                Gradients = newGradient;
+                Gradients.Colors = jsoninfo.Colors;
+                Gradients.Positions = jsoninfo.Positions;
+                Gradients.Angles = jsoninfo.Angles;
+                Gradients.Setting = jsoninfo.Setting;
 
                 chkColor.Checked = true;
             }
@@ -464,18 +468,42 @@ namespace mkdd_text_maker
             SaveSetting.FileName = @"\settings\gradient.json";
             if (SaveSetting.ShowDialog() == DialogResult.OK)
             {
+                JsonInfo jsoninfo = new JsonInfo(Gradients.Colors, Gradients.Positions, Gradients.Angles, Gradients.Setting);
+                String json = JsonConvert.SerializeObject(jsoninfo, Formatting.Indented);
 
-                String json = JsonConvert.SerializeObject(Gradients, Formatting.Indented);
                 //Console.WriteLine(json);
 
                 using (StreamWriter file = File.CreateText(SaveSetting.FileName))
                 {
-                    file.Write(json);
+                    file.Write(json );
                     file.Close();
                 }
 
             }
         }
+
+        private class JsonInfo
+        {
+            public List<List<Color>> Colors { get; set; }
+            public List<List<int>> Positions { get; set; }
+            public List<int> Angles { get; set; }
+            public int Setting { get; set; }
+
+            public JsonInfo(List<List<Color>> colors, List<List<int>> positions, List<int> angles, int setting)
+            {
+                Colors = colors;
+                Positions = positions;
+                Angles = angles;
+                Setting = setting;
+            }
+
+            public JsonInfo()
+            {
+
+            }
+
+        }
+
         private void backgroundImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Background_Image bgImage = new Background_Image( width, height, scale );
