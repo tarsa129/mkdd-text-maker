@@ -330,16 +330,19 @@ namespace mkdd_text_maker
         private void leftToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Information.align = 0;
+            UpdateText(sender, e);
         }
 
         private void centerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Information.align = 2;
+            UpdateText(sender, e);
         }
 
         private void rightToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Information.align = 1;
+            UpdateText(sender, e);
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -631,6 +634,5 @@ namespace mkdd_text_maker
             UpdateText(sender, e);
             
         }
-
     }
 }

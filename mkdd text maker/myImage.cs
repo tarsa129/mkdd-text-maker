@@ -106,7 +106,7 @@ namespace mkdd_text_maker
                         if (chara.Length > 1 && !withPre)
                         {
                             double preScale = 1;
-                            Debug.WriteLine("prescale maybw");
+                            //Debug.WriteLine("prescale maybw");
                             if (Info.PrefixSmall)
                             {
                                 preScale = .9;
@@ -134,7 +134,15 @@ namespace mkdd_text_maker
             }
 
             //thisImage = makeOutline(thisImage, Outline.Colors[0][0]);
-            thisImage = makeOutline(thisImage, Outline);
+            if (Info.HasColor)
+            {
+                thisImage = makeOutline(thisImage, Outline);
+            } else
+            {
+                Outline = new Color_Editor(false);
+                thisImage = makeOutline(thisImage, Outline);
+            }
+            
             //scale the image
 
 

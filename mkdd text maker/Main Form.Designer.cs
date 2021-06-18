@@ -81,17 +81,21 @@
             this.lblVertiVal = new System.Windows.Forms.Label();
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckVertical)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
@@ -228,8 +232,9 @@
             this.centerToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
-            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 45);
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 48);
             this.alignmentToolStripMenuItem.Text = "Alignment";
+            this.alignmentToolStripMenuItem.Visible = false;
             // 
             // leftToolStripMenuItem
             // 
@@ -342,7 +347,7 @@
             // 
             // btnConvert
             // 
-            this.btnConvert.Location = new System.Drawing.Point(1024, 222);
+            this.btnConvert.Location = new System.Drawing.Point(1024, 118);
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(285, 114);
             this.btnConvert.TabIndex = 1;
@@ -370,7 +375,7 @@
             // tckLetter
             // 
             this.tckLetter.LargeChange = 3;
-            this.tckLetter.Location = new System.Drawing.Point(346, 141);
+            this.tckLetter.Location = new System.Drawing.Point(362, 164);
             this.tckLetter.Maximum = 15;
             this.tckLetter.Name = "tckLetter";
             this.tckLetter.Size = new System.Drawing.Size(548, 114);
@@ -382,7 +387,7 @@
             // lblLetters
             // 
             this.lblLetters.AutoSize = true;
-            this.lblLetters.Location = new System.Drawing.Point(23, 141);
+            this.lblLetters.Location = new System.Drawing.Point(39, 164);
             this.lblLetters.Name = "lblLetters";
             this.lblLetters.Size = new System.Drawing.Size(323, 32);
             this.lblLetters.TabIndex = 5;
@@ -393,7 +398,7 @@
             this.picText.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picText.BackgroundImage")));
             this.picText.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picText.Location = new System.Drawing.Point(29, 489);
+            this.picText.Location = new System.Drawing.Point(29, 526);
             this.picText.Name = "picText";
             this.picText.Size = new System.Drawing.Size(1280, 160);
             this.picText.TabIndex = 6;
@@ -403,7 +408,7 @@
             // lblWords
             // 
             this.lblWords.AutoSize = true;
-            this.lblWords.Location = new System.Drawing.Point(23, 226);
+            this.lblWords.Location = new System.Drawing.Point(39, 249);
             this.lblWords.Name = "lblWords";
             this.lblWords.Size = new System.Drawing.Size(301, 32);
             this.lblWords.TabIndex = 8;
@@ -412,7 +417,7 @@
             // tckWords
             // 
             this.tckWords.LargeChange = 1;
-            this.tckWords.Location = new System.Drawing.Point(346, 226);
+            this.tckWords.Location = new System.Drawing.Point(362, 249);
             this.tckWords.Maximum = 20;
             this.tckWords.Minimum = 1;
             this.tckWords.Name = "tckWords";
@@ -425,7 +430,7 @@
             // lblLetterVal
             // 
             this.lblLetterVal.AutoSize = true;
-            this.lblLetterVal.Location = new System.Drawing.Point(932, 141);
+            this.lblLetterVal.Location = new System.Drawing.Point(948, 164);
             this.lblLetterVal.Name = "lblLetterVal";
             this.lblLetterVal.Size = new System.Drawing.Size(31, 32);
             this.lblLetterVal.TabIndex = 9;
@@ -434,7 +439,7 @@
             // lblWordValue
             // 
             this.lblWordValue.AutoSize = true;
-            this.lblWordValue.Location = new System.Drawing.Point(932, 226);
+            this.lblWordValue.Location = new System.Drawing.Point(948, 249);
             this.lblWordValue.Name = "lblWordValue";
             this.lblWordValue.Size = new System.Drawing.Size(47, 32);
             this.lblWordValue.TabIndex = 10;
@@ -491,7 +496,7 @@
             // chkboxPrefix
             // 
             this.chkboxPrefix.AutoSize = true;
-            this.chkboxPrefix.Location = new System.Drawing.Point(1024, 160);
+            this.chkboxPrefix.Location = new System.Drawing.Point(42, 118);
             this.chkboxPrefix.Name = "chkboxPrefix";
             this.chkboxPrefix.Size = new System.Drawing.Size(230, 36);
             this.chkboxPrefix.TabIndex = 14;
@@ -503,7 +508,7 @@
             // lblSqueeze
             // 
             this.lblSqueeze.AutoSize = true;
-            this.lblSqueeze.Location = new System.Drawing.Point(23, 304);
+            this.lblSqueeze.Location = new System.Drawing.Point(39, 327);
             this.lblSqueeze.Name = "lblSqueeze";
             this.lblSqueeze.Size = new System.Drawing.Size(254, 32);
             this.lblSqueeze.TabIndex = 15;
@@ -511,7 +516,7 @@
             // 
             // tckSqueeze
             // 
-            this.tckSqueeze.Location = new System.Drawing.Point(346, 288);
+            this.tckSqueeze.Location = new System.Drawing.Point(362, 311);
             this.tckSqueeze.Maximum = 100;
             this.tckSqueeze.Minimum = 50;
             this.tckSqueeze.Name = "tckSqueeze";
@@ -526,7 +531,7 @@
             // lblShowSqueeze
             // 
             this.lblShowSqueeze.AutoSize = true;
-            this.lblShowSqueeze.Location = new System.Drawing.Point(932, 308);
+            this.lblShowSqueeze.Location = new System.Drawing.Point(948, 331);
             this.lblShowSqueeze.Name = "lblShowSqueeze";
             this.lblShowSqueeze.Size = new System.Drawing.Size(63, 32);
             this.lblShowSqueeze.TabIndex = 17;
@@ -535,7 +540,7 @@
             // chkColor
             // 
             this.chkColor.AutoSize = true;
-            this.chkColor.Location = new System.Drawing.Point(1024, 118);
+            this.chkColor.Location = new System.Drawing.Point(1024, 66);
             this.chkColor.Name = "chkColor";
             this.chkColor.Size = new System.Drawing.Size(121, 36);
             this.chkColor.TabIndex = 18;
@@ -547,7 +552,7 @@
             // lblVertiVal
             // 
             this.lblVertiVal.AutoSize = true;
-            this.lblVertiVal.Location = new System.Drawing.Point(932, 384);
+            this.lblVertiVal.Location = new System.Drawing.Point(948, 407);
             this.lblVertiVal.Name = "lblVertiVal";
             this.lblVertiVal.Size = new System.Drawing.Size(63, 32);
             this.lblVertiVal.TabIndex = 21;
@@ -555,7 +560,7 @@
             // 
             // tckVertical
             // 
-            this.tckVertical.Location = new System.Drawing.Point(346, 370);
+            this.tckVertical.Location = new System.Drawing.Point(362, 393);
             this.tckVertical.Maximum = 100;
             this.tckVertical.Minimum = 75;
             this.tckVertical.Name = "tckVertical";
@@ -570,17 +575,67 @@
             // lblVerticalScaling
             // 
             this.lblVerticalScaling.AutoSize = true;
-            this.lblVerticalScaling.Location = new System.Drawing.Point(23, 384);
+            this.lblVerticalScaling.Location = new System.Drawing.Point(39, 407);
             this.lblVerticalScaling.Name = "lblVerticalScaling";
             this.lblVerticalScaling.Size = new System.Drawing.Size(221, 32);
             this.lblVerticalScaling.TabIndex = 19;
             this.lblVerticalScaling.Text = "Vertical Scaling:";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButton3);
+            this.groupBox1.Controls.Add(this.radioButton2);
+            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Location = new System.Drawing.Point(1024, 263);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(285, 176);
+            this.groupBox1.TabIndex = 22;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Alignment";
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(7, 38);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(100, 36);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Left";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
+            this.radioButton2.Location = new System.Drawing.Point(7, 84);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(137, 36);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Center";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(7, 130);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(119, 36);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Right";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
+            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1348, 684);
+            this.ClientSize = new System.Drawing.Size(1348, 723);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblVertiVal);
             this.Controls.Add(this.tckVertical);
             this.Controls.Add(this.lblVerticalScaling);
@@ -615,6 +670,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckVertical)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -674,6 +731,10 @@
         private System.Windows.Forms.ToolStripMenuItem mniiTextSingle;
         private System.Windows.Forms.ToolStripMenuItem mniiTextGrad;
         private System.Windows.Forms.ToolStripMenuItem clearImageToolStripMenuItem;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 
