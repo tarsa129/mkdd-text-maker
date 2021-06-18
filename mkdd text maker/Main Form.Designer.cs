@@ -58,6 +58,7 @@
             this.loadGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
@@ -80,7 +81,6 @@
             this.lblVertiVal = new System.Windows.Forms.Label();
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
-            this.clearImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -101,7 +101,7 @@
             this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1348, 52);
+            this.menuStrip1.Size = new System.Drawing.Size(1348, 49);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -112,7 +112,7 @@
             this.loadSettingsToolStripMenuItem,
             this.saveSettingsToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 48);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 45);
             this.fileToolStripMenuItem1.Text = "File";
             // 
             // loadAndConverttxtFileToolStripMenuItem
@@ -144,7 +144,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 48);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 45);
             this.fileToolStripMenuItem.Text = "Save Image";
             // 
             // SavePNG
@@ -190,7 +190,7 @@
             this.customSizeToolStripMenuItem,
             this.autoSizesomethingX32ToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
@@ -228,7 +228,7 @@
             this.centerToolStripMenuItem,
             this.rightToolStripMenuItem});
             this.alignmentToolStripMenuItem.Name = "alignmentToolStripMenuItem";
-            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 48);
+            this.alignmentToolStripMenuItem.Size = new System.Drawing.Size(179, 45);
             this.alignmentToolStripMenuItem.Text = "Alignment";
             // 
             // leftToolStripMenuItem
@@ -261,7 +261,7 @@
             this.saveGradientToolStripMenuItem,
             this.backgroundImageToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 45);
             this.colorToolStripMenuItem.Text = "Color";
             // 
             // mniTextColor
@@ -276,14 +276,14 @@
             // mniiTextSingle
             // 
             this.mniiTextSingle.Name = "mniiTextSingle";
-            this.mniiTextSingle.Size = new System.Drawing.Size(448, 54);
+            this.mniiTextSingle.Size = new System.Drawing.Size(384, 54);
             this.mniiTextSingle.Text = "Single Color";
             this.mniiTextSingle.Click += new System.EventHandler(this.mniiTextSingle_Click);
             // 
             // mniiTextGrad
             // 
             this.mniiTextGrad.Name = "mniiTextGrad";
-            this.mniiTextGrad.Size = new System.Drawing.Size(448, 54);
+            this.mniiTextGrad.Size = new System.Drawing.Size(384, 54);
             this.mniiTextGrad.Text = "Gradient Editor";
             this.mniiTextGrad.Click += new System.EventHandler(this.GradientText_Click);
             // 
@@ -299,14 +299,14 @@
             // mniiOutLSingle
             // 
             this.mniiOutLSingle.Name = "mniiOutLSingle";
-            this.mniiOutLSingle.Size = new System.Drawing.Size(448, 54);
+            this.mniiOutLSingle.Size = new System.Drawing.Size(384, 54);
             this.mniiOutLSingle.Text = "Single Color";
             this.mniiOutLSingle.Click += new System.EventHandler(this.OutlineSingle_Clicked);
             // 
             // mniiOutLGrad
             // 
             this.mniiOutLGrad.Name = "mniiOutLGrad";
-            this.mniiOutLGrad.Size = new System.Drawing.Size(448, 54);
+            this.mniiOutLGrad.Size = new System.Drawing.Size(384, 54);
             this.mniiOutLGrad.Text = "Gradient Editor";
             this.mniiOutLGrad.Click += new System.EventHandler(this.OutlineGradient_Clicked);
             // 
@@ -333,6 +333,13 @@
             this.backgroundImageToolStripMenuItem.Text = "Background Image (text)";
             this.backgroundImageToolStripMenuItem.Click += new System.EventHandler(this.backgroundImageToolStripMenuItem_Click);
             // 
+            // clearImageToolStripMenuItem
+            // 
+            this.clearImageToolStripMenuItem.Name = "clearImageToolStripMenuItem";
+            this.clearImageToolStripMenuItem.Size = new System.Drawing.Size(342, 54);
+            this.clearImageToolStripMenuItem.Text = "Clear Image";
+            this.clearImageToolStripMenuItem.Click += new System.EventHandler(this.clearImageToolStripMenuItem_Click);
+            // 
             // btnConvert
             // 
             this.btnConvert.Location = new System.Drawing.Point(1024, 222);
@@ -349,6 +356,7 @@
             this.txtInput.Name = "txtInput";
             this.txtInput.Size = new System.Drawing.Size(455, 38);
             this.txtInput.TabIndex = 2;
+            this.txtInput.TextChanged += new System.EventHandler(this.UpdateText);
             // 
             // lblInput
             // 
@@ -369,6 +377,7 @@
             this.tckLetter.TabIndex = 4;
             this.tckLetter.Value = 5;
             this.tckLetter.Scroll += new System.EventHandler(this.TckLetter_Scroll);
+            this.tckLetter.ValueChanged += new System.EventHandler(this.UpdateText);
             // 
             // lblLetters
             // 
@@ -411,6 +420,7 @@
             this.tckWords.TabIndex = 7;
             this.tckWords.Value = 10;
             this.tckWords.Scroll += new System.EventHandler(this.TckWords_Scroll);
+            this.tckWords.ValueChanged += new System.EventHandler(this.UpdateText);
             // 
             // lblLetterVal
             // 
@@ -488,6 +498,7 @@
             this.chkboxPrefix.Text = "Smaller Prefix";
             this.chkboxPrefix.UseVisualStyleBackColor = true;
             this.chkboxPrefix.CheckedChanged += new System.EventHandler(this.chkboxPrefix_CheckedChanged);
+            this.chkboxPrefix.Click += new System.EventHandler(this.UpdateText);
             // 
             // lblSqueeze
             // 
@@ -510,6 +521,7 @@
             this.tckSqueeze.TickFrequency = 5;
             this.tckSqueeze.Value = 100;
             this.tckSqueeze.Scroll += new System.EventHandler(this.tckSqueeze_Scroll);
+            this.tckSqueeze.ValueChanged += new System.EventHandler(this.UpdateText);
             // 
             // lblShowSqueeze
             // 
@@ -530,6 +542,7 @@
             this.chkColor.Text = "Color";
             this.chkColor.UseVisualStyleBackColor = true;
             this.chkColor.CheckedChanged += new System.EventHandler(this.chkColor_CheckedChanged);
+            this.chkColor.Click += new System.EventHandler(this.UpdateText);
             // 
             // lblVertiVal
             // 
@@ -552,6 +565,7 @@
             this.tckVertical.TickFrequency = 5;
             this.tckVertical.Value = 100;
             this.tckVertical.Scroll += new System.EventHandler(this.tckVertical_Scroll);
+            this.tckVertical.ValueChanged += new System.EventHandler(this.UpdateText);
             // 
             // lblVerticalScaling
             // 
@@ -561,13 +575,6 @@
             this.lblVerticalScaling.Size = new System.Drawing.Size(221, 32);
             this.lblVerticalScaling.TabIndex = 19;
             this.lblVerticalScaling.Text = "Vertical Scaling:";
-            // 
-            // clearImageToolStripMenuItem
-            // 
-            this.clearImageToolStripMenuItem.Name = "clearImageToolStripMenuItem";
-            this.clearImageToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
-            this.clearImageToolStripMenuItem.Text = "Clear Image";
-            this.clearImageToolStripMenuItem.Click += new System.EventHandler(this.clearImageToolStripMenuItem_Click);
             // 
             // Main_Form
             // 
