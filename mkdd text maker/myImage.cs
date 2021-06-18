@@ -27,7 +27,8 @@ namespace mkdd_text_maker
             //if there is a prefix, make the array of strings to write accomdate it
 
             String prefix = Info.Prefix;
-            bool withPre = prefix.Equals("none");
+            Debug.WriteLine(prefix);
+            bool withPre = prefix.Equals("none") || prefix.Equals("None");
             
             int index;
 
@@ -100,14 +101,16 @@ namespace mkdd_text_maker
                         }
 
                         Graphics mainImage = Graphics.FromImage(thisImage);
-
+                        //Debug.WriteLine(withPre);
                         //drawing the actual image
-                        if (chara.Length > 1 && withPre)
+                        if (chara.Length > 1 && !withPre)
                         {
                             double preScale = 1;
+                            Debug.WriteLine("prescale maybw");
                             if (Info.PrefixSmall)
                             {
                                 preScale = .9;
+                                //Debug.WriteLine("prescale changed");
                             }
                             mainImage.DrawImage(LetterImage, new Rectangle(xposes[i], 0, (int)(LetterImage.Width * preScale), (int)(LetterImage.Height * preScale)));
                         }
@@ -206,7 +209,7 @@ namespace mkdd_text_maker
                                 double prefixScale = 1;
                                 if (Info.PrefixSmall)
                                 {
-                                    prefixScale = .8;
+                                    prefixScale = .9;
                                 }
                                 positions[i + 1] = positions[i] + ((int)(imageLetter.Width * prefixScale) - btletters);
                                 TotLength += ((int)(imageLetter.Width * prefixScale) - btletters);

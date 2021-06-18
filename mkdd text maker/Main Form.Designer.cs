@@ -346,7 +346,7 @@
             this.btnConvert.Name = "btnConvert";
             this.btnConvert.Size = new System.Drawing.Size(285, 114);
             this.btnConvert.TabIndex = 1;
-            this.btnConvert.Text = "Make Text";
+            this.btnConvert.Text = "Apply Color Changes";
             this.btnConvert.UseVisualStyleBackColor = true;
             this.btnConvert.Click += new System.EventHandler(this.UpdateText);
             // 

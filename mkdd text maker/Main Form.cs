@@ -627,6 +627,7 @@ namespace mkdd_text_maker
         private void cmbPrefix_SelectedIndexChanged(object sender, EventArgs e)
         {
             Information.Prefix = cmbPrefix.SelectedItem.ToString();
+            Debug.WriteLine(Information.Prefix);
             UpdateText(sender, e);
             
         }
