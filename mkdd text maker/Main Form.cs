@@ -64,7 +64,7 @@ namespace mkdd_text_maker
 
             String text = txtInput.Text;
             text = text.Trim();
-            txtInput.Text = text;
+            //txtInput.Text = text;
 
             if (!String.IsNullOrWhiteSpace(text) && !String.IsNullOrEmpty(text))
             {

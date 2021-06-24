@@ -27,7 +27,7 @@ namespace mkdd_text_maker
             //if there is a prefix, make the array of strings to write accomdate it
 
             String prefix = Info.Prefix;
-            Debug.WriteLine(prefix);
+            ///Debug.WriteLine(prefix);
             bool withPre = prefix.Equals("none") || prefix.Equals("None");
             
             int index;
