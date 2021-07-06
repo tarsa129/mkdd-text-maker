@@ -162,7 +162,17 @@ namespace mkdd_text_maker
             startInfo.UseShellExecute = false;
             startInfo.FileName = "wimgt.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.CMPR --n-mm=0";
+
+            if (chkColor.Checked)
+            {
+                startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.CMPR --n-mm=0";
+            }
+            else
+            {
+                startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.IA4 --n-mm=0";
+            }
+
+            
            
             try
             {
