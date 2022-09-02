@@ -82,9 +82,9 @@
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
@@ -96,6 +96,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem1,
@@ -105,7 +106,7 @@
             this.colorToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1348, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(1348, 52);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -116,7 +117,7 @@
             this.loadSettingsToolStripMenuItem,
             this.saveSettingsToolStripMenuItem});
             this.fileToolStripMenuItem1.Name = "fileToolStripMenuItem1";
-            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 45);
+            this.fileToolStripMenuItem1.Size = new System.Drawing.Size(87, 48);
             this.fileToolStripMenuItem1.Text = "File";
             // 
             // loadAndConverttxtFileToolStripMenuItem
@@ -148,7 +149,7 @@
             this.SaveBTI,
             this.SaveAsBTI});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 45);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(194, 48);
             this.fileToolStripMenuItem.Text = "Save Image";
             // 
             // SavePNG
@@ -194,7 +195,7 @@
             this.customSizeToolStripMenuItem,
             this.autoSizesomethingX32ToolStripMenuItem});
             this.imageSizeToolStripMenuItem.Name = "imageSizeToolStripMenuItem";
-            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 45);
+            this.imageSizeToolStripMenuItem.Size = new System.Drawing.Size(186, 48);
             this.imageSizeToolStripMenuItem.Text = "Image Size";
             // 
             // courseName256X32ToolStripMenuItem
@@ -239,21 +240,21 @@
             // leftToolStripMenuItem
             // 
             this.leftToolStripMenuItem.Name = "leftToolStripMenuItem";
-            this.leftToolStripMenuItem.Size = new System.Drawing.Size(272, 54);
+            this.leftToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
             this.leftToolStripMenuItem.Text = "Left";
             this.leftToolStripMenuItem.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
             // 
             // centerToolStripMenuItem
             // 
             this.centerToolStripMenuItem.Name = "centerToolStripMenuItem";
-            this.centerToolStripMenuItem.Size = new System.Drawing.Size(272, 54);
+            this.centerToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
             this.centerToolStripMenuItem.Text = "Center";
             this.centerToolStripMenuItem.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
             // 
             // rightToolStripMenuItem
             // 
             this.rightToolStripMenuItem.Name = "rightToolStripMenuItem";
-            this.rightToolStripMenuItem.Size = new System.Drawing.Size(272, 54);
+            this.rightToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
             this.rightToolStripMenuItem.Text = "Right";
             this.rightToolStripMenuItem.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
@@ -266,8 +267,9 @@
             this.saveGradientToolStripMenuItem,
             this.backgroundImageToolStripMenuItem});
             this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
-            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 45);
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(114, 48);
             this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Visible = false;
             // 
             // mniTextColor
             // 
@@ -281,14 +283,14 @@
             // mniiTextSingle
             // 
             this.mniiTextSingle.Name = "mniiTextSingle";
-            this.mniiTextSingle.Size = new System.Drawing.Size(384, 54);
+            this.mniiTextSingle.Size = new System.Drawing.Size(448, 54);
             this.mniiTextSingle.Text = "Single Color";
             this.mniiTextSingle.Click += new System.EventHandler(this.mniiTextSingle_Click);
             // 
             // mniiTextGrad
             // 
             this.mniiTextGrad.Name = "mniiTextGrad";
-            this.mniiTextGrad.Size = new System.Drawing.Size(384, 54);
+            this.mniiTextGrad.Size = new System.Drawing.Size(448, 54);
             this.mniiTextGrad.Text = "Gradient Editor";
             this.mniiTextGrad.Click += new System.EventHandler(this.GradientText_Click);
             // 
@@ -304,14 +306,14 @@
             // mniiOutLSingle
             // 
             this.mniiOutLSingle.Name = "mniiOutLSingle";
-            this.mniiOutLSingle.Size = new System.Drawing.Size(384, 54);
+            this.mniiOutLSingle.Size = new System.Drawing.Size(448, 54);
             this.mniiOutLSingle.Text = "Single Color";
             this.mniiOutLSingle.Click += new System.EventHandler(this.OutlineSingle_Clicked);
             // 
             // mniiOutLGrad
             // 
             this.mniiOutLGrad.Name = "mniiOutLGrad";
-            this.mniiOutLGrad.Size = new System.Drawing.Size(384, 54);
+            this.mniiOutLGrad.Size = new System.Drawing.Size(448, 54);
             this.mniiOutLGrad.Text = "Gradient Editor";
             this.mniiOutLGrad.Click += new System.EventHandler(this.OutlineGradient_Clicked);
             // 
@@ -341,7 +343,7 @@
             // clearImageToolStripMenuItem
             // 
             this.clearImageToolStripMenuItem.Name = "clearImageToolStripMenuItem";
-            this.clearImageToolStripMenuItem.Size = new System.Drawing.Size(342, 54);
+            this.clearImageToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
             this.clearImageToolStripMenuItem.Text = "Clear Image";
             this.clearImageToolStripMenuItem.Click += new System.EventHandler(this.clearImageToolStripMenuItem_Click);
             // 
@@ -593,17 +595,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Alignment";
             // 
-            // radioButton1
+            // radioButton3
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 38);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(100, 36);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Left";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(7, 130);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(119, 36);
+            this.radioButton3.TabIndex = 2;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Right";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
             // 
             // radioButton2
             // 
@@ -618,17 +620,17 @@
             this.radioButton2.UseVisualStyleBackColor = true;
             this.radioButton2.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
             // 
-            // radioButton3
+            // radioButton1
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(7, 130);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(119, 36);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Right";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(7, 38);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(100, 36);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Left";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
             // 
             // Main_Form
             // 
