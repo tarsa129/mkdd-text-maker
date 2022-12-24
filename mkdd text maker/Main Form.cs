@@ -384,6 +384,9 @@ namespace mkdd_text_maker
                     case "\"":
                         letters[i] = "''";
                         break;
+                    case "<":
+                        letters[i] = "lessthan";
+                        break;
 
                 }
                 
