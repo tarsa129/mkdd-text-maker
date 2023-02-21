@@ -268,6 +268,7 @@ namespace mkdd_text_maker
             Information.auto = false;
             picText.BackgroundImage = new Bitmap(width, height);
             picText.Size = new Size((int)(width * scale), (int)(height * scale));
+            UpdateText(null, null);
         }
 
         private void courseName256X32ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -333,6 +334,7 @@ namespace mkdd_text_maker
         private void autoSize(object sender, EventArgs e)
         {
             Information.auto = true;
+            UpdateText(null, null);
         }
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
