@@ -58,7 +58,6 @@
             this.saveGradientToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnConvert = new System.Windows.Forms.Button();
             this.txtInput = new System.Windows.Forms.TextBox();
             this.lblInput = new System.Windows.Forms.Label();
             this.tckLetter = new System.Windows.Forms.TrackBar();
@@ -76,21 +75,15 @@
             this.lblSqueeze = new System.Windows.Forms.Label();
             this.tckSqueeze = new System.Windows.Forms.TrackBar();
             this.lblShowSqueeze = new System.Windows.Forms.Label();
-            this.chkColor = new System.Windows.Forms.CheckBox();
             this.lblVertiVal = new System.Windows.Forms.Label();
             this.tckVertical = new System.Windows.Forms.TrackBar();
             this.lblVerticalScaling = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tckLetter)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picText)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckVertical)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -128,16 +121,20 @@
             // 
             // loadSettingsToolStripMenuItem
             // 
+            this.loadSettingsToolStripMenuItem.Enabled = false;
             this.loadSettingsToolStripMenuItem.Name = "loadSettingsToolStripMenuItem";
             this.loadSettingsToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.loadSettingsToolStripMenuItem.Text = "Load settings";
+            this.loadSettingsToolStripMenuItem.Visible = false;
             this.loadSettingsToolStripMenuItem.Click += new System.EventHandler(this.LoadSettings);
             // 
             // saveSettingsToolStripMenuItem
             // 
+            this.saveSettingsToolStripMenuItem.Enabled = false;
             this.saveSettingsToolStripMenuItem.Name = "saveSettingsToolStripMenuItem";
             this.saveSettingsToolStripMenuItem.Size = new System.Drawing.Size(258, 26);
             this.saveSettingsToolStripMenuItem.Text = "Save settings";
+            this.saveSettingsToolStripMenuItem.Visible = false;
             this.saveSettingsToolStripMenuItem.Click += new System.EventHandler(this.SaveSettingsToolStripMenuItem_Click);
             // 
             // fileToolStripMenuItem
@@ -338,17 +335,6 @@
             this.clearImageToolStripMenuItem.Text = "Clear Image";
             this.clearImageToolStripMenuItem.Click += new System.EventHandler(this.clearImageToolStripMenuItem_Click);
             // 
-            // btnConvert
-            // 
-            this.btnConvert.Location = new System.Drawing.Point(512, 61);
-            this.btnConvert.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnConvert.Name = "btnConvert";
-            this.btnConvert.Size = new System.Drawing.Size(142, 59);
-            this.btnConvert.TabIndex = 1;
-            this.btnConvert.Text = "Apply Color Changes";
-            this.btnConvert.UseVisualStyleBackColor = true;
-            this.btnConvert.Click += new System.EventHandler(this.UpdateText);
-            // 
             // txtInput
             // 
             this.txtInput.Location = new System.Drawing.Point(262, 35);
@@ -546,19 +532,6 @@
             this.lblShowSqueeze.TabIndex = 17;
             this.lblShowSqueeze.Text = "100";
             // 
-            // chkColor
-            // 
-            this.chkColor.AutoSize = true;
-            this.chkColor.Location = new System.Drawing.Point(512, 34);
-            this.chkColor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkColor.Name = "chkColor";
-            this.chkColor.Size = new System.Drawing.Size(63, 21);
-            this.chkColor.TabIndex = 18;
-            this.chkColor.Text = "Color";
-            this.chkColor.UseVisualStyleBackColor = true;
-            this.chkColor.CheckedChanged += new System.EventHandler(this.chkColor_CheckedChanged);
-            this.chkColor.Click += new System.EventHandler(this.UpdateText);
-            // 
             // lblVertiVal
             // 
             this.lblVertiVal.AutoSize = true;
@@ -594,70 +567,14 @@
             this.lblVerticalScaling.TabIndex = 19;
             this.lblVerticalScaling.Text = "Vertical Scaling:";
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(512, 136);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox1.Size = new System.Drawing.Size(142, 91);
-            this.groupBox1.TabIndex = 22;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Alignment";
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(4, 67);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(62, 21);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Right";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.Click += new System.EventHandler(this.rightToolStripMenuItem_Click);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Checked = true;
-            this.radioButton2.Location = new System.Drawing.Point(4, 43);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(71, 21);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Center";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.Click += new System.EventHandler(this.centerToolStripMenuItem_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(4, 20);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(53, 21);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Left";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.Click += new System.EventHandler(this.leftToolStripMenuItem_Click);
-            // 
             // Main_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(674, 373);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.lblVertiVal);
             this.Controls.Add(this.tckVertical);
             this.Controls.Add(this.lblVerticalScaling);
-            this.Controls.Add(this.chkColor);
             this.Controls.Add(this.lblShowSqueeze);
             this.Controls.Add(this.tckSqueeze);
             this.Controls.Add(this.lblSqueeze);
@@ -673,7 +590,6 @@
             this.Controls.Add(this.tckLetter);
             this.Controls.Add(this.lblInput);
             this.Controls.Add(this.txtInput);
-            this.Controls.Add(this.btnConvert);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -689,8 +605,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.tckWords)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckSqueeze)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tckVertical)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -701,7 +615,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SavePNG;
-        private System.Windows.Forms.Button btnConvert;
         private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.Label lblInput;
         private System.Windows.Forms.TrackBar tckLetter;
@@ -731,7 +644,6 @@
         private System.Windows.Forms.ToolStripMenuItem rightToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem autoSizesomethingX32ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
-        private System.Windows.Forms.CheckBox chkColor;
         private System.Windows.Forms.ToolStripMenuItem mniTextColor;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem loadAndConverttxtFileToolStripMenuItem;
@@ -749,10 +661,6 @@
         private System.Windows.Forms.ToolStripMenuItem mniiTextSingle;
         private System.Windows.Forms.ToolStripMenuItem mniiTextGrad;
         private System.Windows.Forms.ToolStripMenuItem clearImageToolStripMenuItem;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 

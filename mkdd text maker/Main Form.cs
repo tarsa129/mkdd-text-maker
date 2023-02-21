@@ -31,7 +31,7 @@ namespace mkdd_text_maker
             height = 32;
 
             InitializeComponent();
-            Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, chkColor.Checked, (double)tckVertical.Value / 100);
+            Information = new WriteInfo(null, null, tckLetter.Value, tckWords.Value, cmbPrefix.Text.ToLower(), (double)tckSqueeze.Value / 100, chkboxPrefix.Checked, 2, false, false, (double)tckVertical.Value / 100);
 
 
             //get scale factor for display
@@ -163,14 +163,9 @@ namespace mkdd_text_maker
             startInfo.FileName = "wimgt.exe";
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
-            if (chkColor.Checked)
-            {
-                startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.CMPR --n-mm=0";
-            }
-            else
-            {
-                startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.IA4 --n-mm=0";
-            }
+
+            startInfo.Arguments = "convert \"" + text + ".png\" -d \"" + text + ".bti\" -x BTI.IA4 --n-mm=0";
+
 
             
            
@@ -419,13 +414,11 @@ namespace mkdd_text_maker
 
                 Gradients = new Color_Editor(Colors, Positions, Angles, 0);
 
-                chkColor.Checked = true;
             }
         }
         private void GradientText_Click(object sender, EventArgs e)
         {
             Gradients.ShowDialog();
-            chkColor.Checked = true;
         }
         private void OutlineSingle_Clicked(object sender, EventArgs e)
         {
@@ -449,13 +442,11 @@ namespace mkdd_text_maker
 
                 Outline = new Color_Editor(Colors, Positions, Angles, 0);
 
-                chkColor.Checked = true;
             }
         }
         private void OutlineGradient_Clicked(object sender, EventArgs e)
         {
             Outline.ShowDialog();
-            chkColor.Checked = true;
         }
         private void loadGradientToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -474,8 +465,6 @@ namespace mkdd_text_maker
                 Gradients.Positions = jsoninfo.Positions;
                 Gradients.Angles = jsoninfo.Angles;
                 Gradients.Setting = jsoninfo.Setting;
-
-                chkColor.Checked = true;
             }
         }
         private void saveGradientToolStripMenuItem_Click(object sender, EventArgs e)
@@ -620,7 +609,6 @@ namespace mkdd_text_maker
 
                 //update the gui
                 cmbPrefix.SelectedItem = Information.Prefix;
-                chkColor.Checked = Information.HasColor;
                 chkboxPrefix.Checked = Information.PrefixSmall;
                 tckLetter.Value = Information.LetterSpacing;
                 tckSqueeze.Value = (int)(Information.SqueezeFactor * 100);
@@ -631,12 +619,6 @@ namespace mkdd_text_maker
 
         //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //information stuff
-
-        private void chkColor_CheckedChanged(object sender, EventArgs e)
-        {
-            Information.HasColor = chkColor.Checked;
-        }
-
         private void chkboxPrefix_CheckedChanged(object sender, EventArgs e)
         {
             Information.PrefixSmall = chkboxPrefix.Checked;
