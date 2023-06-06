@@ -7,7 +7,7 @@ You have the option to save as a .png or a .bti. Saving as a .bti requires [Wiim
 mkdd text maker -> bin -> Debug -> mkdd text maker.exe. 
 # Supported Characters
 All standard English characters <br/>
-Forward / back accents on all vowels + umlauts on all voelws. <br/>
+Forward / back accents on all vowels + umlauts on all vowels. <br/>
 Digits 0-9 <br/>
 The symbols: ! ( ) ' , " - _ ¡ ¿ / .<br/>
 All Katakana characters <br/>
